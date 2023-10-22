@@ -1,0 +1,8 @@
+.card-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 15em;
+    height: 30em;
+  }

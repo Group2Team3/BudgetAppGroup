@@ -1,0 +1,35 @@
+ .titles{
+   font-size: 2em;
+   font-weight: 1.5em;
+  }
+
+  .copy{
+    font-size: 0.8em;
+   }
+  
+  .button-check.MuiButton-root {
+    background-color: #e0edea; 
+    width: 6em;
+    height: 2.5em;
+    border-radius: 23px;
+    color: #000000;
+  }
+
+  .button-check.MuiButton-root:hover {
+    background-color: #967399; 
+    color: #bbbbbb;
+  }
+
+  .button-check.MuiButton-root:active {
+    background-color: #4d4e4e; 
+  }
+
+  
+  .App-footer {
+    background-image: url('../assets/budgetImages/footer.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 20em;
+  }
+  

@@ -1,0 +1,47 @@
+.head{
+    font-family: Raleway;
+    font-size: 3em;
+    font-weight: 2em;
+    line-height: 65px;
+    letter-spacing: 0em;
+  }
+  
+  .left_side{
+    text-align: left;
+  }
+  .body{
+    font-family: Raleway;
+    font-size: 1em;
+  }
+
+  .button.MuiButton-root {
+    background-color: #76E7CD; 
+    width: 10em;
+    height: 3em;
+    border-radius: 23px;
+    border-color: #000000;
+    color: #000000; 
+  }
+
+  .button.MuiButton-root:hover {
+    background-color: #5ab5a1; 
+  }
+
+.button.MuiButton-root:active {
+    background-color: #3d8c7e; 
+  }
+
+  
+.centered-content {
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+    text-align: center;
+    margin-left: 0.1em;
+    margin-right: 0.1em; 
+    padding-left: 5em;
+    padding-right: 5em; 
+    padding-top: 4em;
+    padding-bottom: 4em
+  } 
+  

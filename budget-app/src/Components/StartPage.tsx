@@ -1,44 +1,33 @@
-import React, { useState } from "react";
-import { Col, Container, Navbar, Row } from "react-bootstrap";
-import budgetLogo from "../assets/budgetImages/Piggy2.svg";
+import { Col, Container, Row } from "react-bootstrap";
 import comp from "../assets/budgetImages/blob1.svg";
-import { Button, ButtonGroup } from "@mui/material";
+import { Button } from "@mui/material";
 import { faMoneyBillWave, faMagnifyingGlassDollar, faHandHoldingDollar, faReceipt } from '@fortawesome/free-solid-svg-icons'
 import Cards from "./Card";
 import { Footer } from "./Footer";
+import '../Style/StartPage.css';
+import { MainNavbar } from "./MainNavbar";
 
 
 export const StartPage = () => {
     return (
     <>
-      <Navbar >
-        <Container>
-          <Row className="align-items-center">
-            <Col className = "col-md-2">
-              <img src={budgetLogo} alt="react logo" className="App-logo" />
-            </Col>
-            <Col className = "col-md-8">
-              <Navbar.Brand className="App-brandName">BudgetApp</Navbar.Brand>
-            </Col>
-            <Col className = "col-md-2">
-            <ButtonGroup className="buttons" variant="text" aria-label="text button group">
-                <Button>Logowanie</Button>
-                <Button>Rejestracja</Button>
-            </ButtonGroup>
+      <Container>
+          <Row>
+            <Col className="col-md-12">
+            <MainNavbar></MainNavbar>
             </Col>
           </Row>
-        </Container>
-      </Navbar>
-      <hr className="hr" />
+          </Container>
+          <hr className="hr" />
       <Container>
           <Row className="align-items-center left_side">
-            <Col className="col-md-6">
-              <p className="head"><span className="bold">BudgetApp</span> to narzędzie wspomagające zarządzanie <span className="bold">Twoim budżetem</span></p>
-              <p className="body">Załóż konto by wprowadzić swoje przychody i rozchody. Monitoruj ile pieniędzy oszczędzasz miesięcznie, ustaw cel finansowy. 
-                Zapisuj paragony, tak by móc zawsze do nich wrócić, oraz dodawaj wartości z tych paraganów na bieżąco do wydatków.</p>
-            <Button className="button-check" variant="text" aria-label="text button group">Wypróbuj</Button>
+            <Col className="col-md-5">
+             <Row><p className="head px-5"><span className="bold">BudgetApp</span> to narzędzie wspomagające zarządzanie <span className="bold">Twoim budżetem</span></p></Row> 
+             <Row>  <p className="justify-content-left body pt-3 ps-5">Załóż konto by wprowadzić swoje przychody i rozchody. Monitoruj ile pieniędzy oszczędzasz miesięcznie, ustaw cel finansowy. 
+                Zapisuj paragony, tak by móc zawsze do nich wrócić, oraz dodawaj wartości z tych paraganów na bieżąco do wydatków.</p></Row> 
+                <Row  className="justify-content-center pt-4"> <Button className="button" variant="contained">Wypróbuj</Button></Row> 
             </Col>
-            <Col className="col-md-6">
+            <Col className="col-md-7">
             <img src={comp} alt="react logo" className="image-comp img-fluid max-width: 100%;" />
             </Col>
           </Row>

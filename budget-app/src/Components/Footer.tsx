@@ -1,34 +1,27 @@
-import React from "react";
-import footer from "../assets/budgetImages/footer.png";
 import { Container, Row, Col } from 'react-bootstrap';
 import { Button } from "@mui/material";
+import '../Style/Footer.css';
 
 export const Footer = () => {
-    const backgroundStyle = {
-        backgroundImage: `url(${footer})`,
-        backgroundSize: 'cover',
-        backgroundRepeat: 'no-repeat',
-        backgroundPosition: 'center',
-        height: '20em',  // Adjust the height as needed
-    };
-
     return (
-        <Container fluid className="App-footer" style={backgroundStyle}>
-            <Row>
-            <Col className="col-md-8 footter_par1">
-              <p ><span className="bold">BudgetApp</span> </p>
-              <p>Wszelkie prawa zastrzeżone. Kopiowanie lub wykorzystywanie materiałów jest zabronione.</p>
-              <p>BudgetApp Copyright©2023</p>
+        <Container fluid className="App-footer" >
+            <Row className=" justify-content-start pt-5 ps-5">
+            <Col className="col-md-4 pe-5" >
+            <Row className="titles">BudgetApp </Row>
+            <Row>Wszelkie prawa zastrzeżone. Kopiowanie lub wykorzystywanie materiałów jest zabronione.</Row>
+            <Row className="pt-3 copy">BudgetApp Copyright©2023</Row>
             </Col>
-                <Col className="col-md-2 footter_par2">
-              <p ><span className="bold">Polityka prywatności</span></p>
-              <p >Zapoznaj się z naszą polityką prywatności</p>
-            <Button className="button-check" variant="text" aria-label="text button group">Kliknij</Button>
+            </Row>
+            <Row className="justify-content-end">         
+                <Col className="col-md-2 me-4 ">
+                <Row className="pb-2"><span className="bold">Polityka prywatności</span></Row>
+              <Row className="pb-2 ms-2" >Zapoznaj się z naszą polityką prywatności</Row>
+              <Row className="justify-content-center"><Button className="button-check" variant="contained" aria-label="text button group">Kliknij</Button></Row>
                 </Col>
-                <Col className="col-md-2 footter_par2">
-              <p ><span className="bold">Zasady i warunki</span></p>
-              <p >Poznaj zasady i warunki korzystania ze strony</p>
-            <Button className="button-check" variant="text" aria-label="text button group">Kliknij</Button>
+                <Col className="col-md-2 justify-content-center me-3">
+              <Row className="pb-2 ms-1"><span className="bold">Zasady i warunki</span></Row>
+              <Row className="pb-2  ms-2">Poznaj zasady i warunki korzystania ze strony</Row>
+              <Row className="justify-content-center"> <Button className="button-check" variant="contained" aria-label="text button group">Kliknij</Button></Row>
             </Col>
             </Row>
         </Container>

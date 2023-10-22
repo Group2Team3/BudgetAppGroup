@@ -1,84 +1,10 @@
+
+*{
+  font-family: Raleway;
+}
 .App {
   text-align: center;
 }
-
-.App-logo {
-  height: 10vmin;
-  pointer-events: none;
-  margin-left: 1em;
-}
-
-.App-brandName {
-  font-family: Raleway;
-  font-size: 3em;
-  font-weight: bold;
-  letter-spacing: 0em;
-  text-align: left;
-
-}
-
-.head{
-  font-family: Raleway;
-  font-size: 2.2em;
-  font-weight: 2em;
-  line-height: 65px;
-  letter-spacing: 0em;
-  padding-left: 2em;
-  padding-right: 3.5em;
-}
-.left_side{
-  text-align: left;
-}
-.body{
-  font-family: Raleway;
-  font-size: 1em;
-  padding-left: 4em;
-  padding-right: 3em;
-}
-
-/* button - logowanie i rejestracja */
-.buttons .MuiButton-root {
-  background-color: #76E7CD; 
-  width: 10em;
-  height: 3em;
-  border-radius: 23px;
-  gap: 10px;
-}
-
-.buttons .MuiButton-root:hover {
-  background-color: #5ab5a1; 
-}
-
-.centered-content {
-  display: flex;
-  align-items: stretch;
-  justify-content: center;
-  text-align: center;
-  margin-left: 0.1em;
-  margin-right: 0.1em; 
-  padding-left: 5em;
-  padding-right: 5em;
-  padding-top: 4em;
-  padding-bottom: 4em
-} 
-
-.card-content {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  width: 15em;
-  height: 30em;
-}
-
-.buttons .MuiButton-root:active {
-  background-color: #3d8c7e; 
-}
-/* @media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-} */
 
 .App-header {
   background-color: #282c34;
@@ -94,33 +20,8 @@
 .App-link {
   color: #61dafb;
 }
-/* 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-} */
 
 .bold {
   font-weight: bold;
 }
-.button-check .MuiButton-root {
-  background-color: #76E7CD; 
-  width: 10em;
-  height: 3em;
-  border-radius: 23px;
-  gap: 10px;
-}
 
-.footter_par1{
-  padding-top:4em;
-  padding-left:3em;
-  padding-right:30em;
-}
-
-.footter_par2{
-  padding-top:10em;
-}
