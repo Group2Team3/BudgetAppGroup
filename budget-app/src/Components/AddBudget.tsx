@@ -7,6 +7,8 @@ import { format } from 'date-fns';
 import { pl } from 'date-fns/locale';
 import Accordion from 'react-bootstrap/Accordion';
 import Form from 'react-bootstrap/Form';
+import { Link } from 'react-router-dom';
+
 
 const AddBudget = () => {
     const currentMonth = format(new Date(), 'MMMM', { locale: pl });
@@ -642,8 +644,8 @@ const AddBudget = () => {
                                                                 <Form.Label>Inne wydatki</Form.Label>
                                                             </Col>
                                                             <Col>
-                                                                <Form.Control type="number"  />
-                                                                <Form.Control as="textarea" rows={2} placeholder="Opis" />
+                                                                <Form.Control type="number"  /><hr></hr>
+                                                                <Form.Control as="textarea" rows={3} placeholder="Opis" />
                                                             </Col>
                                                         </Row>
                                                     </Form.Group>
@@ -654,7 +656,7 @@ const AddBudget = () => {
 
                                 </Accordion>
                             </Col>
-                        <Button className='button-submit'>Dalej</Button>
+                            <Link to="/budget"><Button className='button-submit'>Dalej</Button></Link>
                     </Col>
                 </Row>
             </Container>
