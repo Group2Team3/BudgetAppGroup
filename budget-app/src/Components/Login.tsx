@@ -1,8 +1,10 @@
 import React, { useState } from "react";
-export const Login = () => {
-return (
-<>
-<div>Hello world!</div>
-</>
-);
+const Login = () => {
+    return (
+        <>
+            <div>Login and register component!</div>
+        </>
+    );
 }
+
+export default Login;

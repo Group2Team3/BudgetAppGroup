@@ -1,5 +1,5 @@
 .head{
-    font-family: Raleway;
+    font-family: 'Raleway', sans-serif;
     font-size: 3em;
     font-weight: 2em;
     line-height: 65px;
@@ -15,6 +15,8 @@
   }
 
   .button.MuiButton-root {
+    font-family: 'Raleway', sans-serif;
+    font-weight: 600;
     background-color: #76E7CD; 
     width: 10em;
     height: 3em;
@@ -33,6 +35,7 @@
 
   
 .centered-content {
+    font-family: 'Raleway', sans-serif;
     display: flex;
     align-items: stretch;
     justify-content: center;
@@ -45,3 +48,11 @@
     padding-bottom: 4em
   } 
   
+  .css-r40f8v-MuiTypography-root {
+    font-family: 'Raleway', sans-serif!important;
+  }
+
+  .css-ag7rrr-MuiTypography-root {
+    font-family: 'Raleway', sans-serif!important;
+    font-weight: 600!important;
+  }

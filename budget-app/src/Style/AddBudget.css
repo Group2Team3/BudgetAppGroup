@@ -1,0 +1,63 @@
+.button-submit { 
+    background-color: #76E7CD!important;
+    color: black!important; 
+    font-family: 'Raleway', sans-serif!important;
+    font-weight: 600!important;
+    font-size: larger!important;
+    border-radius: 23px!important;
+    padding: 10px 20px!important;
+    margin: 50px!important;
+}
+
+.description { 
+    margin-bottom: 50px;
+}
+
+.buttons2 {
+    margin-left: -13em;
+}
+
+.accordion-button { 
+    font-family: 'Raleway', sans-serif!important;
+    font-weight: 800!important;
+    font-size: 0.7em!important;
+    color: #F47C99!important;
+    border-radius: 23px!important;
+}
+
+.accordion-button:focus {
+    -webkit-box-shadow: 0px 3px 32px -20px rgba(244, 124, 153, 1);
+    -moz-box-shadow: 0px 3px 32px -20px rgba(244, 124, 153, 1);
+    box-shadow: 0px 3px 32px -20px rgba(244, 124, 153, 1);
+    background-color: white!important;
+}
+
+.accordion-flush .accordion-item {
+    border-bottom: 0!important;
+    margin: 2px!important;
+}
+
+.form-label {
+    font-size: 0.9em;
+    font-weight: 500;
+}
+
+.form-control { 
+    border: 2px solid black!important;
+    border-radius: 23px!important;
+}
+
+.accordion-button:not(.collapsed) {
+    background-color: white!important;
+}
+
+.accordion-button::after {
+    --bs-accordion-btn-active-icon: url('../assets/budgetImages/accordion-collapsed.png');
+}
+
+.form-control:focus {
+    -webkit-box-shadow: 0px 3px 50px -14px rgba(244, 124, 153, 1);
+    -moz-box-shadow: 0px 3px 50px -14px rgba(244, 124, 153, 1);
+    box-shadow: 0px 3px 50px -14px rgba(244, 124, 153, 1);
+    background-color: white!important;
+}
