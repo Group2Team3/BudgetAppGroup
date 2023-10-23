@@ -1,24 +1,22 @@
 import React from 'react';
 import './App.css';
 import { StartPage } from './Components/StartPage';
+import { Route, Routes } from 'react-router-dom';
+import AddBudget from './Components/AddBudget';
+import Login from './Components/Login';
+import YourBudget from './Components/YourBudget';
 
-export class App extends React.Component {
-render() {
-return (
-<>
-<StartPage></StartPage>  
-
-{/* <Container fluid>
-<Row>
-<Col>
-<First></First>
-</Col>
-</Row>
-</Container> */}
-</>
-)
-}
+class App extends React.Component {
+    render() {
+        return (
+            <Routes>
+                <Route path="/" element={<StartPage />} />
+                <Route path="/addbudgetinfo" element={<AddBudget />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/budget" element={<YourBudget />} />
+            </Routes>
+        )
+    }
 }
 
 export default App;
-
