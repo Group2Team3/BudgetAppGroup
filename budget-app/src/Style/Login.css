@@ -1,0 +1,76 @@
+.login-reg-container {
+    background-color: #9B7EDE;
+    color: #fafafa;
+    border-radius: 2em;
+}
+
+  .Auth-form-content {
+    padding-left: 12%;
+    padding-right: 12%;
+  }
+  
+  .Auth-form-title {
+    margin-bottom: 1em;
+    font-size: 2.2em;
+    font-weight: 1em;
+  }
+  
+  label {
+    font-size: 14px;
+    font-weight: 600;
+  } 
+
+  .form-control{
+    border-color: white !important;
+  }
+ 
+  .sign-button{
+    font-family: 'Raleway', sans-serif;
+    font-weight: 600;
+    background-color: #76E7CD; 
+    width: 10em;
+    height: 3em;
+    border-radius: 23px;
+    border-color: #000000;
+    color: #000000; 
+  }
+
+  .sign-button:hover {
+    background-color: #5ab5a1; 
+  }
+
+.sign-button:active {
+    background-color: #3d8c7e; 
+  }
+
+  .hr-thick {
+    border-width: 0.2em; 
+  }
+
+  .App-icons {
+    height: 4em;
+    max-width: 100%;
+  }
+  
+  .image-container {
+    background-color: white;
+    border-radius: 50%;
+    width: 5em; 
+    height: 5em; 
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .login-centered-content{
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+    margin-left: 0.1em;
+    margin-right: 0.1em; 
+    padding-left: 5em;
+    padding-right: 5em; 
+    padding-top: 4em;
+    padding-bottom: 4em
+  }
