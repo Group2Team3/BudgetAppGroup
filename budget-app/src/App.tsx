@@ -5,6 +5,7 @@ import { Route, Routes } from 'react-router-dom';
 import AddBudget from './Components/AddBudget';
 import Login from './Components/Login';
 import YourBudget from './Components/YourBudget';
+import Goals from './Components/Goals';
 
 class App extends React.Component {
     render() {
@@ -14,6 +15,7 @@ class App extends React.Component {
                 <Route path="/addbudgetinfo" element={<AddBudget />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/budget" element={<YourBudget />} />
+                <Route path="/goals" element={<Goals />} />
             </Routes>
         )
     }
