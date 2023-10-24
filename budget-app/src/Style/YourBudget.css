@@ -1,0 +1,61 @@
+.description {
+    margin: 50px;
+}
+
+.link {
+    color: #76E7CD;
+    font-weight: 900;
+}
+
+h5 {
+    font-size: 2.8rem;
+    margin: 50px;
+}
+
+.month {
+    font-weight: 900;
+    text-transform: uppercase;
+}
+
+.bg-success{
+    background-color: #76E7CD!important;
+    color: white!important;
+    font-family: 'Raleway', sans-serif!important;
+    font-weight: 400!important;
+    font-size: 2.5em;
+}
+
+.bg-danger {
+    background-color: #D4686F!important;
+    color: white!important;
+    font-family: 'Raleway', sans-serif!important;
+    font-weight: 400!important;
+    font-size: 2.5em;
+}
+
+.progress {
+    height: 100px !important;
+    border-radius: 67px!important;
+}
+
+.see { 
+    font-size: 1.2em;
+}
+
+.accordion-button {
+    color: black!important;
+    border: 2px solid black!important;
+    border-radius: 33px!important;
+}
+
+.accordion-item {
+    background-color: #CCCCCC!important;
+    border: 3px solid black!important;
+    border-radius: 37px!important;
+}
+
+.purple {
+    color: #9B7EDE;
+    font-weight: 900;
+    font-size: 1.2em;
+}
