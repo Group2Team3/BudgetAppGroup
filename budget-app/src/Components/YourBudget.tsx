@@ -48,7 +48,7 @@ const YourBudget = () => {
 
       //Bar chart
       const chartSetting = {
-        width: 800,
+        width: 720,
         height: 400,
         sx: {
           [`.${axisClasses.left} .${axisClasses.label}`]: {
@@ -160,7 +160,7 @@ const YourBudget = () => {
                                     legend: {
                                     direction: 'column',
                                     position: { vertical: 'middle', horizontal: 'right' },
-                                    padding: 170,
+                                    padding: 50,
                                     labelStyle: {
                                         fontSize: 20,
                                         fontWeight: 900,

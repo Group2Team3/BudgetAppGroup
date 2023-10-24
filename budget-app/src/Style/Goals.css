@@ -1,0 +1,55 @@
+.thick {
+	font-weight: 800;
+}
+
+.form-label {
+	font-weight: 900 !important;
+	font-size: 1.2em !important;
+}
+
+.form-control {
+	border: 2px solid #000 !important;
+	border-radius: 23px;
+}
+
+.form-select {
+	border: 2px solid #000 !important;
+	border-radius: 23px;
+}
+
+.some-btn {
+	background-color: #76E7CD !important;
+	width: 8em !important;
+	border-right: none !important;
+	margin: 4px !important;
+	border-radius: 23px !important;
+	font-family: 'Raleway', sans-serif !important;
+	font-weight: 600 !important;
+	color: #000000 !important;
+	height: 4em !important;
+}
+
+.submit-button {
+	display: flex!important;
+	justify-content: center!important;
+	align-items: center!important;
+	margin: 0 auto;
+}
+
+.plane-icon {
+	color: #F47C99;
+	font-size: 6em;
+	margin: 50px;
+}
+
+h4 {
+	font-weight: 800;
+	font-size: 3em;
+}
+
+.pink {
+	font-weight: 800;
+	color: #F47C99;
+	line-height: 5px;
+	font-size: 1.2em;
+}
