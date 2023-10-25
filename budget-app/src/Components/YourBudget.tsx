@@ -225,13 +225,7 @@ const YourBudget = () => {
                     </Row>
                 </Container>
 
-                <Container>
-                    <Row>
-                        <Col className="col-md-12">
-                            <Footer></Footer>
-                        </Col>
-                    </Row>
-                </Container>
+                <Footer></Footer>
             </>
     )
 }

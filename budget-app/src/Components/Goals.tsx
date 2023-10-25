@@ -112,7 +112,7 @@ const Goals = () => {
           </Row>
         </Row>
       </Container>
-      
+
       <Container>
         <Row className="d-flex justify-content-center">
           <Col className="col-md-8 text-center m-5">
@@ -186,10 +186,7 @@ const Goals = () => {
                   {oldGoals ? (
                     <Row className="current-goal">
                       <Col className="col-md-4 text-center d-flex justify-content-center">
-                        <FontAwesomeIcon
-                          icon={faCar}
-                          className="plane-icon"
-                        />
+                        <FontAwesomeIcon icon={faCar} className="plane-icon" />
                       </Col>
                       <Col className="col-md-4 text-start">
                         <h4>SAMOCHÓD</h4>
@@ -208,12 +205,11 @@ const Goals = () => {
                       <Col className="col-md-12 text-start">
                         <p className="goal-savings">
                           CZY UDAŁO CI SIĘ ZDOBYĆ TEN CEL:
-                          { success ? (
-                          <span className="green2"> TAK </span>
+                          {success ? (
+                            <span className="green2"> TAK </span>
                           ) : (
-                          <span className="red"> NIE </span>
+                            <span className="red"> NIE </span>
                           )}
-                          
                         </p>
                       </Col>
                     </Row>
@@ -229,13 +225,7 @@ const Goals = () => {
         </Row>
       </Container>
 
-      <Container>
-        <Row>
-          <Col className="col-md-12">
-            <Footer></Footer>
-          </Col>
-        </Row>
-      </Container>
+      <Footer></Footer>
     </>
   );
 };
