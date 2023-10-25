@@ -1,0 +1,10 @@
+.img-receipts {
+    border-radius: 33px;
+    border: 2px solid black;
+    height: 15em;
+    width: 20em;
+}
+
+.modal-body {
+    border: 2px solid black;
+}
