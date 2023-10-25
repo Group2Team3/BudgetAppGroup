@@ -46,13 +46,8 @@ export const StartPage = () => {
             </Col>
           </Row>
           </Container>
-          <Container>
-          <Row>
-            <Col className="col-md-12">
+
             <Footer></Footer>
-            </Col>
-          </Row>
-          </Container>
     </>
     )
 }
