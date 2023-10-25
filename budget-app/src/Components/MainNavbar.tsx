@@ -35,7 +35,7 @@ export const MainNavbar = () => {
               Jakbys miala pytania to pisz, jak przeczytasz to mozesz usuanac ten komentarz. XD 
               */}
               <Link to="/goals"><Button className="other-btn btn2">Cele</Button></Link>
-              <Link to="/"><Button className="other-btn btn3">Paragony</Button></Link>
+              <Link to="/receipts"><Button className="other-btn btn3">Paragony</Button></Link>
               <Link to="/"><Button className="other-btn btn4">Wydatki</Button></Link>
               <Link to="/"><Button className="other-btn btn5">Przychody</Button></Link>
             </ButtonGroup>

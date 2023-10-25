@@ -5,9 +5,6 @@ import { MainNavbar } from "./MainNavbar";
 import { Footer } from "./Footer";
 import { Link } from "react-router-dom";
 import Form from "react-bootstrap/Form";
-import Accordion from "react-bootstrap/Accordion";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlaneUp, faPencil, faCar } from "@fortawesome/free-solid-svg-icons";
 
 const EditGoal = () => {
   //kiedys tu beda pobrane dane dotyczace celu by przekazac je do formularza, na razie na sztywno
@@ -65,7 +62,10 @@ const EditGoal = () => {
                 <Form.Label>KATEGORIA</Form.Label>
               </Col>
               <Col className="mb-5">
-                <Form.Select aria-label="Default select example" value={category}>
+                <Form.Select
+                  aria-label="Default select example"
+                  value={category}
+                >
                   <option value="samochód">samochód</option>
                   <option value="dom">dom</option>
                   <option value="prezent">prezent</option>
@@ -113,7 +113,11 @@ const EditGoal = () => {
                 <Form.Label>OPIS</Form.Label>
               </Col>
               <Col className="mb-5">
-                <Form.Control as="textarea" rows={6} placeholder={description} />
+                <Form.Control
+                  as="textarea"
+                  rows={6}
+                  placeholder={description}
+                />
               </Col>
             </Col>
           </Row>
