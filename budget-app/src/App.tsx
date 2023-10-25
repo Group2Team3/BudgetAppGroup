@@ -6,6 +6,7 @@ import AddBudget from './Components/AddBudget';
 import Login from './Components/Login';
 import YourBudget from './Components/YourBudget';
 import Goals from './Components/Goals';
+import EditGoal from './Components/EditGoal';
 
 class App extends React.Component {
     render() {
@@ -16,6 +17,7 @@ class App extends React.Component {
                 <Route path="/login" element={<Login />} />
                 <Route path="/budget" element={<YourBudget />} />
                 <Route path="/goals" element={<Goals />} />
+                <Route path="/editgoal" element={<EditGoal />} />
             </Routes>
         )
     }

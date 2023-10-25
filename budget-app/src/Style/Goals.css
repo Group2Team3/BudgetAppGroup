@@ -135,3 +135,23 @@ h4 {
 .saved-add {
 	margin-top: 6px;
 }
+
+.some-btn-back { 
+	background-color: #76E7CD !important;
+	width: 14em !important;
+	border-right: none !important;
+	margin-top: 30px !important;
+	border-radius: 23px !important;
+	font-family: 'Raleway', sans-serif !important;
+	font-weight: 600 !important;
+	color: #000000 !important;
+	height: 4em !important;
+}
+
+.form-control {
+	font-weight: 600;
+}
+
+.form-label { 
+	line-height: 6px;
+}

@@ -112,6 +112,7 @@ const Goals = () => {
           </Row>
         </Row>
       </Container>
+      
       <Container>
         <Row className="d-flex justify-content-center">
           <Col className="col-md-8 text-center m-5">
@@ -171,7 +172,7 @@ const Goals = () => {
                         </Form.Group>
                       </Col>
                       <Col className="text-end mx-2 pencil-col">
-                        <Link to="/editgoals">
+                        <Link to="/editgoal">
                           <FontAwesomeIcon icon={faPencil} className="pencil" />
                         </Link>
                       </Col>
