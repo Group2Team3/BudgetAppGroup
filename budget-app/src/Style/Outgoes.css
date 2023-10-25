@@ -1,0 +1,49 @@
+
+.form-label {
+	font-weight: 900 !important;
+	font-size: 1.2em !important;
+}
+
+.form-control {
+	border: 2px solid #000 !important;
+	border-radius: 23px;
+}
+
+.form-select {
+	border: 2px solid #000 !important;
+	border-radius: 23px;
+}
+
+.some-btn {
+	background-color: #76E7CD !important;
+	width: 15em !important;
+	border-right: none !important;
+	margin: 4px !important;
+	border-radius: 23px !important;
+	font-family: 'Raleway', sans-serif !important;
+	font-weight: 600 !important;
+	color: #000000 !important;
+}
+
+.submit-button {
+	display: flex!important;
+	justify-content: center!important;
+	align-items: center!important;
+	margin: 0 auto;
+}
+
+.saved-add {
+	margin-top: 6px;
+}
+
+.some-btn-back { 
+	background-color: #76E7CD !important;
+	width: 14em !important;
+	border-right: none !important;
+	margin-top: 30px !important;
+	border-radius: 23px !important;
+	font-family: 'Raleway', sans-serif !important;
+	font-weight: 600 !important;
+	color: #000000 !important;
+	height: 4em !important;
+}

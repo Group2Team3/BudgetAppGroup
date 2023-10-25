@@ -10,6 +10,7 @@ import EditGoal from './Components/EditGoal';
 import Receipts from './Components/Receipts';
 import Policy from './Components/Policy';
 import Terms from './Components/Terms';
+import Outgoes from './Components/Outgoes';
 
 class App extends React.Component {
     render() {
@@ -24,6 +25,7 @@ class App extends React.Component {
                 <Route path="/receipts" element={<Receipts />} />
                 <Route path="/policy" element={<Policy />} />
                 <Route path="/terms" element={<Terms />} />
+                <Route path="/outgoes" element={<Outgoes />} />
             </Routes>
         )
     }
