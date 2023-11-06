@@ -6,6 +6,9 @@ import '../Style/Login.css';
 import Button from "@mui/material/Button";
 import fb from "../assets/budgetImages/facebook.png";
 import google from "../assets/budgetImages/google.png";
+import axios from "axios";
+import { useAuth } from "../service/AuthContext";
+import { useNavigate  } from 'react-router-dom';
 
 type State = {
   username: string
@@ -67,12 +70,63 @@ const reducer = (state: State, action: Action): State => {
   }
 }
 
-const Login = () => {
-    let [authMode, setAuthMode] = useState("signin")
+const Login: React.FC = () => {
+    //let [authMode, setAuthMode] = useState("signin")
 
-  const changeAuthMode = () => {
-    setAuthMode(authMode === "signin" ? "signup" : "signin")
-  }
+    const [state, setState] = useState(initialState);
+    const { setLogin } = useAuth();
+    const navigate = useNavigate();
+
+    const handleLogin = async () => {
+      try {
+        // Make a GET request to your login API endpoint
+        const response = await axios.post('http://localhost:3001/api/users', {
+          email: state.username,
+          password: state.password,
+        });
+  
+        // Assuming your server responds with a success message
+        setState({ ...state, helperText: 'Login successful', isError: false });
+        setLogin(true); // Update login state
+        console.log('Logging in:');
+
+        navigate('/budget');
+  
+        // Redirect or perform other actions based on success
+      } catch (error) {
+        // Handle errors
+        console.error('Error logging in:', error);
+  
+        // Assuming your server responds with an error message
+        setState({ ...state, helperText: 'Login failed. Please try again.', isError: true });
+      }
+    };
+
+    const handleRegister = async () => {
+      try {
+        const response = await axios.post('http://localhost:3001/api/users/register', {
+          name: state.username, // assuming 'name' corresponds to the user's name
+          email: state.username,
+          password: state.password,
+        });
+  
+        setState({ ...state, helperText: 'Registration successful', isError: false });
+                // Assuming your server responds with a success message
+        setLogin(true); // Update login state
+        console.log('Register in:');
+        
+        // Optionally, you can automatically log in the user after successful registration
+        navigate('/addbudgetinfo');
+      } catch (error) {
+        console.error('Error registering:', error);
+        setState({ ...state, helperText: 'Registration failed. Please try again.', isError: true });
+      }
+    };
+  
+  
+  // const changeAuthMode = () => {
+  //   setAuthMode(authMode === "signin" ? "signup" : "signin")
+  // }
     return (
         <>
         <Container>
@@ -95,17 +149,24 @@ const Login = () => {
                 <input
                 type="email"
                 className="form-control mt-1"
-                placeholder="Enter email" />
+                placeholder="Enter email" 
+                onChange={(e) => setState({ ...state, username: e.target.value })}/>
           </div>
           <div className="form-group mt-4">
             <label>Hasło</label>
             <input
               type="password"
               className="form-control mt-1"
-              placeholder="Enter password"/>
+              placeholder="Enter password"
+              onChange={(e) => setState({ ...state, password: e.target.value })}/>
           </div>
+          {state.isError && (
+                    <div className="error-message">
+                      {state.helperText}
+                    </div>
+          )}
           <div className="justify-content-center d-grid gap-2 mt-5">
-          <Button className="button" variant="contained">Zaloguj</Button>
+          <Button className="button" variant="contained" onClick={handleLogin}>Zaloguj</Button>
           </div>
           <div className="d-flex justify-content-center align-items-center mt-4">
                   <hr className="flex-grow-1 hr-thick" />
@@ -134,21 +195,24 @@ const Login = () => {
             <input
               type="email"
               className="form-control mt-1"
-              placeholder="e.g Jane Doe"/>
+              placeholder="e.g Jane Doe"
+              onChange={(e) => setState({ ...state, username: e.target.value })}/>
           </div>
           <div className="form-group mt-3">
             <label>E-mail</label>
             <input
               type="email"
               className="form-control mt-1"
-              placeholder="Email Address"/>
+              placeholder="Email Address"
+              onChange={(e) => setState({ ...state, username: e.target.value })}/>
           </div>
           <div className="form-group mt-3">
             <label>Hasło</label>
             <input
               type="password"
               className="form-control mt-1"
-              placeholder="Password"/>
+              placeholder="Password"
+              onChange={(e) => setState({ ...state, password: e.target.value })}/>
           </div>
           <div className="form-group mt-3">
             <label>Powtórz hasło</label>
@@ -158,7 +222,7 @@ const Login = () => {
               placeholder="Password"/>
           </div>
           <div className="justify-content-center d-grid gap-2 mt-5">
-          <Button className="button" variant="contained">Zarejestruj</Button>
+          <Button className="button" variant="contained"  onClick={handleRegister}>Zarejestruj</Button>
           </div>
         </div>
       </form>
@@ -173,3 +237,4 @@ const Login = () => {
 }
 
 export default Login;
+

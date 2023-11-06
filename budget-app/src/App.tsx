@@ -10,11 +10,14 @@ import EditGoal from './Components/EditGoal';
 import Receipts from './Components/Receipts';
 import Policy from './Components/Policy';
 import Terms from './Components/Terms';
+import { AuthProvider } from './service/AuthContext';
+import Outgoes from './Components/OutGoes';
 
 class App extends React.Component {
     render() {
         return (
-            <Routes>
+            <AuthProvider>
+              <Routes>
                 <Route path="/" element={<StartPage />} />
                 <Route path="/addbudgetinfo" element={<AddBudget />} />
                 <Route path="/login" element={<Login />} />
@@ -24,7 +27,9 @@ class App extends React.Component {
                 <Route path="/receipts" element={<Receipts />} />
                 <Route path="/policy" element={<Policy />} />
                 <Route path="/terms" element={<Terms />} />
-            </Routes>
+                <Route path="/outgoes" element={<Outgoes />} />
+              </Routes>
+            </AuthProvider>
         )
     }
 }
