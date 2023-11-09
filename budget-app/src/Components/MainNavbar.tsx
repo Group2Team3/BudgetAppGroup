@@ -33,17 +33,6 @@ export const MainNavbar = () => {
           {login ? (
             <ButtonGroup className="buttons2" variant="text" aria-label="text  button group">
               <Link to="/budget"><Button className="other-btn btn1">Twój budżet</Button></Link>
-              {/* 
-              dodalam linki zeby moc przechodzic do wlasciwych komponentow, ale na razie nie ma innych 
-              komponentow wiec / to jest tymczasowe rozwiazanie i przenosi do strony glownej, a /login do 
-              strony logowania (usunelam tez rejestrowanie, bo logowanie i rejestrowanie jest na jednej stronie, 
-              chyba, ze chcesz rozdzielic no to najwyzej dodasz jeszcze jeden link (zeby dodac link w App.tsx 
-              dajesz <Route path="/budget" element={<YourBudget />} /> gdzie /budget to nazwa ktorej bedziemy 
-              uzywac w calej apce i ktora bedzie w linku, a YourBudget to nazwa komponentu (a komponent musi 
-              wtedy zamiast tak jak tu Navbar ma export const Navbar to robisz po prostu const Login = () => i potem 
-              na koncu export default Login i nie importujesz go import {Navbar} from ... tylko import Navbar from))). 
-              Jakbys miala pytania to pisz, jak przeczytasz to mozesz usuanac ten komentarz. XD 
-              */}
               <Link to="/goals"><Button className="other-btn btn2">Cele</Button></Link>
               <Link to="/receipts"><Button className="other-btn btn3">Paragony</Button></Link>
               <Link to="/outgoes"><Button className="other-btn btn4">Wydatki</Button></Link>

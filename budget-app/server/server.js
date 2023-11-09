@@ -6,11 +6,14 @@ const cors = require('cors'); // Import the cors middleware
 const app = express();
 const port = 3001;
 
+const dotenv = require('dotenv');
+dotenv.config();
+
 const client = new Client({
   user: 'postgres',
   host: 'localhost',
   database: 'BudgetApp',
-  password: 'admin',
+  password: process.env.PASSWD_POSTGRES,
   port: 5432,
 });
 
