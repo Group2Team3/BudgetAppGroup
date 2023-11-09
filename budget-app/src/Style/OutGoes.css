@@ -47,3 +47,21 @@
 	color: #000000 !important;
 	height: 4em !important;
 }
+
+.red-b {
+	color: #D4686F;
+	font-weight: 900;
+	font-size: 2em;
+}
+
+.current-goal .badge-right::after {
+	content: "";
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 50px; /* szerokość paska */
+	height: 100%;
+	background-color: #D4686F;
+	border-top-right-radius: 40px;
+	border-bottom-right-radius: 40px;
+  }

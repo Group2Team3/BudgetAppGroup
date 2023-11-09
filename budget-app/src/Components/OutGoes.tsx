@@ -57,7 +57,7 @@ const Outgoes = () => {
         <Row>
           <Col className="col-md-12">
           <p className="description">
-           Tutaj dodasz nowy wydatek. Jeśli chcesz wrócić do Twoich wydatków <Link to="/outgoes" className="link">kliknij tutaj</Link>. 
+           Tutaj dodasz nowy wydatek. Jeśli chcesz wrócić do Twoich wydatków <Link to="/outgoes_detail" className="link">kliknij tutaj</Link>. 
             </p>
             <p className="description">
             Jeśli chcesz dodać wydatek z kwotą pobraną automatycznie z paragonu zaznacz okienko poniżej. 

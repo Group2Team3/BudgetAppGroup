@@ -12,6 +12,8 @@ import Policy from './Components/Policy';
 import Terms from './Components/Terms';
 import { AuthProvider } from './service/AuthContext';
 import Outgoes from './Components/OutGoes';
+import OutgoesDetail from './Components/OutgoesDetail';
+import OutgoesEdit from './Components/OutgoesEdit';
 
 class App extends React.Component {
     render() {
@@ -27,7 +29,9 @@ class App extends React.Component {
                 <Route path="/receipts" element={<Receipts />} />
                 <Route path="/policy" element={<Policy />} />
                 <Route path="/terms" element={<Terms />} />
+                <Route path="/outgoes_detail" element={<OutgoesDetail />} />
                 <Route path="/outgoes" element={<Outgoes />} />
+                <Route path="/outgoes_edit" element={<OutgoesEdit />} />
               </Routes>
             </AuthProvider>
         )
