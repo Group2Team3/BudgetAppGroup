@@ -5,11 +5,12 @@ import Accordion from "react-bootstrap/Accordion";
 import { Link } from "react-router-dom";
 import { Button } from "@mui/material";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPencil, faFilm } from "@fortawesome/free-solid-svg-icons";
+import { faPencil, faFilm, faMoneyCheckDollar } from "@fortawesome/free-solid-svg-icons";
 
-const Outgoes = () => {
-  return (
-    <>
+const Incomes = () => {
+    return (
+        <>
+         <>
       <Container>
         <Row>
           <Col className="col-md-12">
@@ -22,14 +23,11 @@ const Outgoes = () => {
         <Row>
           <Col className="col-md-12">
             <p className="description">
-              Tutaj możesz przejrzeć swoje{" "}
-              <span className="thick">wydatki</span> posortowane od najnowszego
-              do najstarszego. W celu dodania nowego wydatków kliknij przycisk
-              poniżej. Jeśli chcesz edytować istniejący już wydatek kliknij
-              ikonę ołówka.
+              Tutaj możesz przejrzeć swoje <span className="thick">przychody</span>  posortowane od najnowszego do najstarszego. 
+              W celu dodania nowego przychodu kliknij przycisk poniżej. Jeśli chcesz edytować istniejący już przychód kliknij ikonę ołówka. 
             </p>
             <Col className="text-center">
-            <Link to="/outgoes"><Button className="some-btn">DODAJ NOWY WYDATEK</Button></Link>
+            <Link to="/income_add"><Button className="some-btn">DODAJ NOWY PRZYCHÓD</Button></Link>
             </Col>
           </Col>
         </Row>
@@ -41,24 +39,24 @@ const Outgoes = () => {
                   <Accordion.Header>LISTOPAD</Accordion.Header>
                   <Accordion.Body>
                     <Row className="current-goal pb-0">
-                        <div className="badge-right"></div>
+                        <div className="badge-right-green"></div>
                       <Col className="col-md-4 text-center d-flex justify-content-center">
-                        <FontAwesomeIcon icon={faFilm} className="plane-icon" />
+                        <FontAwesomeIcon icon={faMoneyCheckDollar} className="money-icon" />
                       </Col>
                       <Col className="col-md-4 text-start">
-                        <h4>ROZRYWKA</h4>
-                        <p className="description-goal">WYJŚCIE DO KINA</p>
+                        <h4>WYPŁATA</h4>
+                        <p className="description-goal">WYPŁATA Z FIRMY I.O.L</p>
                       </Col>
                       <Col className="col-md-4 text-end">
-                        <p className="red-b">-22.40 zł</p>
+                        <p className="green">4323.20 zł</p>
                       </Col>
                       <Col className="col-md-6 text-end">
                         <p style={{ color: "gray", fontSize: "1.2em" }}>
-                          12.11.2023
+                          10.11.2023
                         </p>
                       </Col>
                       <Col className="col-md-12 text-end mx-2 pencil-col">
-                        <Link to="/outgoes_edit">
+                        <Link to="/income_edit">
                           <FontAwesomeIcon icon={faPencil} className="pencil" />
                         </Link>
                       </Col>
@@ -70,7 +68,7 @@ const Outgoes = () => {
                   <Accordion.Body>
                     <Row className="current-goal">
                       <Col className="col-12 mb-4 text-center d-flex justify-content-center">
-                        <p> Brak wydatków w miesiącu październik</p>
+                        <p> Brak przychodów w miesiącu październik</p>
                       </Col>
                     </Row>
                   </Accordion.Body>
@@ -82,6 +80,8 @@ const Outgoes = () => {
       </Container>
       <Footer></Footer>
     </>
-  );
-};
-export default Outgoes;
+        </>
+    )
+}
+
+export default Incomes

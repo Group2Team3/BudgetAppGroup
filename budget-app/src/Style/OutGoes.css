@@ -65,3 +65,15 @@
 	border-top-right-radius: 40px;
 	border-bottom-right-radius: 40px;
   }
+
+  .current-goal .badge-right-green::after {
+	content: "";
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 50px; /* szerokość paska */
+	height: 100%;
+	background-color: #76E7CD;
+	border-top-right-radius: 40px;
+	border-bottom-right-radius: 40px;
+  }
