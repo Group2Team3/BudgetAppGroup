@@ -35,10 +35,10 @@ export const MainNavbar = () => {
               <Link to="/budget"><Button className="other-btn btn1">Twój budżet</Button></Link>
               <Link to="/goals"><Button className="other-btn btn2">Cele</Button></Link>
               <Link to="/receipts"><Button className="other-btn btn3">Paragony</Button></Link>
-              <Link to="/outgoes"><Button className="other-btn btn4">Wydatki</Button></Link>
+              <Link to="/outgoes_detail"><Button className="other-btn btn4">Wydatki</Button></Link>
               <Link to="/"><Button className="other-btn btn5">Przychody</Button></Link>
               <Link to="/login">
-                <Button className="other-btn btn1" onClick={handleLogout}>
+                <Button className="other-btn btn2" onClick={handleLogout}>
                   Wyloguj
                 </Button>
               </Link>

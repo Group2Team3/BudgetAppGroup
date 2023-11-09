@@ -61,11 +61,13 @@ h4 {
 }
 
 .current-goal {
+	position: relative;
 	background-color: #EEEEEE;
-	margin: 30px;
+	margin: 10px;
 	border-radius: 40px;
 	padding-top: 40px;
-	padding-right: 20px;
+	padding-right: 70px;
+
 }
 
 .description-goal {
