@@ -6,8 +6,8 @@ import { Footer } from "./Footer";
 import { Link } from "react-router-dom";
 import Form from "react-bootstrap/Form";
 
-const OutgoesEdit = () => {
-const date = new Date(2023, 10, 13);
+const EditIncome = () => {
+    const date = new Date(2023, 10, 13);
   return (
     <>
       <Container>
@@ -22,8 +22,8 @@ const date = new Date(2023, 10, 13);
         <Row>
           <Col className="col-md-12">
             <p className="description">
-             Edytujesz wydatek. Jeśli chcesz wrócić do Twoich wydatków {" "}
-              <Link to="/outgoes_detail" className="link">
+             Edytujesz przychód. Jeśli chcesz wrócić do Twoich przychodów {" "}
+              <Link to="/incomes" className="link">
                 kliknij tutaj
               </Link>
               .
@@ -37,7 +37,7 @@ const date = new Date(2023, 10, 13);
               <Col className="mb-5">
                 <Form.Control
                   type="text"
-                  value="ROZRYWKA"
+                  value="WYPŁATA"
                 />
               </Col>
 
@@ -51,7 +51,7 @@ const date = new Date(2023, 10, 13);
                 <Form.Label>OPIS</Form.Label>
               </Col>
               <Col className="mb-5">
-                <Form.Control as="textarea" rows={6} placeholder="WYJŚCIE DO KINA" />
+                <Form.Control as="textarea" rows={6} placeholder="WYPŁATA Z FIRMY I.O.L" />
               </Col>
             </Col>
 
@@ -65,7 +65,7 @@ const date = new Date(2023, 10, 13);
                   min={100}
                   max={100000}
                   step={10}
-                  placeholder="22.40 zł"
+                  placeholder="4323.20 zł"
                 />
               </Col>
 
@@ -74,31 +74,18 @@ const date = new Date(2023, 10, 13);
               </Col>
               <Col className="mb-5">
                 <Form.Select aria-label="Default select example">
-                  <option>wybierz kategorię</option>
-                  <option value="1">pojazd</option>
-                  <option value="2">rachunki</option>
-                  <option value="3">jedzenie</option>
-                  <option value="3">rozrywka</option>
-                  <option value="3">zwierzeta</option>
-                  <option value="3">inne</option>
+                  <option value="1" selected>wypłata</option>
+                  <option value="2">zarobki z samozatrudnienia</option>
+                  <option value="3">zasiłki/zapomogi</option>
+                  <option value="4">stypendia</option>
+                  <option value="5">inne</option>
                 </Form.Select>
               </Col>
-              <Col>
-              <p> Jeśli chcesz przypisać swojemu wydatkowi paragon: </p>
-                <Col>
-                  <Form.Label>PARAGON</Form.Label>
-                </Col>
-                <Col className="mb-5">
-                  <Form.Control type="file" accept="image/*" />
-                </Col>
-              </Col>
-            </Col>
-          </Row>
-          <Row>
-            <Col className="submit-button mb-4">
+              <Col className="submit-button mb-4">
               <Link to="/outgoes">
-                <Button className="some-btn">ZAPISZ WYDATEK</Button>
+                <Button className="some-btn">ZAPISZ PRZYCHÓD</Button>
               </Link>
+            </Col>
             </Col>
           </Row>
         </Row>
@@ -106,6 +93,5 @@ const date = new Date(2023, 10, 13);
       <Footer></Footer>
     </>
   );
-};
-
-export default OutgoesEdit;
+}
+export default EditIncome;

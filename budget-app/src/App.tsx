@@ -14,6 +14,9 @@ import { AuthProvider } from './service/AuthContext';
 import Outgoes from './Components/OutGoes';
 import OutgoesDetail from './Components/OutgoesDetail';
 import OutgoesEdit from './Components/OutgoesEdit';
+import Incomes from './Components/Incomes';
+import AddIncome from './Components/AddIncome';
+import EditIncome from './Components/EditIncome';
 
 class App extends React.Component {
     render() {
@@ -32,6 +35,9 @@ class App extends React.Component {
                 <Route path="/outgoes_detail" element={<OutgoesDetail />} />
                 <Route path="/outgoes" element={<Outgoes />} />
                 <Route path="/outgoes_edit" element={<OutgoesEdit />} />
+                <Route path="/incomes" element={<Incomes />} />
+                <Route path="/income_add" element={<AddIncome />} />
+                <Route path="/income_edit" element={<EditIncome />} />
               </Routes>
             </AuthProvider>
         )
