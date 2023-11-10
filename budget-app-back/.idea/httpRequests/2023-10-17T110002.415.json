@@ -1,0 +1,7 @@
+{
+  "timestamp": "2023-10-17T09:00:02.147+00:00",
+  "status": 415,
+  "error": "Unsupported Media Type",
+  "message": "Content-Type '*/*;charset=UTF-8' is not supported.",
+  "path": "/api/v1/customer"
+}
