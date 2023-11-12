@@ -1,22 +1,19 @@
 package BudgetApp.BudgetAppBack.customer;
 
-import BudgetApp.BudgetAppBack.account.Account;
+import BudgetApp.BudgetAppBack.goal.Goal;
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import java.util.List;
 
 import static jakarta.persistence.GenerationType.SEQUENCE;
 
 @Entity(name = "Customer")
-@Table(
-        name = "customer",
-        uniqueConstraints = {
-                @UniqueConstraint(name = "customer_mail_unique", columnNames = "mail")
-        }
-)
+@Table(name = "customer")
 @Getter
 @Setter
+@CrossOrigin
 @NoArgsConstructor
 public class Customer {
     @Id
@@ -29,37 +26,39 @@ public class Customer {
             strategy = SEQUENCE,
             generator = "customer_sequence"
     )
-
     private Long id;
+
     @Column(
             nullable = false,
             unique = true
     )
     private String mail;
+
     @Column(nullable = false)
     private String name;
 
-    public Customer(Long id, String mail, String name) {
-        this.id = id;
-        this.mail = mail;
-        this.name = name;
-    }
+    @Column(nullable = false)
+    private  String password;
 
-    public Customer(String mail, String name) {
-        this.mail = mail;
-        this.name = name;
-    }
-
-    @Override
-    public String toString() {
-        return "Customer{" +
-                "id=" + id +
-                ", mail='" + mail + '\'' +
-                ", name='" + name + '\'' +
-                '}';
-    }
+//    @OneToMany
+//    @JoinColumn(name = "id")
+//    private List<Account> accounts;
 
     @OneToMany
     @JoinColumn(name = "id")
-    private List<Account> customerAccounts;
+    private List<Goal> goals;
+
+
+    public Customer(Long id, String mail, String name, String password) {
+        this.id = id;
+        this.mail = mail;
+        this.name = name;
+        this.password = password;
+    }
+
+    public Customer(String mail, String name, String password) {
+        this.mail = mail;
+        this.name = name;
+        this.password = password;
+    }
 }
