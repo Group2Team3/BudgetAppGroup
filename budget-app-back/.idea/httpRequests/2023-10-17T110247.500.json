@@ -1,7 +1,0 @@
-{
-  "timestamp": "2023-10-17T09:02:47.853+00:00",
-  "status": 500,
-  "error": "Internal Server Error",
-  "message": "could not execute statement [B£¥D: podwójna wartoœæ klucza narusza ograniczenie unikalnoœci \"customer_mail_key\"\n  Szczegó³y: Klucz (mail)=(test@maila.pl) ju¿ istnieje.] [insert into customer (mail,name,id) values (?,?,?)]; SQL [insert into customer (mail,name,id) values (?,?,?)]; constraint [null]",
-  "path": "/api/v1/customer"
-}
