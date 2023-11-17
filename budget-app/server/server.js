@@ -155,7 +155,45 @@ app.put('/api/budgets/:id', async (req, res) => {
   }
 });
 
+// POST endpoint to create a new expense
+app.post('/api/expenses', async (req, res) => {
+  const { Expense_cst_id, Expense_name, Expense_amount, Expense_date, Expense_category, Expense_desc, Expense_receipt_id } = req.body;
 
+  try {
+    const result = await client.query
+    ('INSERT INTO Expenses (Expense_cst_id, Expense_name, Expense_amount, Expense_date, Expense_category, Expense_desc, Expense_receipt_id) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *', 
+    [Expense_cst_id, Expense_name, Expense_amount, Expense_date, Expense_category, Expense_desc, Expense_receipt_id]);
+
+    res.json({ message: 'Expense created successfully', expense: result.rows[0] });
+  } catch (error) {
+    console.error('Error handling POST expense request:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
+// GET endpoint to retrieve all expenses
+app.get('/api/expenses', async (req, res) => {
+  try {
+    const result = await client.query('SELECT * FROM Expenses');
+    res.json(result.rows);
+  } catch (error) {
+    console.error('Error handling GET expenses request:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
+//get endpoint to retrieve expenses for a single customer
+app.get('/api/expenses/:id', async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const result = await client.query('SELECT * FROM Expenses WHERE Expense_cst_id = $1', [id]);
+    res.json(result.rows);
+  } catch (error) {
+    console.error('Error handling GET expenses request:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
 
 
 app.listen(port, () => {
