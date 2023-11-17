@@ -4,6 +4,8 @@ import React, { createContext, useContext, useState, useEffect } from 'react';
 interface AuthContextProps {
   login: boolean;
   setLogin: React.Dispatch<React.SetStateAction<boolean>>;
+  userId: string | null; 
+  setUserId: React.Dispatch<React.SetStateAction<string | null>>;
 }
 
 const AuthContext = createContext<AuthContextProps | undefined>(undefined);
@@ -14,18 +16,18 @@ interface AuthProviderProps {
 
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [login, setLogin] = useState(() => {
-    // Próba odczytu stanu uwierzytelnienia z localStorage
     const storedLogin = localStorage.getItem('login');
     return storedLogin ? JSON.parse(storedLogin) : false;
   });
 
-  // Efekt uboczny, który zapisuje stan uwierzytelnienia do localStorage przy każdej zmianie
+  const [userId, setUserId] = useState<string | null>(null); 
+
   useEffect(() => {
     localStorage.setItem('login', JSON.stringify(login));
   }, [login]);
 
   return (
-    <AuthContext.Provider value={{ login, setLogin }}>
+    <AuthContext.Provider value={{ login, setLogin, userId, setUserId }}>
       {children}
     </AuthContext.Provider>
   );

@@ -1,7 +1,0 @@
-{
-  "timestamp": "2023-10-18T13:50:02.674+00:00",
-  "status": 500,
-  "error": "Internal Server Error",
-  "message": "customer with id 2 does not exists!",
-  "path": "/api/v1/customer/2"
-}

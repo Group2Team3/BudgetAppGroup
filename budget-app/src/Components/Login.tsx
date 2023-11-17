@@ -75,6 +75,7 @@ const Login: React.FC = () => {
 
     const [state, setState] = useState(initialState);
     const { setLogin } = useAuth();
+    const [userId, setUserId] = useState(null);
     const navigate = useNavigate();
 
     const handleLogin = async () => {
@@ -88,9 +89,15 @@ const Login: React.FC = () => {
         // Assuming your server responds with a success message
         setState({ ...state, helperText: 'Login successful', isError: false });
         setLogin(true); // Update login state
+        console.log(response.data)
+        setUserId(response.data.user.id); 
         console.log('Logging in:');
 
-        navigate('/budget');
+        localStorage.setItem('login', JSON.stringify(true));
+        localStorage.setItem('userId', response.data.user.id);
+
+        navigate('/addbudgetinfo');
+        
   
         // Redirect or perform other actions based on success
       } catch (error) {
