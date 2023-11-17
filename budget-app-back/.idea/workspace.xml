@@ -4,7 +4,63 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="02a12b4a-9a2f-4476-817c-7f20432660f5" name="Changes" comment="" />
+    <list default="true" id="02a12b4a-9a2f-4476-817c-7f20432660f5" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/BudgetAppBack/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BudgetAppBack/.mvn/wrapper/maven-wrapper.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BudgetAppBack/.mvn/wrapper/maven-wrapper.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BudgetAppBack/mvnw" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BudgetAppBack/mvnw.cmd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BudgetAppBack/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BudgetAppBack/src/main/resources/application.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BudgetAppBack/src/test/java/BudgetApp/BudgetAppBack/BudgetAppBackApplicationTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BudgetAppBack/BudgetAppBack.iml" beforeDir="false" afterPath="$PROJECT_DIR$/BudgetAppBack/BudgetAppBack.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BudgetAppBack/src/java/BudgetApp/BudgetAppBack/BudgetAppBackApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/BudgetAppBack/src/main/java/BudgetApp/BudgetAppBack/BudgetAppBackApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BudgetAppBack/src/java/BudgetApp/BudgetAppBack/account/Account.java" beforeDir="false" afterPath="$PROJECT_DIR$/BudgetAppBack/src/main/java/BudgetApp/BudgetAppBack/account/Account.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BudgetAppBack/src/java/BudgetApp/BudgetAppBack/account/AccountController.java" beforeDir="false" afterPath="$PROJECT_DIR$/BudgetAppBack/src/main/java/BudgetApp/BudgetAppBack/account/AccountController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BudgetAppBack/src/java/BudgetApp/BudgetAppBack/account/AccountRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/BudgetAppBack/src/main/java/BudgetApp/BudgetAppBack/account/AccountRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BudgetAppBack/src/java/BudgetApp/BudgetAppBack/account/AccountService.java" beforeDir="false" afterPath="$PROJECT_DIR$/BudgetAppBack/src/main/java/BudgetApp/BudgetAppBack/account/AccountService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BudgetAppBack/src/java/BudgetApp/BudgetAppBack/customer/Customer.java" beforeDir="false" afterPath="$PROJECT_DIR$/BudgetAppBack/src/main/java/BudgetApp/BudgetAppBack/customer/Customer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BudgetAppBack/src/java/BudgetApp/BudgetAppBack/customer/CustomerConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/BudgetAppBack/src/main/java/BudgetApp/BudgetAppBack/customer/CustomerConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BudgetAppBack/src/java/BudgetApp/BudgetAppBack/customer/CustomerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/BudgetAppBack/src/main/java/BudgetApp/BudgetAppBack/customer/CustomerController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BudgetAppBack/src/java/BudgetApp/BudgetAppBack/customer/CustomerRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/BudgetAppBack/src/main/java/BudgetApp/BudgetAppBack/customer/CustomerRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BudgetAppBack/src/java/BudgetApp/BudgetAppBack/customer/CustomerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/BudgetAppBack/src/main/java/BudgetApp/BudgetAppBack/customer/CustomerService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BudgetAppBack/src/java/BudgetApp/BudgetAppBack/goal/Goal.java" beforeDir="false" afterPath="$PROJECT_DIR$/BudgetAppBack/src/main/java/BudgetApp/BudgetAppBack/goal/Goal.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BudgetAppBack/src/java/BudgetApp/BudgetAppBack/goal/GoalController.java" beforeDir="false" afterPath="$PROJECT_DIR$/BudgetAppBack/src/main/java/BudgetApp/BudgetAppBack/goal/GoalController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BudgetAppBack/src/java/BudgetApp/BudgetAppBack/goal/GoalRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/BudgetAppBack/src/main/java/BudgetApp/BudgetAppBack/goal/GoalRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BudgetAppBack/src/java/BudgetApp/BudgetAppBack/goal/GoalService.java" beforeDir="false" afterPath="$PROJECT_DIR$/BudgetAppBack/src/main/java/BudgetApp/BudgetAppBack/goal/GoalService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BudgetAppBack/src/java/BudgetApp/BudgetAppBack/operation/Operation.java" beforeDir="false" afterPath="$PROJECT_DIR$/BudgetAppBack/src/main/java/BudgetApp/BudgetAppBack/operation/Operation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BudgetAppBack/src/java/BudgetApp/BudgetAppBack/operation/OperationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/BudgetAppBack/src/main/java/BudgetApp/BudgetAppBack/operation/OperationController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BudgetAppBack/src/java/BudgetApp/BudgetAppBack/operation/OperationRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/BudgetAppBack/src/main/java/BudgetApp/BudgetAppBack/operation/OperationRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BudgetAppBack/src/java/BudgetApp/BudgetAppBack/operation/OperationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/BudgetAppBack/src/main/java/BudgetApp/BudgetAppBack/operation/OperationService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BudgetAppBack/src/java/BudgetApp/BudgetAppBack/recipt/Recipt.java" beforeDir="false" afterPath="$PROJECT_DIR$/BudgetAppBack/src/main/java/BudgetApp/BudgetAppBack/recipt/Recipt.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BudgetAppBack/src/java/BudgetApp/BudgetAppBack/recipt/ReciptController.java" beforeDir="false" afterPath="$PROJECT_DIR$/BudgetAppBack/src/main/java/BudgetApp/BudgetAppBack/recipt/ReciptController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BudgetAppBack/src/java/BudgetApp/BudgetAppBack/recipt/ReciptRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/BudgetAppBack/src/main/java/BudgetApp/BudgetAppBack/recipt/ReciptRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BudgetAppBack/src/java/BudgetApp/BudgetAppBack/recipt/ReciptService.java" beforeDir="false" afterPath="$PROJECT_DIR$/BudgetAppBack/src/main/java/BudgetApp/BudgetAppBack/recipt/ReciptService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BudgetAppBack/target/classes/BudgetApp/BudgetAppBack/BudgetAppBackApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/BudgetAppBack/target/classes/BudgetApp/BudgetAppBack/BudgetAppBackApplication.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BudgetAppBack/target/classes/BudgetApp/BudgetAppBack/account/Account.class" beforeDir="false" afterPath="$PROJECT_DIR$/BudgetAppBack/target/classes/BudgetApp/BudgetAppBack/account/Account.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BudgetAppBack/target/classes/BudgetApp/BudgetAppBack/account/AccountController.class" beforeDir="false" afterPath="$PROJECT_DIR$/BudgetAppBack/target/classes/BudgetApp/BudgetAppBack/account/AccountController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BudgetAppBack/target/classes/BudgetApp/BudgetAppBack/account/AccountRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/BudgetAppBack/target/classes/BudgetApp/BudgetAppBack/account/AccountRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BudgetAppBack/target/classes/BudgetApp/BudgetAppBack/account/AccountService.class" beforeDir="false" afterPath="$PROJECT_DIR$/BudgetAppBack/target/classes/BudgetApp/BudgetAppBack/account/AccountService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BudgetAppBack/target/classes/BudgetApp/BudgetAppBack/customer/Customer.class" beforeDir="false" afterPath="$PROJECT_DIR$/BudgetAppBack/target/classes/BudgetApp/BudgetAppBack/customer/Customer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BudgetAppBack/target/classes/BudgetApp/BudgetAppBack/customer/CustomerConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/BudgetAppBack/target/classes/BudgetApp/BudgetAppBack/customer/CustomerConfig.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BudgetAppBack/target/classes/BudgetApp/BudgetAppBack/customer/CustomerController.class" beforeDir="false" afterPath="$PROJECT_DIR$/BudgetAppBack/target/classes/BudgetApp/BudgetAppBack/customer/CustomerController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BudgetAppBack/target/classes/BudgetApp/BudgetAppBack/customer/CustomerRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/BudgetAppBack/target/classes/BudgetApp/BudgetAppBack/customer/CustomerRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BudgetAppBack/target/classes/BudgetApp/BudgetAppBack/customer/CustomerService.class" beforeDir="false" afterPath="$PROJECT_DIR$/BudgetAppBack/target/classes/BudgetApp/BudgetAppBack/customer/CustomerService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BudgetAppBack/target/classes/BudgetApp/BudgetAppBack/goal/Goal.class" beforeDir="false" afterPath="$PROJECT_DIR$/BudgetAppBack/target/classes/BudgetApp/BudgetAppBack/goal/Goal.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BudgetAppBack/target/classes/BudgetApp/BudgetAppBack/goal/GoalController.class" beforeDir="false" afterPath="$PROJECT_DIR$/BudgetAppBack/target/classes/BudgetApp/BudgetAppBack/goal/GoalController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BudgetAppBack/target/classes/BudgetApp/BudgetAppBack/goal/GoalRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/BudgetAppBack/target/classes/BudgetApp/BudgetAppBack/goal/GoalRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BudgetAppBack/target/classes/BudgetApp/BudgetAppBack/goal/GoalService.class" beforeDir="false" afterPath="$PROJECT_DIR$/BudgetAppBack/target/classes/BudgetApp/BudgetAppBack/goal/GoalService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BudgetAppBack/target/classes/BudgetApp/BudgetAppBack/operation/Operation.class" beforeDir="false" afterPath="$PROJECT_DIR$/BudgetAppBack/target/classes/BudgetApp/BudgetAppBack/operation/Operation.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BudgetAppBack/target/classes/BudgetApp/BudgetAppBack/operation/OperationController.class" beforeDir="false" afterPath="$PROJECT_DIR$/BudgetAppBack/target/classes/BudgetApp/BudgetAppBack/operation/OperationController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BudgetAppBack/target/classes/BudgetApp/BudgetAppBack/operation/OperationRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/BudgetAppBack/target/classes/BudgetApp/BudgetAppBack/operation/OperationRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BudgetAppBack/target/classes/BudgetApp/BudgetAppBack/operation/OperationService.class" beforeDir="false" afterPath="$PROJECT_DIR$/BudgetAppBack/target/classes/BudgetApp/BudgetAppBack/operation/OperationService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BudgetAppBack/target/classes/BudgetApp/BudgetAppBack/recipt/Recipt.class" beforeDir="false" afterPath="$PROJECT_DIR$/BudgetAppBack/target/classes/BudgetApp/BudgetAppBack/recipt/Recipt.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BudgetAppBack/target/classes/BudgetApp/BudgetAppBack/recipt/ReciptController.class" beforeDir="false" afterPath="$PROJECT_DIR$/BudgetAppBack/target/classes/BudgetApp/BudgetAppBack/recipt/ReciptController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BudgetAppBack/target/classes/BudgetApp/BudgetAppBack/recipt/ReciptRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/BudgetAppBack/target/classes/BudgetApp/BudgetAppBack/recipt/ReciptRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BudgetAppBack/target/classes/BudgetApp/BudgetAppBack/recipt/ReciptService.class" beforeDir="false" afterPath="$PROJECT_DIR$/BudgetAppBack/target/classes/BudgetApp/BudgetAppBack/recipt/ReciptService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BudgetAppBack/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/BudgetAppBack/target/classes/application.properties" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -21,6 +77,9 @@
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
@@ -35,42 +94,44 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
-    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
-    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
-    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/school/projekt/data/v3&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.17&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
-    &quot;spring.configuration.checksum&quot;: &quot;10a04aec6eecb8c0a1bb8a83cfdda5b1&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "D:/school/projekt/jeszcze_raz/BudgetAppGroup/budget-app-back/BudgetAppBack",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.17",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "spring.configuration.checksum": "10a04aec6eecb8c0a1bb8a83cfdda5b1",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;DatabaseDriversLRU&quot;: [
-      &quot;postgresql&quot;
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "postgresql"
     ]
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\school\projekt\jeszcze_raz\BudgetAppGroup\budget-app-back\BudgetAppBack" />
+      <recent name="D:\school\projekt\jeszcze_raz\BudgetAppGroup\budget-app-back\BudgetAppBack\src" />
       <recent name="C:\School\data\projekt\data\v2\BudgetAppBack\src\main\java\BudgetApp\BudgetAppBack\recipt" />
     </key>
   </component>
-  <component name="RunManager" selected="Spring Boot.BudgetAppBackApplication">
+  <component name="RunManager" selected="Application.BudgetAppBackApplication">
     <configuration name="BudgetAppBackApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="BudgetApp.BudgetAppBack.BudgetAppBackApplication" />
-      <module name="BudgetAppBack" />
+      <module name="budget-app-back" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="BudgetApp.BudgetAppBack.*" />
@@ -102,11 +163,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.BudgetAppBackApplication" />
         <item itemvalue="HTTP Request.generated-requests | #5" />
         <item itemvalue="HTTP Request.generated-requests | #3" />
         <item itemvalue="HTTP Request.generated-requests | #2" />
         <item itemvalue="HTTP Request.generated-requests | #1" />
-        <item itemvalue="Application.BudgetAppBackApplication" />
       </list>
     </recent_temporary>
   </component>
@@ -135,11 +196,23 @@
       <workItem from="1699525710380" duration="645000" />
       <workItem from="1699543723315" duration="1297000" />
       <workItem from="1699545034431" duration="4980000" />
+      <workItem from="1699631018413" duration="823000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
