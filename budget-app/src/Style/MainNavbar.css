@@ -1,38 +1,38 @@
 /* button - logowanie i rejestracja */
 
 .buttons .MuiButton-root {
-    font-family: 'Raleway', sans-serif;
-    font-weight: 600;
-    background-color: #76E7CD; 
-    width: 10em;
-    height: 3.5em;
-    border-radius: 23px;
-    border-color: #000000;
-    color: #000000; /* Kolor tekstu */
-  }
+  font-family: 'Raleway', sans-serif;
+  font-weight: 600;
+  background-color: #76E7CD; 
+  width: 10em;
+  height: 3.5em;
+  border-radius: 23px;
+  border-color: #000000;
+  color: #000000; /* Kolor tekstu */
+}
 
 .buttons .MuiButton-root:hover {
-    background-color: #5ab5a1; 
-  }
+  background-color: #5ab5a1; 
+}
 
 .buttons .MuiButton-root:active {
-    background-color: #3d8c7e; 
-  }
+  background-color: #3d8c7e; 
+}
 
-  .App-logo {
-    height: 7em;
-    pointer-events: none;
-    margin-left: 1em;
-  }
-  
-  .App-brandName {
-    font-family: Raleway;
-    font-size: 4em;
-    font-weight: 900;
-    letter-spacing: 0em;
-    text-align: left;
-    margin-left: -1em; 
-  }
+.App-logo {
+  height: 7em;
+  pointer-events: none;
+  margin-left: 1em;
+}
+
+.App-brandName {
+  font-family: Raleway;
+  font-size: 4em;
+  font-weight: 900;
+  letter-spacing: 0em;
+  text-align: left;
+  margin-left: -1em; 
+}
 
 .other-btn {
   width: 8em!important;
@@ -73,4 +73,71 @@ a {
 
 .btn5 {
   background-color: #76E7CD!important; 
+}
+
+/* Media Queries */
+@media screen and (max-width: 1200px) {
+  .App-logo {
+    height: 5em;
+  }
+  
+  .App-brandName {
+    font-size: 2.4em;
+    margin-right: 0;
+  }
+  
+  .buttons .MuiButton-root {
+    width: 8em;
+    height: 2em;
+  }
+  
+  .other-btn {
+    width: 6em!important;
+    height: 3em!important;
+  }
+
+  .buttons .MuiButton-root {
+    font-weight: 600;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .App-logo {
+    height: 5em;
+  }
+  
+  .App-brandName {
+    font-size: 3em;
+    margin-right: 0;
+  }
+  
+  .buttons .MuiButton-root {
+    width: 8em;
+    height: 3em;
+  }
+  
+  .other-btn {
+    width: 6em!important;
+    height: 3em!important;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .App-logo {
+    height: 3em;
+  }
+  
+  .App-brandName {
+    font-size: 2em;
+  }
+  
+  .buttons .MuiButton-root {
+    width: 6em;
+    height: 2.5em;
+  }
+  
+  .other-btn {
+    width: 4em!important;
+    height: 2.5em!important;
+  }
 }

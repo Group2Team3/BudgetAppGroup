@@ -37,8 +37,8 @@ const Goals = () => {
               podejrzeć w zakładce “Cele z przeszłości”.
             </p>
           </Col>
-          <Row className="m-5">
-            <Col className="col-md-5 mx-3">
+          <Row className="row-goals">
+            <Col className="col-md-5 col-sm-12 mx-3">
               <Col>
                 <Form.Label>NAZWA</Form.Label>
               </Col>
@@ -70,12 +70,12 @@ const Goals = () => {
 
               <Col className="submit-button">
                 <Link to="/goals">
-                  <Button className="some-btn">DODAJ CEL</Button>
+                  <Button className="some-btn-3">DODAJ CEL</Button>
                 </Link>
               </Col>
             </Col>
 
-            <Col className="col-md-5 mx-3">
+            <Col className="col-md-5 col-sm-12 mx-3">
               <Col>
                 <Form.Label>KWOTA</Form.Label>
               </Col>
@@ -108,6 +108,13 @@ const Goals = () => {
               <Col className="mb-5">
                 <Form.Control as="textarea" rows={6} placeholder="Opis" />
               </Col>
+
+              <Col className="submit-button">
+                <Link to="/goals">
+                  <Button className="some-btn-2">DODAJ CEL</Button>
+                </Link>
+              </Col>
+
             </Col>
           </Row>
         </Row>

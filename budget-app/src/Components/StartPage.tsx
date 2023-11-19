@@ -1,5 +1,5 @@
 import { Col, Container, Row } from "react-bootstrap";
-import comp from "../assets/budgetImages/blob1.svg";
+import comp from "../assets/budgetImages/presentation.png";
 import { Button } from "@mui/material";
 import { faMoneyBillWave, faMagnifyingGlassDollar, faHandHoldingDollar, faReceipt } from '@fortawesome/free-solid-svg-icons'
 import Cards from "./Card";

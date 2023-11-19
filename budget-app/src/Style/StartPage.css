@@ -1,58 +1,86 @@
-.head{
-    font-family: 'Raleway', sans-serif;
-    font-size: 3em;
-    font-weight: 2em;
-    line-height: 65px;
-    letter-spacing: 0em;
-  }
-  
-  .left_side{
-    text-align: left;
-  }
-  .body{
-    font-family: Raleway;
-    font-size: 1em;
-  }
+.head {
+  font-family: 'Raleway', sans-serif;
+  font-size: 3em;
+  font-weight: 2em;
+  line-height: 65px;
+  letter-spacing: 0em;
+}
 
-  .button.MuiButton-root {
-    font-family: 'Raleway', sans-serif;
-    font-weight: 600;
-    background-color: #76E7CD; 
-    width: 10em;
-    height: 3em;
-    border-radius: 23px;
-    border-color: #000000;
-    color: #000000; 
-  }
+.left_side {
+  text-align: left;
+}
 
-  .button.MuiButton-root:hover {
-    background-color: #5ab5a1; 
-  }
+.body {
+  font-family: Raleway;
+  font-size: 1em;
+}
+
+.button.MuiButton-root {
+  font-family: 'Raleway', sans-serif;
+  font-weight: 600;
+  background-color: #76E7CD;
+  width: 10em;
+  height: 3em;
+  border-radius: 23px;
+  border-color: #000000;
+  color: #000000;
+}
+
+.button.MuiButton-root:hover {
+  background-color: #5ab5a1;
+}
 
 .button.MuiButton-root:active {
-    background-color: #3d8c7e; 
-  }
+  background-color: #3d8c7e;
+}
 
-  
 .centered-content {
-    font-family: 'Raleway', sans-serif;
-    display: flex;
-    align-items: stretch;
-    justify-content: center;
-    text-align: center;
-    margin-left: 0.1em;
-    margin-right: 0.1em; 
-    padding-left: 5em;
-    padding-right: 5em; 
-    padding-top: 4em;
-    padding-bottom: 4em
-  } 
-  
-  .css-r40f8v-MuiTypography-root {
-    font-family: 'Raleway', sans-serif!important;
+  font-family: 'Raleway', sans-serif;
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  text-align: center;
+  margin-left: 0.1em;
+  margin-right: 0.1em;
+  padding-left: 5em;
+  padding-right: 5em;
+  padding-top: 4em;
+  padding-bottom: 4em;
+}
+
+.css-r40f8v-MuiTypography-root {
+  font-family: 'Raleway', sans-serif!important;
+}
+
+.css-ag7rrr-MuiTypography-root {
+  font-family: 'Raleway', sans-serif!important;
+  font-weight: 600!important;
+}
+
+/* Media Queries */
+@media screen and (max-width: 768px) {
+  .head {
+    font-size: 4em;
   }
 
-  .css-ag7rrr-MuiTypography-root {
-    font-family: 'Raleway', sans-serif!important;
-    font-weight: 600!important;
+  .centered-content {
+    padding-left: 8em;
+    padding-right: 2em;
+    padding-top: 2em;
+    padding-bottom: 2em;
   }
+}
+
+@media screen and (max-width: 480px) {
+  .head {
+    font-size: 3em;
+    line-height: 40px;
+  }
+
+  .centered-content {
+    padding-left: 3em;
+    padding-right: 1em;
+    padding-top: 1em;
+    padding-bottom: 1em;
+  }
+}

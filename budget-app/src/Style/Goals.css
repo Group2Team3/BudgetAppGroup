@@ -16,34 +16,49 @@
 	border: 2px solid #000 !important;
 	border-radius: 23px;
 }
-
 .some-btn {
-	background-color: #76E7CD !important;
+	background-color: #76e7cd !important;
 	width: 8em !important;
 	border-right: none !important;
 	margin: 4px !important;
 	border-radius: 23px !important;
-	font-family: 'Raleway', sans-serif !important;
+	font-family: "Raleway", sans-serif !important;
 	font-weight: 600 !important;
 	color: #000000 !important;
 	height: 4em !important;
 }
 
+.some-btn-3 {
+	background-color: #76e7cd !important;
+	width: 8em !important;
+	border-right: none !important;
+	margin: 4px !important;
+	border-radius: 23px !important;
+	font-family: "Raleway", sans-serif !important;
+	font-weight: 600 !important;
+	color: #000000 !important;
+	height: 4em !important;
+}
+
+.some-btn-2 {
+	display: none !important;
+}
+
 .submit-button {
-	display: flex!important;
-	justify-content: center!important;
-	align-items: center!important;
+	display: flex !important;
+	justify-content: center !important;
+	align-items: center !important;
 	margin: 0 auto;
 }
 
 .plane-icon {
-	color: #F47C99;
+	color: #f47c99;
 	font-size: 8em;
 	margin-top: 50px;
 }
 
 .money-icon {
-	color: #76E7CD;
+	color: #76e7cd;
 	font-size: 8em;
 	margin-top: 50px;
 }
@@ -55,25 +70,24 @@ h4 {
 
 .pink {
 	font-weight: 800;
-	color: #F47C99;
+	color: #f47c99;
 	line-height: 10px;
 	font-size: 1.5em;
 }
 
 .green {
-	color: #76E7CD;
+	color: #76e7cd;
 	font-weight: 900;
 	font-size: 2em;
 }
 
 .current-goal {
 	position: relative;
-	background-color: #EEEEEE;
+	background-color: #eeeeee;
 	margin: 10px;
 	border-radius: 40px;
 	padding-top: 40px;
 	padding-right: 70px;
-
 }
 
 .description-goal {
@@ -97,17 +111,17 @@ h4 {
 	font-size: 1.3em;
 }
 
-.how-much-savings { 
-	color: #76E7CD;
+.how-much-savings {
+	color: #76e7cd;
 	font-size: 1.5em;
 }
 
 .some-other-btn {
-	background-color: #76E7CD !important;
+	background-color: #76e7cd !important;
 	width: 8em !important;
 	border-right: none !important;
 	border-radius: 23px !important;
-	font-family: 'Raleway', sans-serif !important;
+	font-family: "Raleway", sans-serif !important;
 	font-weight: 600 !important;
 	font-size: 1.2em;
 	margin-top: -3px;
@@ -133,24 +147,24 @@ h4 {
 }
 
 .red {
-	color: #D4686F;
+	color: #d4686f;
 }
 
 .green2 {
-	color: #76E7CD;
+	color: #76e7cd;
 }
 
 .saved-add {
 	margin-top: 6px;
 }
 
-.some-btn-back { 
-	background-color: #76E7CD !important;
+.some-btn-back {
+	background-color: #76e7cd !important;
 	width: 14em !important;
 	border-right: none !important;
 	margin-top: 30px !important;
 	border-radius: 23px !important;
-	font-family: 'Raleway', sans-serif !important;
+	font-family: "Raleway", sans-serif !important;
 	font-weight: 600 !important;
 	color: #000000 !important;
 	height: 4em !important;
@@ -160,6 +174,253 @@ h4 {
 	font-weight: 600;
 }
 
-.form-label { 
+.form-label {
 	line-height: 6px;
+}
+
+.row-goals {
+	margin: 50px;
+}
+
+/* Media Queries */
+@media screen and (max-width: 1200px) {
+	.thick {
+		font-weight: 700;
+	}
+
+	.some-btn-3 {
+		display: none !important;
+	}
+
+	.form-label {
+		font-size: 1em !important;
+	}
+
+	.form-control,
+	.form-select {
+		border-width: 1px !important;
+		border-radius: 20px;
+	}
+
+	.some-btn,
+	.some-other-btn,
+	.some-btn-back {
+		width: 6em !important;
+		border-radius: 20px !important;
+		font-size: 1em;
+		height: 3em !important;
+	}
+
+	.some-btn-2 {
+		background-color: #76e7cd !important;
+		width: 8em !important;
+		border-right: none !important;
+		margin: 4px !important;
+		border-radius: 23px !important;
+		font-family: "Raleway", sans-serif !important;
+		font-weight: 600 !important;
+		color: #000000 !important;
+		height: 4em !important;
+		display: flex!important;
+	}
+
+	.plane-icon,
+	.money-icon {
+		font-size: 6em;
+		margin-top: 30px;
+	}
+
+	h4 {
+		font-size: 2.5em;
+	}
+
+	.pink {
+		font-size: 1.2em;
+	}
+
+	.green {
+		font-size: 1.5em;
+	}
+
+	.current-goal {
+		padding-top: 30px;
+		padding-right: 50px;
+	}
+
+	.description-goal {
+		margin-bottom: 40px;
+		font-size: 1em;
+	}
+
+	.details-goal {
+		font-size: 1.2em;
+	}
+
+	.details-goal-col {
+		margin-top: 80px;
+	}
+
+	.goal-savings {
+		padding: 40px;
+		font-size: 1.1em;
+	}
+
+	.how-much-savings {
+		font-size: 1.2em;
+	}
+
+	.pencil {
+		font-size: 2.5em;
+	}
+
+	.pencil-col {
+		margin-top: -20px;
+		margin-bottom: 40px;
+	}
+
+	.saved-amount {
+		margin-left: -10px;
+	}
+
+	.details-goal-col-fail {
+		margin-top: 100px;
+	}
+
+	.some-btn-back {
+		width: 10em !important;
+		margin-top: 20px !important;
+	}
+
+	.form-control {
+		font-weight: 500;
+	}
+
+	.form-label {
+		line-height: 4px;
+	}
+
+	.row-goals {
+		margin: 0 auto;
+	}
+}
+
+@media screen and (max-width: 586px) {
+	.thick {
+		font-weight: 700;
+	}
+
+	.some-btn-3 {
+		display: none !important;
+	}
+
+	.form-label {
+		font-size: 1em !important;
+	}
+
+	.form-control,
+	.form-select {
+		border-width: 1px !important;
+		border-radius: 20px;
+	}
+
+	.some-btn,
+	.some-other-btn,
+	.some-btn-back {
+		width: 6em !important;
+		border-radius: 20px !important;
+		font-size: 1em;
+		height: 3em !important;
+	}
+
+	.some-btn-2 {
+		background-color: #76e7cd !important;
+		width: 8em !important;
+		border-right: none !important;
+		margin: 4px !important;
+		border-radius: 23px !important;
+		font-family: "Raleway", sans-serif !important;
+		font-weight: 600 !important;
+		color: #000000 !important;
+		height: 4em !important;
+		display: flex!important;
+	}
+
+	.plane-icon,
+	.money-icon {
+		font-size: 6em;
+		margin-top: 30px;
+	}
+
+	h4 {
+		font-size: 2.5em;
+	}
+
+	.pink {
+		font-size: 1.2em;
+	}
+
+	.green {
+		font-size: 1.5em;
+	}
+
+	.current-goal {
+		padding-top: 30px;
+		padding-right: 50px;
+	}
+
+	.description-goal {
+		margin-bottom: 40px;
+		font-size: 1em;
+	}
+
+	.details-goal {
+		font-size: 1.2em;
+	}
+
+	.details-goal-col {
+		margin-top: 80px;
+	}
+
+	.goal-savings {
+		padding: 40px;
+		font-size: 1.1em;
+	}
+
+	.how-much-savings {
+		font-size: 1.2em;
+	}
+
+	.pencil {
+		font-size: 2.5em;
+	}
+
+	.pencil-col {
+		margin-top: -20px;
+		margin-bottom: 40px;
+	}
+
+	.saved-amount {
+		margin-left: -10px;
+	}
+
+	.details-goal-col-fail {
+		margin-top: 100px;
+	}
+
+	.some-btn-back {
+		width: 10em !important;
+		margin-top: 20px !important;
+	}
+
+	.form-control {
+		font-weight: 500;
+	}
+
+	.form-label {
+		line-height: 4px;
+	}
+
+	.row-goals {
+		margin: 0 auto;
+	}
 }

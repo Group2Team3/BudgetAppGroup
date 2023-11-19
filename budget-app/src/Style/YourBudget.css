@@ -1,3 +1,4 @@
+/* Default styles */
 .description {
     margin: 50px;
 }
@@ -17,7 +18,7 @@ h5 {
     text-transform: uppercase;
 }
 
-.bg-success{
+.bg-success {
     background-color: #76E7CD!important;
     color: white!important;
     font-family: 'Raleway', sans-serif!important;
@@ -58,4 +59,79 @@ h5 {
     color: #9B7EDE;
     font-weight: 900;
     font-size: 1.2em;
+}
+
+/* Media queries */
+@media (max-width: 768px) {
+    .description {
+        margin: 20px;
+    }
+
+    h5 {
+        font-size: 2rem;
+        margin: 20px;
+    }
+
+    .bg-success,
+    .bg-danger {
+        font-size: 2em;
+    }
+
+    .progress {
+        height: 80px !important;
+        border-radius: 50px!important;
+    }
+
+    .see {
+        font-size: 1em;
+    }
+
+    .accordion-button {
+        border-radius: 20px!important;
+    }
+
+    .accordion-item {
+        border-radius: 25px!important;
+    }
+
+    .purple {
+        font-size: 1em;
+    }
+}
+
+@media (max-width: 480px) {
+    .description {
+        margin: 10px;
+    }
+
+    h5 {
+        font-size: 1.5rem;
+        margin: 10px;
+    }
+
+    .bg-success,
+    .bg-danger {
+        font-size: 1.5em;
+    }
+
+    .progress {
+        height: 60px !important;
+        border-radius: 40px!important;
+    }
+
+    .see {
+        font-size: 0.8em;
+    }
+
+    .accordion-button {
+        border-radius: 15px!important;
+    }
+
+    .accordion-item {
+        border-radius: 20px!important;
+    }
+
+    .purple {
+        font-size: 0.8em;
+    }
 }

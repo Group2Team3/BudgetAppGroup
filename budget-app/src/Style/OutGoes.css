@@ -1,4 +1,3 @@
-
 .form-label {
 	font-weight: 900 !important;
 	font-size: 1.2em !important;
@@ -64,9 +63,9 @@
 	background-color: #D4686F;
 	border-top-right-radius: 40px;
 	border-bottom-right-radius: 40px;
-  }
+}
 
-  .current-goal .badge-right-green::after {
+.current-goal .badge-right-green::after {
 	content: "";
 	position: absolute;
 	top: 0;
@@ -76,4 +75,93 @@
 	background-color: #76E7CD;
 	border-top-right-radius: 40px;
 	border-bottom-right-radius: 40px;
-  }
+}
+
+/* Media Queries */
+@media screen and (max-width: 1400px) {
+	.form-label {
+		font-size: 1em !important;
+	}
+
+	.some-btn {
+		width: 12em !important;
+	}
+
+	.some-btn-back {
+		width: 12em !important;
+	}
+
+	.red-b {
+		font-size: 1.5em;
+	}
+
+	h4 {
+		font-size: 2.2em;
+	}
+}
+
+@media screen and (max-width: 1200px) {
+	.form-label {
+		font-size: 1em !important;
+	}
+
+	.some-btn {
+		width: 12em !important;
+	}
+
+	.some-btn-back {
+		width: 12em !important;
+	}
+
+	.red-b {
+		font-size: 1.2em;
+	}
+
+	h4 {
+		font-size: 1.8em;
+	}
+}
+
+@media screen and (max-width: 768px) {
+	.form-label {
+		font-size: 1em !important;
+	}
+
+	.some-btn {
+		width: 12em !important;
+	}
+
+	.some-btn-back {
+		width: 12em !important;
+	}
+
+	.red-b {
+		font-size: 1em;
+	}
+
+	h4 {
+		font-size: 1.5em;
+	}
+}
+
+@media screen and (max-width: 576px) {
+	.form-label {
+		font-size: 0.8em !important;
+	}
+
+	.some-btn {
+		width: 10em !important;
+	}
+
+	.some-btn-back {
+		width: 10em !important;
+	}
+
+	.red-b {
+		font-size: 0.8em;
+	}
+
+	h4 {
+		font-size: 1.2em;
+	}
+}
