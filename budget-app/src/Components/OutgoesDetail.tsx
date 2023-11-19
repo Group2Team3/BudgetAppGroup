@@ -35,7 +35,7 @@ const Outgoes = () => {
         </Row>
         <Container>
           <Row className="d-flex justify-content-center">
-            <Col className="col-md-8 text-center m-5">
+            <Col className="col-sm-12 col-md-8 text-center m-5">
               <Accordion defaultActiveKey="0" className="mb-5">
                 <Accordion.Item eventKey="0">
                   <Accordion.Header>LISTOPAD</Accordion.Header>

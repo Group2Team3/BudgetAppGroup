@@ -29,8 +29,8 @@ const date = new Date(2023, 10, 13);
               .
             </p>
           </Col>
-          <Row className="m-5">
-            <Col className="col-md-5 mx-3">
+          <Row className="row-goals">
+            <Col className="col-sm-12 col-md-5 mx-3">
               <Col>
                 <Form.Label>NAZWA</Form.Label>
               </Col>
@@ -55,7 +55,7 @@ const date = new Date(2023, 10, 13);
               </Col>
             </Col>
 
-            <Col className="col-md-5 mx-3">
+            <Col className="col-sm-12 col-md-5 mx-3">
               <Col>
                 <Form.Label>KWOTA</Form.Label>
               </Col>

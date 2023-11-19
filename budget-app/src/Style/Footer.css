@@ -39,3 +39,47 @@
 .all-rigths-reserved {
   font-weight: 600;
 }
+/* Media Queries */
+@media screen and (max-width: 768px) {
+  .titles {
+    font-size: 1.5em;
+  }
+
+  .copy {
+    font-size: 0.7em;
+  }
+
+  .button-check.MuiButton-root {
+    width: 5em;
+    height: 2em;
+  }
+
+  .row-buttons {
+    margin-top: 100px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .titles {
+    font-size: 1.2em;
+  }
+
+  .copy {
+    font-size: 0.6em;
+  }
+
+  .button-check.MuiButton-root {
+    width: 4em;
+    height: 1.8em;
+  }
+
+  .row-buttons {
+    margin-top: 50px;
+  }
+
+  .App-footer {
+    background-color: #967399;
+    background-image: none;
+    margin-top: 40px;
+  }
+}

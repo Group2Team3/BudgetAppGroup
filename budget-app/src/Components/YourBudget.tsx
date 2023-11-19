@@ -4,7 +4,7 @@ import { Button } from "@mui/material";
 import { MainNavbar } from "./MainNavbar";
 import { Footer } from "./Footer";
 import { format } from "date-fns";
-import { ca, pl } from "date-fns/locale";
+import { ca, he, pl } from "date-fns/locale";
 import Accordion from "react-bootstrap/Accordion";
 import { Link } from "react-router-dom";
 import ProgressBar from "react-bootstrap/ProgressBar";
@@ -123,10 +123,75 @@ const YourBudget = () => {
     { id: "8", label: "WAKACJE", value: vacations, color: "#F47329" },
   ];
 
+  //CUSTOM SIZINGS FOR PIE AND BAR CHART DEPENDING ON SCREEN SIZE
+  let width, height, fontSize, outerRadius, marginTop, marginBottom, marginLeft, marginRight, fontSize_prc, width_bar, height_bar;
+  if (window.innerWidth > 1700) {
+    width = 1000;
+    height = 480;
+    outerRadius = 200;
+    fontSize = 20;
+    marginTop = 100;
+    marginBottom = 100;
+    marginLeft = -400;
+    marginRight = 100;
+    fontSize_prc = 25
+    width_bar = 820;
+    height_bar = 400;
+  } else if (window.innerWidth > 1000) {
+    width = 800;
+    height = 430;
+    outerRadius = 170;
+    fontSize = 18;
+    marginTop = 70;
+    marginBottom = 70;
+    marginLeft = -300;
+    marginRight = 70;
+    fontSize_prc = 22;
+    width_bar = 700;
+    height_bar = 400;
+  } else if (window.innerWidth > 700) {
+    width = 600;
+    height = 400;
+    outerRadius = 130;
+    fontSize = 15;
+    marginTop = 50;
+    marginBottom = 50;
+    marginLeft = -200;
+    marginRight = 50;
+    fontSize_prc = 16;
+    width_bar = 450;
+    height_bar = 400;
+  } else if (window.innerWidth > 400) {
+    width = 450;
+    height = 300;
+    outerRadius = 80;
+    fontSize = 6;
+    marginTop = 20;
+    marginBottom = 20;
+    marginLeft = -200;
+    marginRight = 50;
+    fontSize_prc = 10;
+    width_bar = 400;
+    height_bar = 400;
+  } else {
+    width = 400;
+    height = 300;
+    outerRadius = 100;
+    fontSize = 6;
+    marginTop = 20;
+    marginBottom = 20;
+    marginLeft = -200;
+    marginRight = 50;
+    fontSize_prc = 10;
+    width_bar = 300;
+    height_bar = 300;
+  }
+
   const sizing = {
-    width: 1000,
-    height: 480,
+    width: width,
+    height: height,
   };
+
 
   const TOTAL = data.map((item) => item.value).reduce((a, b) => a + b, 0);
 
@@ -135,71 +200,18 @@ const YourBudget = () => {
     return `${(percent * 100).toFixed(0)}%`;
   };
 
+
   //Bar chart
   const chartSetting = {
-    width: 720,
-    height: 400,
+    width: width_bar,
+    height: height_bar,
     sx: {
       [`.${axisClasses.left} .${axisClasses.label}`]: {
         transform: "translate(-10px, 0)",
       },
     },
   };
-  // const dataset = [
-  //   {
-  //     expenses: 120,
-  //     day: 1,
-  //   },
-  //   {
-  //     expenses: 20,
-  //     day: 3,
-  //   },
-  //   {
-  //     expenses: 45,
-  //     day: 4,
-  //   },
-  //   {
-  //     expenses: 500,
-  //     day: 8,
-  //   },
-  //   {
-  //     expenses: 68,
-  //     day: 12,
-  //   },
-  //   {
-  //     expenses: 61,
-  //     day: 13,
-  //   },
-  //   {
-  //     expenses: 23,
-  //     day: 14,
-  //   },
-  //   {
-  //     expenses: 600,
-  //     day: 19,
-  //   },
-  //   {
-  //     expenses: 120,
-  //     day: 20,
-  //   },
-  //   {
-  //     expenses: 61,
-  //     day: 25,
-  //   },
-  //   {
-  //     expenses: 23,
-  //     day: 26,
-  //   },
-  //   {
-  //     expenses: 430,
-  //     day: 27,
-  //   },
-  //   {
-  //     expenses: 22,
-  //     day: 30,
-  //   },
-  // ];
-  
+
   const dataset = currentExpenses ? currentExpenses.map(expense => ({
     expenses: expense.expense_amount,
     day: new Date(expense.expense_date).getDate()
@@ -238,8 +250,7 @@ const YourBudget = () => {
                   {format(new Date(), "LLLL", { locale: pl })}
                 </span>
               </h5>
-
-              {/* PROGRESS BAR CHART */}
+            {currentExpenses && currentExpenses.length > 0 && (
               <Col className="col-md-8 mx-auto mb-5">
                 <ProgressBar>
                   <ProgressBar
@@ -255,18 +266,17 @@ const YourBudget = () => {
                     label={`${savings_prc.toFixed(0)}%`}
                   />
                 </ProgressBar>
-              </Col>
+              </Col> )}
               <p className="see">
                 Zobacz na co wydałeś pieniądze w tym miesiącu
               </p>
-
-              {/* PIE CHART */}
+              {data && data.length > 0 && (
               <Col className="col-md-8 mx-auto mb-5">
                 <PieChart
-                  margin={{ top: 100, bottom: 100, left: -400, right: 100 }}
+                  margin={{ top: marginTop, bottom: marginBottom, left: marginLeft, right: marginRight }}
                   series={[
                     {
-                      outerRadius: 230,
+                      outerRadius: outerRadius,
                       data,
                       arcLabel: getArcLabel,
                     },
@@ -274,7 +284,7 @@ const YourBudget = () => {
                   sx={{
                     [`& .${pieArcLabelClasses.root}`]: {
                       fill: "white",
-                      fontSize: 25,
+                      fontSize: fontSize_prc,
                     },
                   }}
                   slotProps={{
@@ -283,14 +293,14 @@ const YourBudget = () => {
                       position: { vertical: "middle", horizontal: "right" },
                       padding: 50,
                       labelStyle: {
-                        fontSize: 20,
+                        fontSize: fontSize,
                         fontWeight: 900,
                       },
                     },
                   }}
                   {...sizing}
                 />
-              </Col>
+              </Col> )}
 
               <Col className="col-md-8 mx-auto mb-5">
                 <Accordion defaultActiveKey="0" flush>
@@ -300,6 +310,7 @@ const YourBudget = () => {
                     </Accordion.Header>
                     {/* BAR CHART */}
                     <Accordion.Body>
+                    {dataset && dataset.length > 0 && (
                       <BarChart
                         dataset={dataset}
                         xAxis={[
@@ -323,7 +334,7 @@ const YourBudget = () => {
                           },
                         ]}
                         {...chartSetting}
-                      />
+                      />)}
                     </Accordion.Body>
                   </Accordion.Item>
                 </Accordion>
