@@ -17,6 +17,7 @@ import OutgoesEdit from './Components/OutgoesEdit';
 import Incomes from './Components/Incomes';
 import AddIncome from './Components/AddIncome';
 import EditIncome from './Components/EditIncome';
+import ModalCookies from './Components/CookiesModal';
 
 class App extends React.Component {
     render() {
@@ -39,6 +40,7 @@ class App extends React.Component {
                 <Route path="/income_add" element={<AddIncome />} />
                 <Route path="/income_edit" element={<EditIncome />} />
               </Routes>
+              <ModalCookies />
             </AuthProvider>
         )
     }
