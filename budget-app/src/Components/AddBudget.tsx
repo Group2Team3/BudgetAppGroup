@@ -348,6 +348,11 @@ const AddBudget = () => {
               Wprowadź dane dotyczące Twojego budżetu. Jeżeli któryś przykład
               Cię nie dotyczy, nie wypełniaj go. Po wypełnieniu wszystkich
               danych kliknij przycisk “Dalej”.
+              Jeśli wprowadziłeś już dane dotyczące budżetu w tym
+              miesiącu i nie chcesz ich edytować możesz przejść do Twojego budżetu tutaj:{" "}
+              <Link to="/budget" className="link">
+                TWÓJ BUDŻET
+              </Link>
             </p>
             <Col className="col-md-8 mx-auto text-start">
               <Accordion defaultActiveKey="0" flush>

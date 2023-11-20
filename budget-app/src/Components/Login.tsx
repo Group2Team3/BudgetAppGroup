@@ -146,7 +146,7 @@ const Login: React.FC = () => {
           <hr className="hr" />
           <Container className="py-5 px-5">
           <Row className="login-centered-content login-reg-container mx-4 my-4 px-5 py-5">
-            <Col className="login-container col-md-6 px-2 py-4">
+            <Col className="login-container col-sm-12 col-md-6 px-2 py-4">
             <div className="Auth-form-container">
             <form className="Auth-form">
                 <div className="Auth-form-content">
@@ -175,24 +175,11 @@ const Login: React.FC = () => {
           <div className="justify-content-center d-grid gap-2 mt-5">
           <Button className="button" variant="contained" onClick={handleLogin}>Zaloguj</Button>
           </div>
-          <div className="d-flex justify-content-center align-items-center mt-4">
-                  <hr className="flex-grow-1 hr-thick" />
-                  <span className="mx-2">lub</span>
-                  <hr className="flex-grow-1 hr-thick" />
-                </div>
         </div>
       </form>
     </div>
-    <div className="d-flex justify-content-center mt-5">
-    <div className="image-container mx-5">
-    <img src={google} alt="Google logo" className="App-icons" />
-  </div>
-  <div className="image-container  mx-5">
-    <img src={fb} alt="Facebook logo" className="App-icons" />
-  </div>
-</div>
     </Col>
-            <Col className="register-container col-md-6 px-2 py-4">
+            <Col className="register-container col-sm-12 col-md-6 px-2 py-4">
             <div className="Auth-form-container">
       <form className="Auth-form">
         <div className="Auth-form-content">
