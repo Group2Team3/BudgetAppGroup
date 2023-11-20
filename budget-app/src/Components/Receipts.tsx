@@ -87,7 +87,7 @@ const Receipt = () => {
                           <p>{date.date}</p>
                           <Row>
                             {date.images.map((image, index) => (
-                              <Col key={index} className='col-md-3 text-start'>
+                              <Col key={index} className='col-sm-12 col-md-3 text-start'>
                                 <img src={image} alt='' className='img-fluid img-receipts' onClick={() => setSelectedImage(image)} />
                               </Col>
                             ))}
