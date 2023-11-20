@@ -13,6 +13,7 @@ import { PieChart, pieArcLabelClasses } from "@mui/x-charts/PieChart";
 import { BarChart } from "@mui/x-charts/BarChart";
 import { axisClasses } from "@mui/x-charts";
 import piggyPhoto from "../assets/budgetImages/piggy_photo.svg";
+import finance from "../assets/budgetImages/finance.svg";
 import axios from "axios";
 import { useEffect, useState } from "react";
 
@@ -76,10 +77,33 @@ const YourBudget = () => {
 
   }, [Budget_acc_id]);
 
-  // Progress Bar Chart
-  if (currentBudget === null) {
-    return <div>Loading...</div>;
-  }
+  //jezeli w db nie ma informacji na temat budzetu
+  if (currentBudget === null)
+  { return <>
+    <Container>
+        <Row>
+          <Col className="col-md-12">
+            <MainNavbar></MainNavbar>
+          </Col>
+        </Row>
+      </Container>
+      <hr className="hr" />
+      <p className="description py-5 text-center">
+              <b>Nie wprowadziłeś jeszcze danych dotyczących budżetu w tym
+              miesiącu!</b> Możesz to zrobić przechodząc tutaj:{" "}
+              <Link to="/addbudgetinfo" className="link">
+                DODAWANIE BUDŻETU
+              </Link>
+            </p>
+            <Col className="col-md-12 text-center justify-content-center align-items-center my-5">
+            <img
+                    src={finance}
+                    alt="Piggy photo"
+                    className="img-fluid"
+                  /></Col>
+            <Footer></Footer>
+  </>}
+
   const income = currentBudget.budget_income;
   const expenses = currentBudget.budget_expenses;
   const savings = currentBudget.budget_summary;
@@ -243,6 +267,13 @@ const YourBudget = () => {
           </>
         ) : (
           <Row>
+            <p className="description text-center">
+              Jeśli chcesz zaaktualizować dane dotyczące budżetu w tym
+              miesiącu możesz to zrobić przechodząc tutaj:{" "}
+              <Link to="/addbudgetinfo" className="link">
+                DODAWANIE BUDŻETU
+              </Link>
+            </p>
             <Col className="col-md-12 text-center justify-content-center align-items-center">
               <h5>
                 Twoj budżet w miesiącu{" "}
@@ -250,23 +281,22 @@ const YourBudget = () => {
                   {format(new Date(), "LLLL", { locale: pl })}
                 </span>
               </h5>
-            {currentExpenses && currentExpenses.length > 0 && (
               <Col className="col-md-8 mx-auto mb-5">
                 <ProgressBar>
                   <ProgressBar
                     variant="danger"
                     now={expenses_prc}
                     key={1}
-                    label={`${expenses_prc.toFixed(0)}%`}
+                    label={`${expenses_prc.toFixed(1)}%`}
                   />
                   <ProgressBar
                     variant="success"
                     now={savings_prc}
                     key={2}
-                    label={`${savings_prc.toFixed(0)}%`}
+                    label={`${savings_prc.toFixed(1)}%`}
                   />
                 </ProgressBar>
-              </Col> )}
+              </Col> 
               <p className="see">
                 Zobacz na co wydałeś pieniądze w tym miesiącu
               </p>
@@ -310,7 +340,7 @@ const YourBudget = () => {
                     </Accordion.Header>
                     {/* BAR CHART */}
                     <Accordion.Body>
-                    {dataset && dataset.length > 0 && (
+                    {dataset && dataset.length > 0 ? (
                       <BarChart
                         dataset={dataset}
                         xAxis={[
@@ -334,7 +364,10 @@ const YourBudget = () => {
                           },
                         ]}
                         {...chartSetting}
-                      />)}
+                      />) : (
+                      <>
+                      <p className="description"> Nie dodałeś jeszcze żadnego wydatku w tym miesiącu. </p>
+                      </>)} 
                     </Accordion.Body>
                   </Accordion.Item>
                 </Accordion>
