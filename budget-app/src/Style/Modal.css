@@ -1,0 +1,30 @@
+.modal-body {
+    border: none!important;
+    
+}
+
+.modal {
+    border-radius: 33px!important;
+}
+
+.custom-modal .modal-dialog {
+    max-width: 60vw; /* Zmień na preferowaną szerokość */
+  }
+  
+  .custom-modal .modal-content {
+    border-radius: 33px;
+  }
+
+.img-custom {
+    max-width: 200px;
+    max-height: 200px;
+}
+
+.col-cookies {
+    padding-left: 50px;
+}
+
+.link-2 {
+    color: #9B7EDE;
+    font-weight: 800;
+}
