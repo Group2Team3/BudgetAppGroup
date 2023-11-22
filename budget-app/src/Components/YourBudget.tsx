@@ -4,7 +4,7 @@ import { Button } from "@mui/material";
 import { MainNavbar } from "./MainNavbar";
 import { Footer } from "./Footer";
 import { format } from "date-fns";
-import { ca, he, pl } from "date-fns/locale";
+import { pl } from "date-fns/locale";
 import Accordion from "react-bootstrap/Accordion";
 import { Link } from "react-router-dom";
 import ProgressBar from "react-bootstrap/ProgressBar";
@@ -20,16 +20,31 @@ import { useEffect, useState } from "react";
 interface Budget {
   income: number;
   bills: number;
-  cost_of_life: number;
+  costOfLife: number;
   insurance: number;
   family: number;
   car: number;
-  public_trans: number;
+  publicTrans: number;
   entertainment: number;
   vacations: number;
   expenses: number;
   summary: number; //savings bardziej ale nie bede juz zmieniac
 }
+
+interface CalculatedBudget {
+  income: number;
+  bills: number;
+  costOfLife: number;
+  insurance: number;
+  family: number;
+  car: number;
+  publicTrans: number;
+  entertainment: number;
+  vacations: number;
+  expenses: number;
+  summary: number; 
+}
+
 
 interface Expense {
   name: string;
@@ -44,7 +59,10 @@ const YourBudget = () => {
   const userId = Number(localStorage.getItem("userId"));
   const Budget_acc_id = userId;
   const [currentBudget, setCurrentBudget] = useState<Budget | null>(null);
-  const [currentExpenses, setCurrentExpenses] = useState<Expense[] | null>(null);
+  const [currentCalculatedBudget, setCurrentCalculatedBudget] = useState<CalculatedBudget | null>(null);
+  const [currentExpenses, setCurrentExpenses] = useState<Expense[] | null>(
+    null
+  );
 
   useEffect(() => {
     const fetchBudget = async () => {
@@ -53,73 +71,98 @@ const YourBudget = () => {
           `http://localhost:8080/budget/${Budget_acc_id}`
         );
         setCurrentBudget(response.data[0]);
+        localStorage.setItem("budgetId", response.data[0].id);
         console.log(response.data);
       } catch (error) {
         console.error("Error fetching budget", error);
       }
     };
 
+    console.log("Budzet", currentBudget);
     fetchBudget();
+  }, [Budget_acc_id]);
 
+  useEffect(() => {
+    const fetchCalculatedBudget = async () => {
+      try {
+        const response = await axios.get(
+          `http://localhost:8080/budget/calculatedBudget/${Budget_acc_id}`
+        );
+        setCurrentCalculatedBudget(response.data[0]);
+        console.log("Calculated budget", response.data);
+      } catch (error) {
+        console.error("Error fetching budget", error);
+      }
+    };
+
+    console.log("Budzet obliczony", currentCalculatedBudget);
+    fetchCalculatedBudget();
+  }, [Budget_acc_id]);
+
+  useEffect(() => {
     const fetchExpenses = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:8080/expense/${Budget_acc_id}`
+          `http://localhost:8080/expense/customerId/${Budget_acc_id}`
         );
         setCurrentExpenses(response.data);
-
+        console.log(response.data);
       } catch (error) {
         console.error("Error fetching expenses", error);
       }
-    }
+    };
 
     fetchExpenses();
-
   }, [Budget_acc_id]);
 
-  //jezeli w db nie ma informacji na temat budzetu
-  if (currentBudget === null)
-  { return <>
-    <Container>
-        <Row>
-          <Col className="col-md-12">
-            <MainNavbar></MainNavbar>
-          </Col>
-        </Row>
-      </Container>
-      <hr className="hr" />
-      <p className="description py-5 text-center">
-              <b>Nie wprowadziłeś jeszcze danych dotyczących budżetu w tym
-              miesiącu!</b> Możesz to zrobić przechodząc tutaj:{" "}
-              <Link to="/addbudgetinfo" className="link">
-                DODAWANIE BUDŻETU
-              </Link>
-            </p>
-            <Col className="col-md-12 text-center justify-content-center align-items-center my-5">
-            <img
-                    src={finance}
-                    alt="Piggy photo"
-                    className="img-fluid"
-                  /></Col>
-            <Footer></Footer>
-  </>}
 
-  const income = currentBudget.income;
-  const expenses = currentBudget.expenses;
-  const savings = currentBudget.summary;
-  const yearly_savings: number = savings * 12;
+  //jezeli w db nie ma informacji na temat budzetu
+  if (currentBudget === null) {
+    return (
+      <>
+        <Container>
+          <Row>
+            <Col className="col-md-12">
+              <MainNavbar></MainNavbar>
+            </Col>
+          </Row>
+        </Container>
+        <hr className="hr" />
+        <p className="description py-5 text-center">
+          <b>
+            Nie wprowadziłeś jeszcze danych dotyczących budżetu w tym miesiącu!
+          </b>{" "}
+          Możesz to zrobić przechodząc tutaj:{" "}
+          <Link to="/addbudgetinfo" className="link">
+            DODAWANIE BUDŻETU
+          </Link>
+        </p>
+        <Col className="col-md-12 text-center justify-content-center align-items-center my-5">
+          <img src={finance} alt="Piggy photo" className="img-fluid" />
+        </Col>
+        <Footer></Footer>
+      </>
+    );
+  }
+
+  if (currentCalculatedBudget === null) {
+    return (<p> Pusto </p>)
+  }
+
+  const expenses = currentCalculatedBudget.expenses;
+  const savings = currentCalculatedBudget.summary;
+  const income = currentCalculatedBudget.income;
   const expenses_prc: number = (expenses / income) * 100;
   const savings_prc: number = (savings / income) * 100;
 
   const bills = currentBudget.bills;
-
-  const cost_of_life = parseFloat(currentBudget.cost_of_life as any);
-  const insurance = parseFloat(currentBudget.insurance as any);
-  const family = parseFloat(currentBudget.family as any);
-  const car = parseFloat(currentBudget.car as any);
-  const public_trans = parseFloat(currentBudget.public_trans as any);
-  const entertainment = parseFloat(currentBudget.entertainment as any);
-  const vacations = parseFloat(currentBudget.vacations as any);
+  const cost_of_life = currentBudget.costOfLife;
+  const insurance = currentBudget.insurance;
+  const family = currentBudget.family;
+  const car = currentBudget.car;
+  const public_trans = currentBudget.publicTrans;
+  const entertainment = currentBudget.entertainment;
+  const vacations = currentBudget.vacations;
 
   // Pie Chart
   const data = [
@@ -149,7 +192,17 @@ const YourBudget = () => {
   ];
 
   //CUSTOM SIZINGS FOR PIE AND BAR CHART DEPENDING ON SCREEN SIZE
-  let width, height, fontSize, outerRadius, marginTop, marginBottom, marginLeft, marginRight, fontSize_prc, width_bar, height_bar;
+  let width,
+    height,
+    fontSize,
+    outerRadius,
+    marginTop,
+    marginBottom,
+    marginLeft,
+    marginRight,
+    fontSize_prc,
+    width_bar,
+    height_bar;
   if (window.innerWidth > 1700) {
     width = 1000;
     height = 480;
@@ -159,7 +212,7 @@ const YourBudget = () => {
     marginBottom = 100;
     marginLeft = -400;
     marginRight = 100;
-    fontSize_prc = 25
+    fontSize_prc = 25;
     width_bar = 820;
     height_bar = 400;
   } else if (window.innerWidth > 1000) {
@@ -217,14 +270,12 @@ const YourBudget = () => {
     height: height,
   };
 
-
   const TOTAL = data.map((item) => item.value).reduce((a, b) => a + b, 0);
 
   const getArcLabel = (params: DefaultizedPieValueType) => {
     const percent = params.value / TOTAL;
     return `${(percent * 100).toFixed(0)}%`;
   };
-
 
   //Bar chart
   const chartSetting = {
@@ -237,10 +288,14 @@ const YourBudget = () => {
     },
   };
 
-  const dataset = currentExpenses ? currentExpenses.map(expense => ({
-    expenses: expense.amount,
-    day: new Date(expense.date).getDate()
-  })) : [];
+  const dataset = currentExpenses
+    ? currentExpenses
+        .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
+        .map((expense) => ({
+            expenses: expense.amount,
+            day: new Date(expense.date).getDate(),
+        }))
+    : [];
 
   const valueFormatter = (value: number) => `${value} zł`;
 
@@ -269,8 +324,8 @@ const YourBudget = () => {
         ) : (
           <Row>
             <p className="description text-center">
-              Jeśli chcesz zaaktualizować dane dotyczące budżetu w tym
-              miesiącu możesz to zrobić przechodząc tutaj:{" "}
+              Jeśli chcesz zaaktualizować dane dotyczące budżetu w tym miesiącu
+              możesz to zrobić przechodząc tutaj:{" "}
               <Link to="/addbudgetinfo" className="link">
                 DODAWANIE BUDŻETU
               </Link>
@@ -297,41 +352,47 @@ const YourBudget = () => {
                     label={`${savings_prc.toFixed(1)}%`}
                   />
                 </ProgressBar>
-              </Col> 
+              </Col>
               <p className="see">
                 Zobacz na co wydałeś pieniądze w tym miesiącu
               </p>
               {data && data.length > 0 && (
-              <Col className="col-md-8 mx-auto mb-5">
-                <PieChart
-                  margin={{ top: marginTop, bottom: marginBottom, left: marginLeft, right: marginRight }}
-                  series={[
-                    {
-                      outerRadius: outerRadius,
-                      data,
-                      arcLabel: getArcLabel,
-                    },
-                  ]}
-                  sx={{
-                    [`& .${pieArcLabelClasses.root}`]: {
-                      fill: "white",
-                      fontSize: fontSize_prc,
-                    },
-                  }}
-                  slotProps={{
-                    legend: {
-                      direction: "column",
-                      position: { vertical: "middle", horizontal: "right" },
-                      padding: 50,
-                      labelStyle: {
-                        fontSize: fontSize,
-                        fontWeight: 900,
+                <Col className="col-md-8 mx-auto mb-5">
+                  <PieChart
+                    margin={{
+                      top: marginTop,
+                      bottom: marginBottom,
+                      left: marginLeft,
+                      right: marginRight,
+                    }}
+                    series={[
+                      {
+                        outerRadius: outerRadius,
+                        data,
+                        arcLabel: getArcLabel,
                       },
-                    },
-                  }}
-                  {...sizing}
-                />
-              </Col> )}
+                    ]}
+                    sx={{
+                      [`& .${pieArcLabelClasses.root}`]: {
+                        fill: "white",
+                        fontSize: fontSize_prc,
+                      },
+                    }}
+                    slotProps={{
+                      legend: {
+                        direction: "column",
+                        position: { vertical: "middle", horizontal: "right" },
+                        padding: 50,
+                        labelStyle: {
+                          fontSize: fontSize,
+                          fontWeight: 900,
+                        },
+                      },
+                    }}
+                    {...sizing}
+                  />
+                </Col>
+              )}
 
               <Col className="col-md-8 mx-auto mb-5">
                 <Accordion defaultActiveKey="0" flush>
@@ -341,34 +402,39 @@ const YourBudget = () => {
                     </Accordion.Header>
                     {/* BAR CHART */}
                     <Accordion.Body>
-                    {dataset && dataset.length > 0 ? (
-                      <BarChart
-                        dataset={dataset}
-                        xAxis={[
-                          {
-                            scaleType: "band",
-                            dataKey: "day",
-                            label: "DZIEŃ MIESIĄCA",
-                          },
-                        ]}
-                        yAxis={[
-                          {
-                            label: "KWOTA",
-                          },
-                        ]}
-                        series={[
-                          {
-                            dataKey: "expenses",
-                            label: "Wydatki",
-                            valueFormatter,
-                            color: "#9B7EDE",
-                          },
-                        ]}
-                        {...chartSetting}
-                      />) : (
-                      <>
-                      <p className="description"> Nie dodałeś jeszcze żadnego wydatku w tym miesiącu. </p>
-                      </>)} 
+                      {dataset && dataset.length > 0 ? (
+                        <BarChart
+                          dataset={dataset}
+                          xAxis={[
+                            {
+                              scaleType: "band",
+                              dataKey: "day",
+                              label: "DZIEŃ MIESIĄCA",
+                            },
+                          ]}
+                          yAxis={[
+                            {
+                              label: "KWOTA",
+                            },
+                          ]}
+                          series={[
+                            {
+                              dataKey: "expenses",
+                              label: "Wydatki",
+                              valueFormatter,
+                              color: "#9B7EDE",
+                            },
+                          ]}
+                          {...chartSetting}
+                        />
+                      ) : (
+                        <>
+                          <p className="description">
+                            {" "}
+                            Nie dodałeś jeszcze żadnego wydatku w tym miesiącu.{" "}
+                          </p>
+                        </>
+                      )}
                     </Accordion.Body>
                   </Accordion.Item>
                 </Accordion>
@@ -384,9 +450,9 @@ const YourBudget = () => {
                 <Col className="col-md-5">
                   <h5>
                     W miesiądzu październik zaoszczędziłeś{" "}
-                    <span className="purple">{savings} zł</span>! Trzymaj tak
+                    <span className="purple">{currentCalculatedBudget.summary} zł</span>! Trzymaj tak
                     dalej a w skali roku jesteś w stanie oszczędzić{" "}
-                    <span className="purple">{yearly_savings} zł</span>.
+                    <span className="purple">{currentCalculatedBudget.summary * 12} zł</span>.
                   </h5>
                 </Col>
               </Row>

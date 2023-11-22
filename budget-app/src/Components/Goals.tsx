@@ -7,11 +7,123 @@ import { Link } from "react-router-dom";
 import Form from "react-bootstrap/Form";
 import Accordion from "react-bootstrap/Accordion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlaneUp, faPencil, faCar } from "@fortawesome/free-solid-svg-icons";
+import {
+  faPlaneUp,
+  faPencil,
+  faCar,
+  faGift,
+  faBattery,
+  faBatteryEmpty,
+  faStethoscope,
+  faHouse,
+  faStar,
+} from "@fortawesome/free-solid-svg-icons";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { ca, da } from "date-fns/locale";
+import moment from "moment";
+
+interface Goal {
+  id: number;
+  name: string;
+  category: string;
+  description: string;
+  amount: number;
+  dateFrom: Date;
+  dateTo: Date;
+  saved: number;
+  endDate: string;
+  timePassed: boolean;
+  accomplished: boolean;
+  timeLeft: Date;
+  customer_id: number;
+}
 
 const Goals = () => {
   const oldGoals: boolean = true; //jesli nie ma starych celi to false (zmienia drugi accordion)
   const success: boolean = false; //jesli cel zostal osiagniety to true (zmienia kolor tekstu w drugim accordion)
+  const userId = Number(localStorage.getItem("userId"));
+
+  const [name, setName] = useState("");
+  const [category, setCategory] = useState("");
+  const [amount, setAmount] = useState("");
+  const [date_to, setDate_to] = useState("");
+  const [description, setDescription] = useState("");
+  const [saved, setSaved] = useState("");
+  const [goals, setGoals] = useState<Goal[]>([]);
+
+  const date_to_timestamp = `${date_to} 00:00`;
+  let formattedtime = moment(date_to_timestamp).format();
+
+  const date = new Date();
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+  const hours = String(date.getHours()).padStart(2, "0");
+  const minutes = String(date.getMinutes()).padStart(2, "0");
+  const seconds = String(date.getSeconds()).padStart(2, "0");
+
+  const date_from_timestamp = `${year}-${month}-${day} ${hours}:${minutes}`;
+
+  const handleSubmit = async (event: { preventDefault: () => void }) => {
+    console.log("Form submitted");
+    event.preventDefault();
+
+    const formData = {
+      name,
+      date_to: formattedtime,
+      category,
+      amount,
+      description,
+      saved,
+      date_from: date_from_timestamp,
+      customer_id: userId,
+    };
+    console.log(formData);
+
+    try {
+      const response = await axios.post(
+        `http://localhost:8080/goal/${userId}`,
+        formData
+      );
+      console.log(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    const fetchGoals = async () => {
+      try {
+        const response = await axios.get(`http://localhost:8080/goal`);
+        setGoals(response.data);
+        console.log("Data", response.data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchGoals();
+  }, []);
+
+  const getIconForCategory = (category: any) => {
+    switch (category) {
+      case "wakacje":
+        return faPlaneUp;
+      case "samochód":
+        return faCar;
+      case "prezent":
+        return faGift;
+      case "zdrowie":
+        return faStethoscope;
+      case "dom":
+        return faHouse;
+      case "inne":
+        return faStar;
+      default:
+        return faBatteryEmpty;
+    }
+  };
 
   return (
     <>
@@ -38,84 +150,103 @@ const Goals = () => {
             </p>
           </Col>
           <Row className="row-goals">
-            <Col className="col-md-5 col-sm-12 mx-3">
-              <Col>
-                <Form.Label>NAZWA</Form.Label>
-              </Col>
-              <Col className="mb-5">
-                <Form.Control type="text" value="krótka nazwa Twojego celu" />
+            <Form
+              className="d-flex justify-content-space-between"
+              onSubmit={handleSubmit}
+            >
+              <Col className="col-md-5 col-sm-12 mx-3">
+                <Col>
+                  <Form.Label>NAZWA</Form.Label>
+                </Col>
+                <Col className="mb-5">
+                  <Form.Control
+                    type="text"
+                    placeholder="krótka nazwa Twojego celu"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                  />
+                </Col>
+
+                <Col>
+                  <Form.Label>DO KIEDY</Form.Label>
+                </Col>
+                <Col className="mb-5">
+                  <Form.Control
+                    type="date"
+                    value={date_to}
+                    onChange={(e) => setDate_to(e.target.value)}
+                  />
+                </Col>
+
+                <Col>
+                  <Form.Label>KATEGORIA</Form.Label>
+                </Col>
+                <Col className="mb-5">
+                  <Form.Select
+                    aria-label="Default select example"
+                    value={category}
+                    onChange={(e) => setCategory(e.target.value)}
+                  >
+                    <option value="samochód">samochód</option>
+                    <option value="dom">dom</option>
+                    <option value="prezent">prezent</option>
+                    <option value="wakacje">wakacje</option>
+                    <option value="zdrowie">zdrowie</option>
+                    <option value="inne">inne</option>
+                  </Form.Select>
+                </Col>
               </Col>
 
-              <Col>
-                <Form.Label>DO KIEDY</Form.Label>
-              </Col>
-              <Col className="mb-5">
-                <Form.Control type="date" />
-              </Col>
+              <Col className="col-md-5 col-sm-12 mx-3">
+                <Col>
+                  <Form.Label>KWOTA</Form.Label>
+                </Col>
+                <Col className="mb-5">
+                  <Form.Control
+                    type="number"
+                    min={100}
+                    max={100000}
+                    step={10}
+                    placeholder="kwota, którą chcesz odłożyć"
+                    value={amount}
+                    onChange={(e) => setAmount(e.target.value)}
+                  />
+                </Col>
 
-              <Col>
-                <Form.Label>KATEGORIA</Form.Label>
-              </Col>
-              <Col className="mb-5">
-                <Form.Select aria-label="Default select example">
-                  <option>Wybierz kategorię</option>
-                  <option value="1">samochód</option>
-                  <option value="2">dom</option>
-                  <option value="3">prezent</option>
-                  <option value="3">wakacje</option>
-                  <option value="3">zdrowie</option>
-                  <option value="3">inne</option>
-                </Form.Select>
-              </Col>
+                <Col>
+                  <Form.Label>KWOTA ZAOSZCZĘDZONA</Form.Label>
+                </Col>
+                <Col className="mb-5">
+                  <Form.Control
+                    type="number"
+                    min={10}
+                    max={100000}
+                    step={10}
+                    placeholder="kwota, którą odłożyłeś do tej pory"
+                    value={saved}
+                    onChange={(e) => setSaved(e.target.value)}
+                  />
+                </Col>
 
-              <Col className="submit-button">
-                <Link to="/goals">
-                  <Button className="some-btn-3">DODAJ CEL</Button>
-                </Link>
-              </Col>
-            </Col>
+                <Col>
+                  <Form.Label>OPIS</Form.Label>
+                </Col>
+                <Col className="mb-5">
+                  <Form.Control
+                    as="textarea"
+                    rows={6}
+                    placeholder="Opis"
+                    onChange={(e) => setDescription(e.target.value)}
+                  />
+                </Col>
 
-            <Col className="col-md-5 col-sm-12 mx-3">
-              <Col>
-                <Form.Label>KWOTA</Form.Label>
+                <Col className="submit-button">
+                  <Button className="some-btn" type="submit">
+                    DODAJ CEL
+                  </Button>
+                </Col>
               </Col>
-              <Col className="mb-5">
-                <Form.Control
-                  type="number"
-                  min={100}
-                  max={100000}
-                  step={10}
-                  placeholder="kwota, którą chcesz odłożyć"
-                />
-              </Col>
-
-              <Col>
-                <Form.Label>KWOTA ZAOSZCZĘDZONA</Form.Label>
-              </Col>
-              <Col className="mb-5">
-                <Form.Control
-                  type="number"
-                  min={10}
-                  max={100000}
-                  step={10}
-                  placeholder="kwota, którą odłożyłeś do tej pory"
-                />
-              </Col>
-
-              <Col>
-                <Form.Label>OPIS</Form.Label>
-              </Col>
-              <Col className="mb-5">
-                <Form.Control as="textarea" rows={6} placeholder="Opis" />
-              </Col>
-
-              <Col className="submit-button">
-                <Link to="/goals">
-                  <Button className="some-btn-2">DODAJ CEL</Button>
-                </Link>
-              </Col>
-
-            </Col>
+            </Form>
           </Row>
         </Row>
       </Container>
@@ -127,99 +258,123 @@ const Goals = () => {
               <Accordion.Item eventKey="0">
                 <Accordion.Header>TWOJE AKTUALNE CELE</Accordion.Header>
                 <Accordion.Body>
-                  <Row className="current-goal">
-                    <Col className="col-md-4 text-center d-flex justify-content-center">
-                      <FontAwesomeIcon
-                        icon={faPlaneUp}
-                        className="plane-icon"
-                      />
-                    </Col>
-                    <Col className="col-md-4 text-start">
-                      <h4>WAKACJE</h4>
-                      <p className="description-goal">WYJAZD DO INDONEZJI</p>
-                      <p className="pink">ZOSTAŁO:</p>
-                      <p className="pink">ODŁOŻONO:</p>
-                      <p className="pink">DATA KOŃCOWA:</p>
-                    </Col>
-                    <Col className="col-md-4 text-end">
-                      <p className="green">5.000 zł</p>
-                      <Col className="details-goal-col">
-                        <p className="details-goal"> 8 MIESIĘCY</p>
-                        <p className="details-goal"> 200 zł</p>
-                        <p className="details-goal"> 17.06.2024 </p>
-                      </Col>
-                    </Col>
-                    <Col className="col-md-12 text-start">
-                      <p className="goal-savings">
-                        ŻEBY ZDOBYĆ TEN CEL MIESIĘCZNIE POWINIENEŚ ODKŁADAĆ:
-                        <span className="how-much-savings"> 600 zł</span>
-                      </p>
-                      <Col>
-                        <Form.Group className="mb-5">
-                          <Row>
-                            <Col className="col-md-3">
-                              <Form.Label className="mx-5 saved-add">
-                                ODŁOŻONO:{" "}
-                              </Form.Label>
-                            </Col>
-                            <Col className="col-md-4">
-                              <Form.Control
-                                className="saved-amount"
-                                type="number"
-                                min={100}
-                                max={100000}
-                                step={10}
-                                placeholder="kwota"
+                  {goals
+                    .filter((goal) => goal.timePassed === false)
+                    .map((goal) => (
+                      <Row className="current-goal mb-4">
+                        <Col className="col-md-4 text-center d-flex justify-content-center">
+                          <FontAwesomeIcon
+                            icon={getIconForCategory(goal.category)}
+                            className="plane-icon"
+                          />
+                        </Col>
+                        <Col className="col-md-4 text-start">
+                          <h4>{goal.name.toUpperCase()}</h4>
+                          <p className="description-goal">
+                            {goal.description.toUpperCase()}
+                          </p>
+                          <div style={{display: 'flex'}}><p className="pink">POZOSTAŁO:&nbsp;</p>{" "}
+                          <p className="details-goal">
+                            {" "}
+                            {/*{goal.timeLeft}*/} 8 MIESIĘCY
+                          </p></div>
+                          <div style={{display: 'flex'}}><p className="pink">ODŁOŻONO:&nbsp;</p>{" "}
+                          <p className="details-goal"> {goal.saved} zł</p></div>
+                          <div style={{display: 'flex'}}><p className="pink">DATA KOŃCOWA:&nbsp;</p>
+                          <p className="details-goal">
+                            {" "}
+                            {/*goal.timeTo*/}17.06.2024{" "}
+                          </p></div>
+                        </Col>
+                        <Col className="col-md-4 text-end">
+                          <p className="green">{goal.amount} zł</p>
+                        </Col>
+                        <Col className="col-md-12 text-start">
+                          <p className="goal-savings">
+                            ŻEBY ZDOBYĆ TEN CEL MIESIĘCZNIE POWINIENEŚ ODKŁADAĆ:
+                            <span className="how-much-savings">
+                              {" "}
+                              {/*{goal.amount / goal.timeLeft }*/} 100 zł
+                            </span>
+                          </p>
+                          <Col>
+                            <Form /* Tu jak bedzie juz put bedziemy updatetowac goal.amount w db */
+                            >
+                              <Form.Group className="mb-5">
+                                <Row>
+                                  <Col className="col-md-3">
+                                    <Form.Label className="mx-5 saved-add">
+                                      ODŁOŻONO:{" "}
+                                    </Form.Label>
+                                  </Col>
+                                  <Col className="col-md-4">
+                                    <Form.Control
+                                      className="saved-amount"
+                                      type="number"
+                                      min={0}
+                                      max={1000000}
+                                      step={10}
+                                      placeholder="kwota"
+                                    />
+                                  </Col>
+                                  <Col className="col-md-4">
+                                    <Button className="some-other-btn">
+                                      DODAJ
+                                    </Button>
+                                  </Col>
+                                </Row>
+                              </Form.Group>
+                            </Form>
+                          </Col>
+                          <Col className="text-end mx-2 pencil-col">
+                            <Link to="/editgoal">
+                              <FontAwesomeIcon
+                                icon={faPencil}
+                                className="pencil"
                               />
-                            </Col>
-                            <Col className="col-md-4">
-                              <Button className="some-other-btn">DODAJ</Button>
-                            </Col>
-                          </Row>
-                        </Form.Group>
-                      </Col>
-                      <Col className="text-end mx-2 pencil-col">
-                        <Link to="/editgoal">
-                          <FontAwesomeIcon icon={faPencil} className="pencil" />
-                        </Link>
-                      </Col>
-                    </Col>
-                  </Row>
+                            </Link>
+                          </Col>
+                        </Col>
+                      </Row>
+                    ))}
                 </Accordion.Body>
               </Accordion.Item>
               <Accordion.Item eventKey="1">
                 <Accordion.Header>CELE Z PRZESZŁOŚCI</Accordion.Header>
                 <Accordion.Body>
-                  {oldGoals ? (
-                    <Row className="current-goal">
-                      <Col className="col-md-4 text-center d-flex justify-content-center">
-                        <FontAwesomeIcon icon={faCar} className="plane-icon" />
-                      </Col>
-                      <Col className="col-md-4 text-start">
-                        <h4>SAMOCHÓD</h4>
-                        <p className="description-goal">NOWE AUDI A5</p>
-                        <p className="pink">CEL:</p>
-                        <p className="pink">ODŁOŻONO:</p>
-                        <p className="pink">DATA KOŃCOWA:</p>
-                      </Col>
-                      <Col className="col-md-4 text-end">
-                        <Col className="details-goal-col-fail">
-                          <p className="details-goal"> 20.000 zł</p>
-                          <p className="details-goal"> 10.000 zł</p>
-                          <p className="details-goal"> 12.06.2023 </p>
-                        </Col>
-                      </Col>
-                      <Col className="col-md-12 text-start">
-                        <p className="goal-savings">
-                          CZY UDAŁO CI SIĘ ZDOBYĆ TEN CEL:
-                          {success ? (
-                            <span className="green2"> TAK </span>
-                          ) : (
-                            <span className="red"> NIE </span>
-                          )}
-                        </p>
-                      </Col>
-                    </Row>
+                  {goals.filter((goal) => goal.timePassed === true).length >
+                  0 ? (
+                    goals
+                      .filter((goal) => goal.timePassed === true)
+                      .map((goal) => (
+                        <Row className="current-goal">
+                          <Col className="col-md-4 text-center d-flex justify-content-center">
+                            <FontAwesomeIcon
+                              icon={getIconForCategory(goal.category)}
+                              className="plane-icon"
+                            />
+                          </Col>
+                          <Col className="col-md-6 text-start">
+                            <h4>{goal.name.toUpperCase()}</h4>
+                            <p className="description-goal">
+                              {goal.description.toUpperCase()}
+                            </p>
+                            <div style={{display: 'flex'}}><p className="pink">CEL: </p><span className="details-goal"> &nbsp;{goal.amount} zł</span></div>
+                            <div style={{display: 'flex'}}><p className="pink">ODŁOŻONO:</p> <p className="details-goal"> &nbsp;{goal.saved} zł</p></div>
+                            <div style={{display: 'flex'}}><p className="pink">DATA KOŃCOWA:</p> <p className="details-goal">&nbsp;{/* {goal.dateTo} */} 10.20.2023</p></div>
+                          </Col>
+                          <Col className="col-md-12 text-start">
+                            <p className="goal-savings">
+                              CZY UDAŁO CI SIĘ ZDOBYĆ TEN CEL:
+                              {goal.accomplished ? (
+                                <span className="green2"> TAK </span>
+                              ) : (
+                                <span className="red"> NIE </span>
+                              )}
+                            </p>
+                          </Col>
+                        </Row>
+                      ))
                   ) : (
                     <h4 className="no-goals m-4">
                       Nie masz jeszcze celów z przeszłości

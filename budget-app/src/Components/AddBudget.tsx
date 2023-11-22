@@ -280,11 +280,11 @@ const AddBudget = () => {
         customer_id : Budget_acc_id,
         income: Budget_income,
         bills: Budget_bills,
-        cost_of_life: Budget_cost_of_life,
+        costOfLife: Budget_cost_of_life,
         insurance: Budget_insurance,
         family: Budget_family,
         car: Budget_car,
-        public_trans: Budget_public_transport,
+        publicTrans: Budget_public_transport,
         entertainment: Budget_entertainment,
         vacations: Budget_vacations,
         additionalCosts: 0, //dodatkowe koszty na zero bo usunelam je z formularza

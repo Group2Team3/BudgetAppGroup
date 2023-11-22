@@ -71,7 +71,7 @@ h4 {
 .pink {
 	font-weight: 800;
 	color: #f47c99;
-	line-height: 10px;
+	line-height: 20px;
 	font-size: 1.5em;
 }
 
@@ -96,7 +96,7 @@ h4 {
 }
 
 .details-goal {
-	line-height: 10px;
+	line-height: 20px;
 	font-weight: 600;
 	font-size: 1.5em;
 }
