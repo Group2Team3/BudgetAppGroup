@@ -14,8 +14,10 @@ import { error } from "console";
 
 const AddBudget = () => {
   const currentMonth = format(new Date(), "MMMM", { locale: pl });
-  const userId  = Number(localStorage.getItem('userId'))
+  {/* Pobranie userId z localStorage */}
+  const userId = Number(localStorage.getItem("userId")); 
 
+{/* Type FormFields dla wszystkich poszczególnych pól w formularzu*/}
   type FormFields = {
     incomeFields: {
       salary: number;
@@ -89,6 +91,7 @@ const AddBudget = () => {
 
   type FieldGroup = keyof FormFields;
 
+  {/* State form z początkowymi wartościami pól w formularzu */}
   const [form, setForm] = useState<FormFields>({
     incomeFields: {
       salary: 0,
@@ -160,6 +163,7 @@ const AddBudget = () => {
     },
   });
 
+  {/* Funkcja handleInputChange dla wszystkich pól w formularzu */}
   const handleInputChange = (
     event: React.ChangeEvent<HTMLInputElement>,
     fieldGroup: FieldGroup
@@ -173,6 +177,7 @@ const AddBudget = () => {
     });
   };
 
+  {/* Funkcje handleInput... dla poszczególnych pól w formularzu */}
   const handleIncomeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     handleInputChange(event, "incomeFields");
   };
@@ -217,111 +222,123 @@ const AddBudget = () => {
     handleInputChange(event, "vacationFields");
   };
 
+  {/* Obliczanie sumy dla wszystkich poszczególnych pól w formularzu */}
+  const Budget_income = Object.values(form.incomeFields).reduce(
+    (a, b) => a + b,
+    0
+  );
+  const Budget_bills = Object.values(form.billsFields).reduce(
+    (a, b) => a + b,
+    0
+  );
+  const Budget_cost_of_life = Object.values(form.costOfLifeFields).reduce(
+    (a, b) => a + b,
+    0
+  );
+  const Budget_insurance = Object.values(form.insuranceFields).reduce(
+    (a, b) => a + b,
+    0
+  );
+  const Budget_family = Object.values(form.familyFields).reduce(
+    (a, b) => a + b,
+    0
+  );
+  const Budget_car = Object.values(form.carFields).reduce((a, b) => a + b, 0);
+
+  const Budget_public_transport = Object.values(
+    form.publicTransportFields
+  ).reduce((a, b) => a + b, 0);
+
+  const Budget_entertainment = Object.values(form.entertainmentFields).reduce(
+    (a, b) => a + b,
+    0
+  );
+  const Budget_vacations = Object.values(form.vacationFields).reduce(
+    (a, b) => a + b,
+    0
+  );
   const navigate = useNavigate();
 
-  //ZATWIERDZANIE BUDZETU I PRZESYLANIE DO DB
+  {/* Funkcja handleSubmit dla wszystkich poszczególnych pól w formularzu */}
   const handleSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
     try {
       const Budget_acc_id = userId;
       let currentBudget = null;
-      try {
-        const response = await axios.get(`http://localhost:3001/api/budgets/${Budget_acc_id}`);
-        currentBudget = response.data;
-      } catch (error) {
-        console.error("Error fetching current budget:", error);
-      }
-  
-      const Budget_income = Object.values(form.incomeFields).reduce(
-        (a, b) => a + b,
-        0
-      );
-      const Budget_bills = Object.values(form.billsFields).reduce(
-        (a, b) => a + b,
-        0
-      );
-      const Budget_cost_of_life = Object.values(form.costOfLifeFields).reduce(
-        (a, b) => a + b,
-        0
-      );
-      const Budget_insurance = Object.values(form.insuranceFields).reduce(
-        (a, b) => a + b,
-        0
-      );
-      const Budget_family = Object.values(form.familyFields).reduce(
-        (a, b) => a + b,
-        0
-      );
-      const Budget_car = Object.values(form.carFields).reduce(
-        (a, b) => a + b,
-        0
-      );
-      const Budget_public_transport = Object.values(
-        form.publicTransportFields
-      ).reduce((a, b) => a + b, 0);
-      const Budget_entertainment = Object.values(
-        form.entertainmentFields
-      ).reduce((a, b) => a + b, 0);
-      const Budget_vacations = Object.values(form.vacationFields).reduce(
-        (a, b) => a + b,
-        0
-      );
-  
-      const Budget_expenses =
-      Budget_bills +
-      Budget_cost_of_life +
-      Budget_insurance +
-      Budget_family +
-      Budget_car +
-      Budget_public_transport +
-      Budget_entertainment +
-      Budget_vacations;
-      const Budget_summary = Budget_income - Budget_expenses;
-  
+      // nie dziala na razie zakomentuje
+      // try {
+      //   const response = await axios.get(
+      //     `http://localhost:8080/budget/${Budget_acc_id}`
+      //   );
+      //   currentBudget = response.data;
+      // } catch (error) {
+      //   console.error("Error fetching current budget:", error);
+      // }
+
+      
       const data = {
-        Budget_acc_id,
-        Budget_income,
-        Budget_bills,
-        Budget_cost_of_life,
-        Budget_insurance,
-        Budget_family,
-        Budget_car,
-        Budget_public_trans: Budget_public_transport,
-        Budget_entertainment,
-        Budget_vacations,
-        Budget_expenses,
-        Budget_summary,
+        customer_id : Budget_acc_id,
+        income: Budget_income,
+        bills: Budget_bills,
+        cost_of_life: Budget_cost_of_life,
+        insurance: Budget_insurance,
+        family: Budget_family,
+        car: Budget_car,
+        public_trans: Budget_public_transport,
+        entertainment: Budget_entertainment,
+        vacations: Budget_vacations,
+        additionalCosts: 0, //dodatkowe koszty na zero bo usunelam je z formularza
       };
-  
-      if (!currentBudget) { //jesli nie ma budzetu dla uz z tym id to post nowego budzetu
-        await axios.post("http://localhost:3001/api/budgets", data);
-      } else { //jesli istnieje juz dla niego budzet to jest aktualizowany o nowe wartosci
-        const updatedData = {
-          Budget_income: parseFloat(currentBudget.budget_income) + Budget_income,
-          Budget_bills: parseFloat(currentBudget.budget_bills) + Budget_bills,
-          Budget_cost_of_life:
-            parseFloat(currentBudget.budget_cost_of_life) + Budget_cost_of_life,
-          Budget_insurance: parseFloat(currentBudget.budget_insurance) + Budget_insurance,
-          Budget_family: parseFloat(currentBudget.budget_family) + Budget_family,
-          Budget_car: parseFloat(currentBudget.budget_car) + Budget_car,
-          Budget_public_trans: parseFloat(currentBudget.budget_public_trans) + Budget_public_transport,
-          Budget_entertainment:
-            parseFloat(currentBudget.budget_entertainment) + Budget_entertainment,
-          Budget_vacations: parseFloat(currentBudget.budget_vacations) + Budget_vacations,
-          Budget_expenses: parseFloat(currentBudget.budget_expenses) + Budget_bills +
-                            Budget_cost_of_life +
-                            Budget_insurance +
-                            Budget_family +
-                            Budget_car +
-                            Budget_public_transport +
-                            Budget_entertainment +
-                            Budget_vacations,
-          Budget_summary: Budget_income - Budget_bills,
-        };
-        console.log("updatedData", updatedData);
-        await axios.put(`http://localhost:3001/api/budgets/${Budget_acc_id}`, updatedData);
+      
+
+      if (!currentBudget) {
+        //jesli nie ma budzetu dla uz z tym id to post nowego budzetu
+        await axios.post(`http://localhost:8080/budget/${Budget_acc_id}`, data);
+        console.log("data", data)
+      } else {
+        //jesli istnieje juz dla niego budzet to jest aktualizowany o nowe wartosci
+        // const updatedData = {
+        //   Budget_income:
+        //     parseFloat(currentBudget.budget_income) + Budget_income,
+        //   Budget_bills: parseFloat(currentBudget.budget_bills) + Budget_bills,
+        //   Budget_cost_of_life:
+        //     parseFloat(currentBudget.budget_cost_of_life) + Budget_cost_of_life,
+        //   Budget_insurance:
+        //     parseFloat(currentBudget.budget_insurance) + Budget_insurance,
+        //   Budget_family:
+        //     parseFloat(currentBudget.budget_family) + Budget_family,
+        //   Budget_car: parseFloat(currentBudget.budget_car) + Budget_car,
+        //   Budget_public_trans:
+        //     parseFloat(currentBudget.budget_public_trans) +
+        //     Budget_public_transport,
+        //   Budget_entertainment:
+        //     parseFloat(currentBudget.budget_entertainment) +
+        //     Budget_entertainment,
+        //   Budget_vacations:
+        //     parseFloat(currentBudget.budget_vacations) + Budget_vacations,
+        //   Budget_expenses:
+        //     parseFloat(currentBudget.budget_expenses) +
+        //     Budget_bills +
+        //     Budget_cost_of_life +
+        //     Budget_insurance +
+        //     Budget_family +
+        //     Budget_car +
+        //     Budget_public_transport +
+        //     Budget_entertainment +
+        //     Budget_vacations,
+        //   Budget_summary: Budget_income - Budget_bills,
+        // };
+        // console.log("updatedData", updatedData);
+        // await axios.put(
+        //   `http://localhost:3001/api/budgets/${Budget_acc_id}`,
+        //   updatedData
+        // );
+        {/* Jako ze nie ma jeszcze puta to na tej moment tylko alert
+          W przyszlosci trzeba bedzie aktualizowac te wartosci 
+        */}
+        console.log("Istnieje juz budzet dla tego uzytkownika")
       }
-      navigate('/budget')
+      navigate("/budget");
     } catch (error) {
       console.error("Error creating budget:", error);
     }
@@ -347,9 +364,9 @@ const AddBudget = () => {
             <p className="description">
               Wprowadź dane dotyczące Twojego budżetu. Jeżeli któryś przykład
               Cię nie dotyczy, nie wypełniaj go. Po wypełnieniu wszystkich
-              danych kliknij przycisk “Dalej”.
-              Jeśli wprowadziłeś już dane dotyczące budżetu w tym
-              miesiącu i nie chcesz ich edytować możesz przejść do Twojego budżetu tutaj:{" "}
+              danych kliknij przycisk “Dalej”. Jeśli wprowadziłeś już dane
+              dotyczące budżetu w tym miesiącu i nie chcesz ich edytować możesz
+              przejść do Twojego budżetu tutaj:{" "}
               <Link to="/budget" className="link">
                 TWÓJ BUDŻET
               </Link>

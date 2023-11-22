@@ -18,42 +18,42 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 
 interface Budget {
-  budget_income: number;
-  budget_bills: number;
-  budget_cost_of_life: number;
-  budget_insurance: number;
-  budget_family: number;
-  budget_car: number;
-  budget_public_trans: number;
-  budget_entertainment: number;
-  budget_vacations: number;
-  budget_expenses: number;
-  budget_summary: number; //savings bardziej ale nie bede juz zmieniac
+  income: number;
+  bills: number;
+  cost_of_life: number;
+  insurance: number;
+  family: number;
+  car: number;
+  public_trans: number;
+  entertainment: number;
+  vacations: number;
+  expenses: number;
+  summary: number; //savings bardziej ale nie bede juz zmieniac
 }
 
-interface Expenses {
-  expense_id: number;
-  expense_name: string;
-  expense_amount: number;
-  expense_date: Date;
-  expense_category: string;
-  expense_desc: string;
-  expense_receipt_id: number;
+interface Expense {
+  name: string;
+  amount: number;
+  date: Date;
+  category: string;
+  desc: string;
+  //receipt_id: number;
 }
 
 const YourBudget = () => {
   const userId = Number(localStorage.getItem("userId"));
   const Budget_acc_id = userId;
   const [currentBudget, setCurrentBudget] = useState<Budget | null>(null);
-  const [currentExpenses, setCurrentExpenses] = useState<Expenses[] | null>(null);
+  const [currentExpenses, setCurrentExpenses] = useState<Expense[] | null>(null);
 
   useEffect(() => {
     const fetchBudget = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:3001/api/budgets/${Budget_acc_id}`
+          `http://localhost:8080/budget/${Budget_acc_id}`
         );
-        setCurrentBudget(response.data);
+        setCurrentBudget(response.data[0]);
+        console.log(response.data);
       } catch (error) {
         console.error("Error fetching budget", error);
       }
@@ -64,7 +64,7 @@ const YourBudget = () => {
     const fetchExpenses = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:3001/api/expenses/${Budget_acc_id}`
+          `http://localhost:8080/expense/${Budget_acc_id}`
         );
         setCurrentExpenses(response.data);
 
@@ -104,21 +104,22 @@ const YourBudget = () => {
             <Footer></Footer>
   </>}
 
-  const income = currentBudget.budget_income;
-  const expenses = currentBudget.budget_expenses;
-  const savings = currentBudget.budget_summary;
+  const income = currentBudget.income;
+  const expenses = currentBudget.expenses;
+  const savings = currentBudget.summary;
   const yearly_savings: number = savings * 12;
   const expenses_prc: number = (expenses / income) * 100;
   const savings_prc: number = (savings / income) * 100;
 
-  const bills = parseFloat(currentBudget.budget_bills as any);
-  const cost_of_life = parseFloat(currentBudget.budget_cost_of_life as any);
-  const insurance = parseFloat(currentBudget.budget_insurance as any);
-  const family = parseFloat(currentBudget.budget_family as any);
-  const car = parseFloat(currentBudget.budget_car as any);
-  const public_trans = parseFloat(currentBudget.budget_public_trans as any);
-  const entertainment = parseFloat(currentBudget.budget_entertainment as any);
-  const vacations = parseFloat(currentBudget.budget_vacations as any);
+  const bills = currentBudget.bills;
+
+  const cost_of_life = parseFloat(currentBudget.cost_of_life as any);
+  const insurance = parseFloat(currentBudget.insurance as any);
+  const family = parseFloat(currentBudget.family as any);
+  const car = parseFloat(currentBudget.car as any);
+  const public_trans = parseFloat(currentBudget.public_trans as any);
+  const entertainment = parseFloat(currentBudget.entertainment as any);
+  const vacations = parseFloat(currentBudget.vacations as any);
 
   // Pie Chart
   const data = [
@@ -237,8 +238,8 @@ const YourBudget = () => {
   };
 
   const dataset = currentExpenses ? currentExpenses.map(expense => ({
-    expenses: expense.expense_amount,
-    day: new Date(expense.expense_date).getDate()
+    expenses: expense.amount,
+    day: new Date(expense.date).getDate()
   })) : [];
 
   const valueFormatter = (value: number) => `${value} zł`;
