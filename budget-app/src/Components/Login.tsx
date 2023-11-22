@@ -121,6 +121,8 @@ const Login: React.FC = () => {
                 // Assuming your server responds with a success message
         setLogin(true); // Update login state
         console.log('Register in:');
+        localStorage.setItem('login', JSON.stringify(true));
+        localStorage.setItem('userId', response.data.user.id);
         
         // Optionally, you can automatically log in the user after successful registration
         navigate('/addbudgetinfo');

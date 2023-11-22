@@ -11,10 +11,14 @@ export const MainNavbar = () => {
   const { login, setLogin } = useAuth();
   const [mobileView, setMobileView] = useState(false);
   const [anchorEl, setAnchorEl] = useState<Element | null>(null);
+  const [userId, setUserId] = useState(null);
 
   const handleLogout = () => {
     // Add logic to handle logout
     setLogin(false);
+    localStorage.setItem('userId', '0');
+    localStorage.setItem('login', JSON.stringify(false));
+    
   };
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
