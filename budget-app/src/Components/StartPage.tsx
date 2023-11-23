@@ -6,9 +6,21 @@ import Cards from "./Card";
 import { Footer } from "./Footer";
 import '../Style/StartPage.css';
 import { MainNavbar } from "./MainNavbar";
+import { useNavigate } from "react-router-dom";
 
 
 export const StartPage = () => {
+
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    if (localStorage.getItem("login") === true.toString() ) {
+      navigate("/budget");
+    } else {
+      navigate("/login");
+    }
+    
+  };
     return (
     <>
       <Container>
@@ -25,7 +37,7 @@ export const StartPage = () => {
              <Row><p className="head px-5"><span className="bold">BudgetApp</span> to narzędzie wspomagające zarządzanie <span className="bold">Twoim budżetem</span></p></Row> 
              <Row>  <p className="justify-content-left body pt-3 ps-5">Załóż konto by wprowadzić swoje przychody i rozchody. Monitoruj ile pieniędzy oszczędzasz miesięcznie, ustaw cel finansowy. 
                 Zapisuj paragony, tak by móc zawsze do nich wrócić, oraz dodawaj wartości z tych paraganów na bieżąco do wydatków.</p></Row> 
-                <Row  className="justify-content-center pt-4"> <Button className="button" variant="contained">Wypróbuj</Button></Row> 
+                <Row  className="justify-content-center pt-4"> <Button className="button" variant="contained" onClick={handleClick} >Wypróbuj</Button></Row> 
             </Col>
             <Col className="col-md-7">
             <img src={comp} alt="react logo" className="image-comp img-fluid max-width: 100%;" />

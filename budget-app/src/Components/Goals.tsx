@@ -12,7 +12,6 @@ import {
   faPencil,
   faCar,
   faGift,
-  faBattery,
   faBatteryEmpty,
   faStethoscope,
   faHouse,
@@ -20,8 +19,6 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { ca, da } from "date-fns/locale";
-import moment from "moment";
 
 interface Goal {
   id: number;
@@ -40,8 +37,6 @@ interface Goal {
 }
 
 const Goals = () => {
-  const oldGoals: boolean = true; //jesli nie ma starych celi to false (zmienia drugi accordion)
-  const success: boolean = false; //jesli cel zostal osiagniety to true (zmienia kolor tekstu w drugim accordion)
   const userId = Number(localStorage.getItem("userId"));
 
   const [name, setName] = useState("");
@@ -53,15 +48,12 @@ const Goals = () => {
   const [goals, setGoals] = useState<Goal[]>([]);
 
   const date_to_timestamp = `${date_to} 00:00`;
-  let formattedtime = moment(date_to_timestamp).format();
-
   const date = new Date();
   const year = date.getFullYear();
   const month = String(date.getMonth() + 1).padStart(2, "0");
   const day = String(date.getDate()).padStart(2, "0");
   const hours = String(date.getHours()).padStart(2, "0");
   const minutes = String(date.getMinutes()).padStart(2, "0");
-  const seconds = String(date.getSeconds()).padStart(2, "0");
 
   const date_from_timestamp = `${year}-${month}-${day} ${hours}:${minutes}`;
 
@@ -71,12 +63,12 @@ const Goals = () => {
 
     const formData = {
       name,
-      date_to: formattedtime,
+      dateTo: date_to_timestamp,
       category,
       amount,
       description,
       saved,
-      date_from: date_from_timestamp,
+      dateFrom: date_from_timestamp,
       customer_id: userId,
     };
     console.log(formData);
@@ -261,7 +253,7 @@ const Goals = () => {
                   {goals
                     .filter((goal) => goal.timePassed === false)
                     .map((goal) => (
-                      <Row className="current-goal mb-4">
+                      <Row className="current-goal mb-4" key={goal.id}>
                         <Col className="col-md-4 text-center d-flex justify-content-center">
                           <FontAwesomeIcon
                             icon={getIconForCategory(goal.category)}
@@ -283,7 +275,7 @@ const Goals = () => {
                           <div style={{display: 'flex'}}><p className="pink">DATA KOŃCOWA:&nbsp;</p>
                           <p className="details-goal">
                             {" "}
-                            {/*goal.timeTo*/}17.06.2024{" "}
+                            {goal.dateTo.toString().slice(0, 10)} 
                           </p></div>
                         </Col>
                         <Col className="col-md-4 text-end">

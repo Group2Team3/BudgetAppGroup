@@ -47,12 +47,13 @@ interface CalculatedBudget {
 
 
 interface Expense {
+  id: number;
   name: string;
+  category: string;
+  description: string;
   amount: number;
   date: Date;
-  category: string;
-  desc: string;
-  //receipt_id: number;
+  customer_id: number;
 }
 
 const YourBudget = () => {
@@ -149,20 +150,71 @@ const YourBudget = () => {
     return (<p> Pusto </p>)
   }
 
+  if (currentExpenses === null) {
+    return (<p>Pusto</p>)
+  }
+
   const expenses = currentCalculatedBudget.expenses;
   const savings = currentCalculatedBudget.summary;
   const income = currentCalculatedBudget.income;
   const expenses_prc: number = (expenses / income) * 100;
   const savings_prc: number = (savings / income) * 100;
 
-  const bills = currentBudget.bills;
-  const cost_of_life = currentBudget.costOfLife;
-  const insurance = currentBudget.insurance;
-  const family = currentBudget.family;
-  const car = currentBudget.car;
-  const public_trans = currentBudget.publicTrans;
-  const entertainment = currentBudget.entertainment;
-  const vacations = currentBudget.vacations;
+
+  /* sortowanie tak by podane byly tylko expenses z tego miesiaca */
+  const currentMonth = new Date().getMonth();
+  const currentYear = new Date().getFullYear();
+
+  const currentMonthExpenses = currentExpenses
+  .filter(expense => {
+    const expenseDate = new Date(expense.date);
+    return expenseDate.getMonth() === currentMonth && expenseDate.getFullYear() === currentYear;
+  })
+  .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+
+  console.log("Sorted and filtered", currentMonthExpenses);
+
+  /* wydatki w poszczegolnych kategoriach z tabeli expense by dodac do pie chart */
+  const bills_exp = currentMonthExpenses
+  .filter(expense => expense.category === "rachunki")
+  .reduce((total, expense) => total + expense.amount, 0);
+
+  const cost_of_life_exp = currentMonthExpenses
+  .filter(expense => expense.category === "koszty życia")
+  .reduce((total, expense) => total + expense.amount, 0);
+
+  const car_exp = currentMonthExpenses
+  .filter(expense => expense.category === "samochód")
+  .reduce((total, expense) => total + expense.amount, 0);
+
+  const enterteinment_exp = currentMonthExpenses
+  .filter(expense => expense.category === "rozrywka")
+  .reduce((total, expense) => total + expense.amount, 0);
+
+  const family_exp = currentMonthExpenses
+  .filter(expense => expense.category === "rodzina/zwierzęta")
+  .reduce((total, expense) => total + expense.amount, 0);
+
+  const insurance_exp = currentMonthExpenses
+  .filter(expense => expense.category === "ubezpieczenia/finanse")
+  .reduce((total, expense) => total + expense.amount, 0);
+
+  const public_trans_exp = currentMonthExpenses
+  .filter(expense => expense.category === "transport publiczny")
+  .reduce((total, expense) => total + expense.amount, 0);
+
+  const vacations_exp = currentMonthExpenses
+  .filter(expense => expense.category === "wakacje")
+  .reduce((total, expense) => total + expense.amount, 0);
+
+  const bills = currentBudget.bills + bills_exp;
+  const cost_of_life = currentBudget.costOfLife + cost_of_life_exp;
+  const insurance = currentBudget.insurance + insurance_exp;
+  const family = currentBudget.family + family_exp;
+  const car = currentBudget.car + car_exp;
+  const public_trans = currentBudget.publicTrans + public_trans_exp;
+  const entertainment = currentBudget.entertainment + enterteinment_exp;
+  const vacations = currentBudget.vacations + vacations_exp;
 
   // Pie Chart
   const data = [
@@ -288,8 +340,8 @@ const YourBudget = () => {
     },
   };
 
-  const dataset = currentExpenses
-    ? currentExpenses
+  const dataset = currentMonthExpenses
+    ? currentMonthExpenses
         .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
         .map((expense) => ({
             expenses: expense.amount,
