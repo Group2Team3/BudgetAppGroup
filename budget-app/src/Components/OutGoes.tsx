@@ -8,6 +8,7 @@ import Form from "react-bootstrap/Form";
 import { ChangeEvent, useEffect, useState } from "react";
 import {Tesseract} from "tesseract.ts";
 import cv from 'opencv-ts';
+import axios, { AxiosResponse } from "axios";
 
 const Outgoes = () => {
   const [selectedImage, setSelectedImage] = useState<File | null>(null);
@@ -15,6 +16,11 @@ const Outgoes = () => {
   const [processedImage, setProcessedImage] = useState<string | null>(null);
   const [totalAmount, setTotalAmount] = useState<number | null>(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [expenseId, setExpenseId] = useState<string>("");
+  const [name, setName] = useState('');
+  const [date, setDate] = useState("");
+  const [description, setDescription] = useState('');
+  const [category, setCategory] = useState<string>('');
 
   const [showDialog, setShowDialog] = useState(false);
 
@@ -34,13 +40,8 @@ const Outgoes = () => {
   
 const processImage = async (imageFile: File): Promise<string> => {
   const image = await loadImage(imageFile);
-
-  // Perform image processing (e.g., thresholding)
   const processedImage = thresholdImage(image);
-
-  // Convert the processed image to base64
   const processedImageUrl = canvasToBase64(processedImage);
-
   return processedImageUrl;
 };
 
@@ -120,7 +121,6 @@ const saveReceipts = async () => {
             preserve_interword_spaces: '1',
             textord_force_make_prop_words: '1',
             textord_force_make_prop_fract: '1',
-            tessedit_pageseg_mode: '10',
           },
           threshold: {
             adaptive: true,
@@ -130,7 +130,7 @@ const saveReceipts = async () => {
           ocr_engine_mode: 3,
         });
         
-        console.log(result.text);
+        // console.log(result.text);
       const extractedTotalAmount = extractTotalAmount(result.text);
 
       if (extractedTotalAmount) {
@@ -160,39 +160,138 @@ function LoadingSpinner() {
   );
 }
 
-  const extractTotalAmount = (text: string): string | null => {
-    const words = text.split(/\s+/);
-  
-    const keywords = ['SUMA', 'SUM', 'SUMH', 'SIJHA', 'PLN', 'P`LN'];
-  
-    for (const keyword of keywords) {
-      const keywordIndex = words.findIndex((word) => word.toUpperCase() === keyword);
-  
-      if (keywordIndex !== -1 && keywordIndex < words.length - 1) {
-        //let totalAmount = words[keywordIndex + 1];
-        let totalAmount = '';
-        let consecutiveDigitsCount = 0;
-  
-        for (let i = keywordIndex + 1; i < words.length; i++) {
-          if (/[0-9.,]/.test(words[i])) { // Allow numbers, dots, and commas
-            totalAmount += words[i];
-            consecutiveDigitsCount++;
-  
-            if (consecutiveDigitsCount >= 2) {
-              break;
-            }
-          } else {
+const extractTotalAmount = (text: string): string | null => {
+  const words = text.split(/\s+/);
+  const words2 = text.split(/\s+/);
+
+  const keywords = ['SUMA', 'SUM', 'SUMH', 'SIJHA', 'PLN', 'P`LN', 'PLN ', 'Gotówka:', 'Gorduka:'];
+
+  for (const keyword of keywords) {
+    const keywordIndex = words.findIndex((word) => word.toUpperCase() === keyword);
+
+    if (keywordIndex !== -1 && keywordIndex < words.length - 1) {
+      let totalAmount = '';
+      let consecutiveDigitsCount = 0;
+
+      for (let i = keywordIndex + 1; i < words.length; i++) {
+        if (/[0-9.,]/.test(words[i])) {
+          // Allow numbers, dots, and commas
+          totalAmount += words[i];
+          consecutiveDigitsCount++;
+
+          if (consecutiveDigitsCount >= 2) {
             break;
           }
+        } else if (words[i] === '.') {
+          // If a dot is encountered, add it to the totalAmount only if it's not the first character
+          if (totalAmount.length > 0) {
+            totalAmount += words[i];
+          }
+        } else {
+          break;
         }
-        totalAmount = totalAmount.replace(/[^0-9.,]/g, '');
-  
+      }
+
+      // Remove any commas
+      totalAmount = totalAmount.replace(/,/g, '.');
+      // Remove non-numeric characters except dots
+      totalAmount = totalAmount.replace(/[^0-9.]/g, '');
+      console.log('Amount1: %d', totalAmount)
+      if (totalAmount != ''){
+        return totalAmount;
+      }
+      
+    }
+  }
+
+  for (const keyword of keywords) {
+    const keywordIndexes = words2
+      .map((word, index) => ({ word, index }))
+      .filter((item) => item.word.toUpperCase() === keyword);
+
+    for (const keywordIndexObj of keywordIndexes) {
+      const keywordIndex = keywordIndexObj.index;
+
+      // Check if the keyword is followed by 'PLN' and the next word is numeric
+      if (
+        keywordIndex !== -1 &&
+        keywordIndex < words2.length - 2 &&
+        words2[keywordIndex + 1].toUpperCase() === 'PLN' &&
+        /[0-9.,]/.test(words2[keywordIndex + 1])
+      ) {
+        let totalAmount = words2[keywordIndex + 1];
+
+        // Remove any commas
+        totalAmount = totalAmount.replace(/,/g, '.');
+        // // Remove non-numeric characters except dots
+        // totalAmount = totalAmount.replace(/[^0-9.]/g, '');
+        console.log('Amount2: %d', totalAmount)
         return totalAmount;
       }
     }
-  
-    return null;
+  }
+
+  return null;
+};
+
+  // Generic function to handle form field changes
+  const handleFieldChange = (field: string, value: string | number | File) => {
+    switch (field) {
+      case 'name':
+        setName(value as string);
+        break;
+      case 'description':
+        setDescription(value as string);
+        break;
+      case 'totalAmount':
+        setTotalAmount(value as number);
+        break;
+      case 'image':
+        setSelectedImage(value as File);
+        break;
+      case 'category':
+          setCategory(value as string);
+          break;
+      default:
+        break;
+    }
   };
+
+
+  const saveOutgoes = async () => {
+    const expenseResponse: AxiosResponse<any> = await axios.post('http://localhost:8080/expense/1', {
+        name,
+        amount: totalAmount,
+        date,
+        category,
+        description, 
+      });
+
+      console.log(expenseResponse!.data);
+
+      setExpenseId(expenseResponse!.data);
+      console.log(expenseId);
+
+      if (selectedImage) {
+        try {
+          const formData = new FormData();
+      
+          formData.append('photo', selectedImage);
+          formData.append('date', date);
+          console.log(date);
+
+          const receiptResponse = await axios.post(`http://localhost:8080/recipt/${expenseResponse!.data}`, formData);
+      
+          handleShowDialog();
+        } catch (error) {
+          console.error('Error saving receipts:', error);
+        } finally {
+          setIsLoading(false);
+        }
+      } else {
+        setIsLoading(false);
+      }
+    }
 
   return (
     <>
@@ -230,24 +329,38 @@ function LoadingSpinner() {
       </Row>
           <Row className="row-goals">
             <Col className="col-sm-12 col-md-5 mx-3">
-              <Col>
+            <Col>
                 <Form.Label>NAZWA</Form.Label>
               </Col>
               <Col className="mb-5">
-                <Form.Control type="text" value="krótka nazwa Twojego wydatku" />
+                <Form.Control
+                  type="text"
+                  value={name}
+                  onChange={(e) => handleFieldChange('name', e.target.value)}
+                />
               </Col>
 
               <Col>
                 <Form.Label>DATA</Form.Label>
               </Col>
               <Col className="mb-5">
-                <Form.Control type="date" />
+                <Form.Control
+                  type="date"
+                  value={date}
+                  onChange={(e) => setDate(e.target.value)}
+                />
               </Col>
               <Col>
                 <Form.Label>OPIS</Form.Label>
               </Col>
               <Col className="mb-5">
-                <Form.Control as="textarea" rows={6} placeholder="Opis" />
+                <Form.Control
+                  as="textarea"
+                  rows={6}
+                  placeholder="Opis"
+                  value={description}
+                  onChange={(e) => handleFieldChange('description', e.target.value)}
+                />
               </Col>
          
             </Col>
@@ -272,20 +385,22 @@ function LoadingSpinner() {
               />
             </Col>
 
-              <Col>
-                <Form.Label>KATEGORIA</Form.Label>
-              </Col>
-              <Col className="mb-5">
-                <Form.Select aria-label="Default select example">
-                  <option>wybierz kategorię</option>
-                  <option value="1">pojazd</option>
-                  <option value="2">rachunki</option>
-                  <option value="3">jedzenie</option>
-                  <option value="3">rozrywka</option>
-                  <option value="3">zwierzeta</option>
-                  <option value="3">inne</option>
-                </Form.Select>
-              </Col>
+            <Col className="mb-5">
+      <Form.Select
+        aria-label="Default select example"
+        value={category}
+        onChange={(e: ChangeEvent<HTMLSelectElement>) => handleFieldChange('category', e.target.value)}
+      >
+        <option value="samochod">pojazd</option>
+        <option value="rachunki">rachunki</option>
+        <option value="koszty życia">koszty życia</option>
+        <option value="rozrywka">rozrywka</option>
+        <option value="rodzina/zwierzęta">rodzina/zwierzęta</option>
+        <option value="ubezpieczenia/finanse">ubezpieczenia/finanse</option>
+        <option value="transport publiczny">transport publiczny</option>
+        <option value="wakacje">wakacje</option>
+      </Form.Select>
+    </Col>
               {isParagonChecked && (
             <Col>
               <Col>
@@ -299,7 +414,7 @@ function LoadingSpinner() {
                 />
               </Col>
               {isLoading && (
-            <Col className="loading-indicator">
+            <Col className="loading-indicator mb-5">
               {isLoading ? <LoadingSpinner /> : ''}
             </Col>
               )}
@@ -316,43 +431,29 @@ function LoadingSpinner() {
               <Col className="submit-button mb-4">
                 <Button className="some-btn"  onClick={() => saveReceipts()}>Wpisz kwotę z paragonu</Button>
               </Col>
-              {/* {selectedImage && (
-        <Row className="m-5">
-          <Col className="col-md-5 mx-3">
-            <h4>Selected Image</h4>
-            <img src={URL.createObjectURL(selectedImage)} alt="Selected Image" style={{ width: '100%', borderRadius: '5px' }} />
-          </Col>
-        </Row>
-      )}
-              {processedImage && (
-        <Row className="m-5">
-          <Col className="col-md-5 mx-3">
-            <img src={processedImage} alt="Processed Image" style={{ width: '100%', borderRadius: '5px' }} />
-            <Button className="some-btn"  onClick={() => ocr()}>OCR</Button>
-          </Col>
-        </Row>
-      )}  */}
+              </Col>
+            )}
 
       <Modal show={showDialog} onHide={handleCloseDialog}>
         <Modal.Header closeButton>
-          <Modal.Title>Zwryfikuj poprawność kwoty</Modal.Title>
+          <Modal.Title> {isParagonChecked ? 'Zweryfikuj poprawność kwoty' : 'Czy napewno chcesz kontynuować bez dodawania paragonu?'} </Modal.Title>
         </Modal.Header>
         <Modal.Body style={{ textAlign: 'center'}}>
-  {processedImage && (
+          
+    
     <div>
       <h5>Kwota:
-        <p className="amount">{totalAmount !== null ? `${totalAmount} zł` : 'No total amount found.'}</p></h5>
+        <p className="amount">{totalAmount !== null ? `${totalAmount} zł` : '0.00 zł'}</p></h5>
     </div>
-  )}
-  {selectedImage && (
+    {isParagonChecked && selectedImage && (
     <div>
       <img src={URL.createObjectURL(selectedImage)} alt="Selected Image" style={{ width: '100%', borderRadius: '5px' }} />
     </div>
   )}
+ <Link to="/outgoes_detail" ><Button className="some-btn mt-4" onClick={saveOutgoes}>Potwierdzam</Button></Link> 
 </Modal.Body>
       </Modal>
-            </Col>
-            )}
+           
             </Col>
           </Row>
           <Row>
