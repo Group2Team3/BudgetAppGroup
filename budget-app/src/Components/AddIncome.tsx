@@ -11,33 +11,36 @@ import { useNavigate } from "react-router-dom";
 
 const AddIncome = () => {
   const userId = Number(localStorage.getItem("userId"));
+  const budgetId = Number(localStorage.getItem("budgetId"));
 
   const [name, setName] = useState("");
   const [category, setCategory] = useState("");
   const [amount, setAmount] = useState("");
-  const [date, setDate] = useState("");
+  const [date, setDate] = useState(() => {
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = String(today.getMonth() + 1).padStart(2, '0');
+    const day = String(today.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+  });
   const [description, setDescription] = useState("");
 
   const navigate = useNavigate();
-  const date_to_timestamp = `${date}T00:00:00.000Z`;
 
   const handleSubmit = async (event: { preventDefault: () => void }) => {
-    console.log("Form submitted");
     event.preventDefault();
 
     const formData = {
       name,
-      date: date_to_timestamp,
+      date,
       category,
       amount,
       description,
-      customer_id: userId,
     };
-    console.log(formData);
 
     try {
       const response = await axios.post(
-        `http://localhost:8080/income/${userId}`,
+        `http://localhost:8080/income/${budgetId}`,
         formData
       );
       console.log(response.data);
@@ -118,9 +121,9 @@ const AddIncome = () => {
               </Col>
               <Col className="mb-5">
                 <Form.Select aria-label="Default select example" value={category} onChange={(e) => setCategory(e.target.value)}>
-                  <option value="wypłata">wypłata</option>
+                  <option value="wyplata">wypłata</option>
                   <option value="zarobki z samozatrudnienia">zarobki z samozatrudnienia</option>
-                  <option value="zasiłki/zapomogi">zasiłki/zapomogi</option>
+                  <option value="zasilki/zapomogi">zasiłki/zapomogi</option>
                   <option value="stypendia">stypendia</option>
                   <option value="inne">inne</option>
                 </Form.Select>
