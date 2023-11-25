@@ -57,11 +57,11 @@ const Incomes = () => {
 
   const getIconForCategory = (category: any) => {
     switch (category) {
-      case "wypłata":
+      case "wyplata":
         return faCreditCard;
       case "zarobki z samozatrudnienia":
         return faCashRegister;
-      case "zasiłki/zapomogi":
+      case "zasilki/zapomogi":
         return faHandHoldingDollar;
       case "stypendia":
         return faMoneyBillWave;

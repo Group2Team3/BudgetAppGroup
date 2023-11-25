@@ -19,6 +19,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { differenceInMonths, differenceInWeeks, parseISO } from "date-fns";
 
 interface Goal {
   id: number;
@@ -42,20 +43,16 @@ const Goals = () => {
   const [name, setName] = useState("");
   const [category, setCategory] = useState("");
   const [amount, setAmount] = useState("");
-  const [date_to, setDate_to] = useState("");
+  const [date_to, setDate_to] = useState(() => {
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = String(today.getMonth() + 1).padStart(2, '0');
+    const day = String(today.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+  });
   const [description, setDescription] = useState("");
   const [saved, setSaved] = useState("");
   const [goals, setGoals] = useState<Goal[]>([]);
-
-  const date_to_timestamp = `${date_to} 00:00`;
-  const date = new Date();
-  const year = date.getFullYear();
-  const month = String(date.getMonth() + 1).padStart(2, "0");
-  const day = String(date.getDate()).padStart(2, "0");
-  const hours = String(date.getHours()).padStart(2, "0");
-  const minutes = String(date.getMinutes()).padStart(2, "0");
-
-  const date_from_timestamp = `${year}-${month}-${day} ${hours}:${minutes}`;
 
   const handleSubmit = async (event: { preventDefault: () => void }) => {
     console.log("Form submitted");
@@ -63,12 +60,12 @@ const Goals = () => {
 
     const formData = {
       name,
-      dateTo: date_to_timestamp,
+      dateTo: date_to,
       category,
       amount,
       description,
       saved,
-      dateFrom: date_from_timestamp,
+      dateFrom: new Date(),
       customer_id: userId,
     };
     console.log(formData);
@@ -102,7 +99,7 @@ const Goals = () => {
     switch (category) {
       case "wakacje":
         return faPlaneUp;
-      case "samochód":
+      case "samochod":
         return faCar;
       case "prezent":
         return faGift;
@@ -167,6 +164,7 @@ const Goals = () => {
                     type="date"
                     value={date_to}
                     onChange={(e) => setDate_to(e.target.value)}
+                    required
                   />
                 </Col>
 
@@ -179,7 +177,7 @@ const Goals = () => {
                     value={category}
                     onChange={(e) => setCategory(e.target.value)}
                   >
-                    <option value="samochód">samochód</option>
+                    <option value="samochod">samochód</option>
                     <option value="dom">dom</option>
                     <option value="prezent">prezent</option>
                     <option value="wakacje">wakacje</option>
@@ -211,7 +209,7 @@ const Goals = () => {
                 <Col className="mb-5">
                   <Form.Control
                     type="number"
-                    min={10}
+                    min={0}
                     max={100000}
                     step={10}
                     placeholder="kwota, którą odłożyłeś do tej pory"
@@ -265,28 +263,104 @@ const Goals = () => {
                           <p className="description-goal">
                             {goal.description.toUpperCase()}
                           </p>
-                          <div style={{display: 'flex'}}><p className="pink">POZOSTAŁO:&nbsp;</p>{" "}
-                          <p className="details-goal">
-                            {" "}
-                            {/*{goal.timeLeft}*/} 8 MIESIĘCY
-                          </p></div>
-                          <div style={{display: 'flex'}}><p className="pink">ODŁOŻONO:&nbsp;</p>{" "}
-                          <p className="details-goal"> {goal.saved} zł</p></div>
-                          <div style={{display: 'flex'}}><p className="pink">DATA KOŃCOWA:&nbsp;</p>
-                          <p className="details-goal">
-                            {" "}
-                            {goal.dateTo.toString().slice(0, 10)} 
-                          </p></div>
+                          <div style={{ display: "flex" }}>
+                            <p className="pink">POZOSTAŁO:&nbsp;</p>{" "}
+                            <p className="details-goal">
+                              {" "}
+                              {(() => {
+                                const dateFrom = parseISO(
+                                  goal.dateFrom.toString().slice(0, 10)
+                                );
+                                const dateTo = parseISO(
+                                  goal.dateTo.toString().slice(0, 10)
+                                );
+                                const diffMonths = differenceInMonths(
+                                  dateTo,
+                                  dateFrom
+                                );
+                                const diffWeeks = differenceInWeeks(
+                                  dateTo,
+                                  dateFrom
+                                );
+                                return diffMonths >= 1
+                                  ? `${diffMonths} MIESIĘCY`
+                                  : `${diffWeeks} TYGODNI`;
+                              })()}
+                            </p>
+                          </div>
+                          <div style={{ display: "flex" }}>
+                            <p className="pink">ODŁOŻONO:&nbsp;</p>{" "}
+                            <p className="details-goal"> {goal.saved} zł</p>
+                          </div>
+                          <div style={{ display: "flex" }}>
+                            <p className="pink">DATA KOŃCOWA:&nbsp;</p>
+                            <p className="details-goal">
+                              {" "}
+                              {goal.dateTo.toString().slice(0, 10)}
+                            </p>
+                          </div>
                         </Col>
                         <Col className="col-md-4 text-end">
                           <p className="green">{goal.amount} zł</p>
                         </Col>
                         <Col className="col-md-12 text-start">
                           <p className="goal-savings">
-                            ŻEBY ZDOBYĆ TEN CEL MIESIĘCZNIE POWINIENEŚ ODKŁADAĆ:
+                            ŻEBY ZDOBYĆ TEN CEL{" "}
+                            {(() => {
+                              const dateFrom = parseISO(
+                                goal.dateFrom.toString().slice(0, 10)
+                              );
+                              const dateTo = parseISO(
+                                goal.dateTo.toString().slice(0, 10)
+                              );
+                              const diffMonths = differenceInMonths(
+                                dateTo,
+                                dateFrom
+                              );
+                              const diffWeeks = differenceInWeeks(
+                                dateTo,
+                                dateFrom
+                              );
+                              let amountPerPeriod = 0;
+                              let period = "";
+
+                              if (diffMonths >= 1) {
+                                amountPerPeriod = (goal.amount - goal.saved) / diffMonths;
+                                period = `MIESIĘCZNIE POWINIENEŚ ODKŁADAĆ: `;
+                              } else {
+                                amountPerPeriod = (goal.amount - goal.saved) / diffWeeks;
+                                period = `TYGODNIOWO POWINIENEŚ ODKŁADAĆ: `;
+                              }
+
+                              return period;
+                            })()}
                             <span className="how-much-savings">
                               {" "}
-                              {/*{goal.amount / goal.timeLeft }*/} 100 zł
+                              {(() => {
+                                const dateFrom = parseISO(
+                                  goal.dateFrom.toString().slice(0, 10)
+                                );
+                                const dateTo = parseISO(
+                                  goal.dateTo.toString().slice(0, 10)
+                                );
+                                const diffMonths = differenceInMonths(
+                                  dateTo,
+                                  dateFrom
+                                );
+                                const diffWeeks = differenceInWeeks(
+                                  dateTo,
+                                  dateFrom
+                                );
+                                let amountPerPeriod = 0;
+
+                                if (diffMonths >= 1) {
+                                  amountPerPeriod = (goal.amount - goal.saved) / diffMonths;
+                                } else {
+                                  amountPerPeriod = (goal.amount - goal.saved) / diffWeeks;
+                                }
+
+                                return amountPerPeriod.toFixed(2);
+                              })()}
                             </span>
                           </p>
                           <Col>
@@ -339,7 +413,7 @@ const Goals = () => {
                     goals
                       .filter((goal) => goal.timePassed === true)
                       .map((goal) => (
-                        <Row className="current-goal">
+                        <Row className="current-goal mb-4" key={goal.id}>
                           <Col className="col-md-4 text-center d-flex justify-content-center">
                             <FontAwesomeIcon
                               icon={getIconForCategory(goal.category)}
@@ -351,9 +425,26 @@ const Goals = () => {
                             <p className="description-goal">
                               {goal.description.toUpperCase()}
                             </p>
-                            <div style={{display: 'flex'}}><p className="pink">CEL: </p><span className="details-goal"> &nbsp;{goal.amount} zł</span></div>
-                            <div style={{display: 'flex'}}><p className="pink">ODŁOŻONO:</p> <p className="details-goal"> &nbsp;{goal.saved} zł</p></div>
-                            <div style={{display: 'flex'}}><p className="pink">DATA KOŃCOWA:</p> <p className="details-goal">&nbsp;{/* {goal.dateTo} */} 10.20.2023</p></div>
+                            <div style={{ display: "flex" }}>
+                              <p className="pink">CEL: </p>
+                              <span className="details-goal">
+                                {" "}
+                                &nbsp;{goal.amount} zł
+                              </span>
+                            </div>
+                            <div style={{ display: "flex" }}>
+                              <p className="pink">ODŁOŻONO:</p>{" "}
+                              <p className="details-goal">
+                                {" "}
+                                &nbsp;{goal.saved} zł
+                              </p>
+                            </div>
+                            <div style={{ display: "flex" }}>
+                              <p className="pink">DATA KOŃCOWA:</p>{" "}
+                              <p className="details-goal">
+                                &nbsp;{goal.dateTo.toString().slice(0, 10)}
+                              </p>
+                            </div>
                           </Col>
                           <Col className="col-md-12 text-start">
                             <p className="goal-savings">
@@ -364,6 +455,14 @@ const Goals = () => {
                                 <span className="red"> NIE </span>
                               )}
                             </p>
+                          </Col>
+                          <Col className="text-end mx-2 pencil-col">
+                            <Link to="/editgoal">
+                              <FontAwesomeIcon
+                                icon={faPencil}
+                                className="pencil"
+                              />
+                            </Link>
                           </Col>
                         </Row>
                       ))

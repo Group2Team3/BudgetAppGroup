@@ -59,13 +59,13 @@ const Outgoes = () => {
     switch (category) {
       case "rachunki":
         return faFileInvoiceDollar;
-      case "samochód":
+      case "samochod":
         return faCarOn;
-      case "koszty życia":
+      case "koszty zycia":
         return faCartShopping;
       case "rozrywka":
         return faGamepad;
-      case "rodzina/zwierzęta":
+      case "rodzina/zwierzeta":
         return faPaw;
       case "ubezpieczenia/finanse":
         return faHouseCrack;
