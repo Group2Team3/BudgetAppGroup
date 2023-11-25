@@ -13,41 +13,57 @@ import paragon6 from '../assets/receipts/paragon6.jpeg';
 import paragon7 from '../assets/receipts/paragon7.jpg';
 import paragon8 from '../assets/receipts/paragon8.jpg';
 import paragon9 from '../assets/receipts/paragon9.png';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
+
+interface Receipt {
+  id: number;
+  date: string;
+  photo: number[];
+  // Add more fields as needed
+}
 
 const Receipt = () => {
   const [selectedImage, setSelectedImage] = useState('');
-  const months: { month: string; images: { date: string; images: string[] }[] }[] = [
-    {
-      month: 'Sierpień',
-      images: [
-        { date: '2022-08-05', images: [paragon1, paragon2, paragon3, paragon4] },
-        { date: '2022-08-10', images: [paragon5] },
-      ],
-    },
-    {
-      month: 'Wrzesień',
-      images: [
-        { date: '2022-09-01', images: [paragon6, paragon7] },
-      ],
-    },
-    {
-      month: 'Październik',
-      images: [
-        { date: '2022-10-02', images: [paragon8] },
-        { date: '2022-10-12', images: [paragon9] },
-      ],
-    },
-    {
-      month: 'Listopad',
-      images: [], //zeby sprawdzic ze jezeli nie ma nic zapisanego to wyswietla odpowiednia wiadomosc
-    },
-    {
-        month: 'Grudzień',
-        images: [],
-    },
-  ];
+  const months: { month: string; images: { date: string; images: string[] }[] }[] = [];
 
+  const [receipts, setReceipts] = useState<Receipt[]>([]);
+
+  const fetchReceipts = async () => {
+    try {
+      const response = await axios.get<Receipt[]>('http://localhost:8080/recipt');
+      console.log(response.data); // Log the response
+      setReceipts(response.data);
+    } catch (error) {
+      console.error('Error fetching receipts:', error);
+    }
+  };
+
+  useEffect(() => {
+    fetchReceipts();
+  }, []);
+
+  receipts.forEach((receipt) => {
+    const receiptDate = new Date(receipt.date);
+    const year = receiptDate.getFullYear();
+    const month = receiptDate.toLocaleString('default', { month: 'long' });
+
+    const existingMonth = months.find((m) => m.month === month);
+
+    if (existingMonth) {
+      const existingDate = existingMonth.images.find((d) => d.date === receipt.date);
+      if (existingDate) {
+        existingDate.images.push(`data:image/jpeg;base64,${receipt.photo}`);
+      } else {
+        existingMonth.images.push({ date: receipt.date, images: [`data:image/jpeg;base64,${receipt.photo}`] });
+      }
+    } else {
+      months.push({
+        month,
+        images: [{ date: receipt.date, images: [`data:image/jpeg;base64,${receipt.photo}`] }],
+      });
+    }
+  });
   return (
     <>
       <Container>
@@ -57,8 +73,6 @@ const Receipt = () => {
           </Col>
         </Row>
       </Container>
-      <hr className='hr' />
-
       <Container>
         <Row>
           <Col className='col-md-12'>
@@ -77,7 +91,7 @@ const Receipt = () => {
             <Accordion className='mb-5'>
               {months.map((month, index) => (
                 <Accordion.Item key={index} eventKey={index.toString()}>
-                  <Accordion.Header>{month.month}</Accordion.Header>
+                  <Accordion.Header>{`${month.month}`}</Accordion.Header>
                   <Accordion.Body className='p-5'>
                     {month.images.length === 0 ? (
                       <p>W tym miesiącu nie zapisałeś żadnych paragonów</p>
