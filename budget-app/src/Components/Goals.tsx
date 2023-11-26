@@ -84,7 +84,7 @@ const Goals = () => {
   useEffect(() => {
     const fetchGoals = async () => {
       try {
-        const response = await axios.get(`http://localhost:8080/goal`);
+        const response = await axios.get(`http://localhost:8080/goal/customer/${userId}`);
         setGoals(response.data);
         console.log("Data", response.data);
       } catch (error) {
