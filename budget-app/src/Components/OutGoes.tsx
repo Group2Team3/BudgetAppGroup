@@ -3,7 +3,7 @@ import { Col, Container, Modal, ProgressBar, Row } from "react-bootstrap";
 import { Button } from "@mui/material";
 import { MainNavbar } from "./MainNavbar";
 import { Footer } from "./Footer";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Form from "react-bootstrap/Form";
 import { ChangeEvent, useEffect, useState } from "react";
 import {Tesseract} from "tesseract.ts";
@@ -21,6 +21,8 @@ const Outgoes = () => {
   const [date, setDate] = useState("");
   const [description, setDescription] = useState('');
   const [category, setCategory] = useState<string>('');
+  const budgetId = Number(localStorage.getItem("budgetId")); 
+  const navigate = useNavigate();
 
   const [showDialog, setShowDialog] = useState(false);
 
@@ -259,7 +261,7 @@ const extractTotalAmount = (text: string): string | null => {
 
 
   const saveOutgoes = async () => {
-    const expenseResponse: AxiosResponse<any> = await axios.post('http://localhost:8080/expense/1', {
+    const expenseResponse: AxiosResponse<any> = await axios.post(`http://localhost:8080/expense/${budgetId}`, {
         name,
         amount: totalAmount,
         date,
@@ -291,6 +293,7 @@ const extractTotalAmount = (text: string): string | null => {
       } else {
         setIsLoading(false);
       }
+      navigate("/outgoes_detail")
     }
 
   return (

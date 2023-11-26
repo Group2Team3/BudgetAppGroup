@@ -103,7 +103,7 @@ const Incomes = () => {
                 <Accordion.Item eventKey={month}>
                   <Accordion.Header>{monthNames[Number(month)]}</Accordion.Header>
                   <Accordion.Body>
-                  {groupedData[month].map((item: { name: string; category: string; description: string; amount: number; date: Date; }) => ( 
+                  {groupedData[month].map((item: { name: string; category: string; description: string; amount: number; date: Date; id: number }) => ( 
                     <Row className="current-goal pb-0">
                         <div className="badge-right-green"></div>
                       <Col className="col-md-4 text-center d-flex justify-content-center">
@@ -122,7 +122,7 @@ const Incomes = () => {
                         </p>
                       </Col>
                       <Col className="col-md-12 text-end mx-2 pencil-col">
-                        <Link to="/income_edit">
+                        <Link to={`/income_edit/${item.id}`}>
                           <FontAwesomeIcon icon={faPencil} className="pencil" />
                         </Link>
                       </Col>

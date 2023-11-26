@@ -135,7 +135,7 @@ const YourBudget = () => {
           </b>{" "}
           Możesz to zrobić przechodząc tutaj:{" "}
           <Link to="/addbudgetinfo" className="link">
-            EDYCJA BUDŻETU
+            DODAWANIE BUDŻETU
           </Link>
         </p>
         <Col className="col-md-12 text-center justify-content-center align-items-center my-5">
@@ -378,7 +378,7 @@ const YourBudget = () => {
             <p className="description text-center">
               Jeśli chcesz zaaktualizować dane dotyczące budżetu w tym miesiącu
               możesz to zrobić przechodząc tutaj:{" "}
-              <Link to="/addbudgetinfo" className="link">
+              <Link to={`/editbudgetinfo/${userId}`} className="link">
                 EDYCJA BUDŻETU
               </Link>
             </p>
@@ -503,9 +503,9 @@ const YourBudget = () => {
                   <h5>
                     W miesiącu&nbsp;
                     {format(new Date(), "LLLL", { locale: pl })}&nbsp; zaoszczędziłeś{" "}
-                    <span className="purple">{currentCalculatedBudget.summary} zł</span>! Trzymaj tak
+                    <span className="purple">{currentCalculatedBudget.summary.toFixed(2)} zł</span>! Trzymaj tak
                     dalej a w skali roku jesteś w stanie oszczędzić{" "}
-                    <span className="purple">{currentCalculatedBudget.summary * 12} zł</span>.
+                    <span className="purple">{(currentCalculatedBudget.summary * 12).toFixed(2)} zł</span>.
                   </h5>
                 </Col>
               </Row>

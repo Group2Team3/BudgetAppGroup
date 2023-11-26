@@ -3,11 +3,69 @@ import { Col, Container, Row } from "react-bootstrap";
 import { Button } from "@mui/material";
 import { MainNavbar } from "./MainNavbar";
 import { Footer } from "./Footer";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import Form from "react-bootstrap/Form";
+import { useEffect, useRef, useState } from "react";
+import axios from "axios";
+
+interface Income {
+  id: number;
+  name: string;
+  amount: number;
+  category: string;
+  date: string;
+  description: string;
+}
 
 const EditIncome = () => {
-    const date = new Date(2023, 10, 13);
+  const { incomeId } = useParams();
+  const [income, setIncome] = useState<Income | null>(null);
+  const navigate = useNavigate();
+  const [name, setName] = useState(income?.name || "");
+  const [description, setDescription] = useState(income?.description || "");
+  const [date, setDate] = useState(income?.date || "");
+  const [category, setCategory] = useState(income?.category || "");
+  const [amount, setAmount] = useState(income?.amount || 0);
+
+  useEffect(() => {
+
+    axios
+      .get(`http://localhost:8080/income/${incomeId}`)
+      .then((response) => {
+        setIncome(response.data);
+        setName(response.data.name);
+        setDescription(response.data.description);
+        setDate(response.data.date);
+        setCategory(response.data.category);
+        setAmount(response.data.amount);
+      })
+      .catch((error) => {
+        console.error("Error fetching income", error);
+      });
+  }, [incomeId]);
+
+  const handleSubmit = () => {
+    const data = {
+      name: name,
+      description: description,
+      date: date,
+      category: category,
+      amount: amount
+    };
+
+    console.log("DATA", data);
+
+    axios
+      .put(`http://localhost:8080/income/${incomeId}`, data)
+      .then((response) => {
+        console.log(response.data);
+        navigate("/incomes");
+      })
+      .catch((error) => {
+        console.error("Error posting income!", error);
+      });
+  };
+
   return (
     <>
       <Container>
@@ -20,78 +78,102 @@ const EditIncome = () => {
       <hr className="hr" />
       <Container>
         <Row>
-          <Col className="col-md-12">
-            <p className="description">
-             Edytujesz przychód. Jeśli chcesz wrócić do Twoich przychodów {" "}
-              <Link to="/incomes" className="link">
-                kliknij tutaj
-              </Link>
-              .
-            </p>
-          </Col>
-          <Row className="row-goals">
-            <Col className="col-sm-12 col-md-5 mx-3">
-              <Col>
-                <Form.Label>NAZWA</Form.Label>
-              </Col>
-              <Col className="mb-5">
-                <Form.Control
-                  type="text"
-                  value="WYPŁATA"
-                />
+          <Form>
+            <Col className="col-md-12">
+              <p className="description">
+                Edytujesz przychód. Jeśli chcesz wrócić do Twoich przychodów{" "}
+                <Link to="/incomes" className="link">
+                  kliknij tutaj
+                </Link>
+                .
+              </p>
+            </Col>
+            <Row className="row-goals">
+              <Col className="col-sm-12 col-md-5 mx-3">
+                <Col>
+                  <Form.Label>NAZWA</Form.Label>
+                </Col>
+                <Col className="mb-5">
+                  <Form.Control
+                    type="text"
+                    name="name"
+                    defaultValue={name}
+                    onChange={(e) => setName(e.target.value)}
+                  />
+                </Col>
+
+                <Col>
+                  <Form.Label>DATA</Form.Label>
+                </Col>
+                <Col className="mb-5">
+                  <Form.Control
+                    type="date"
+                    defaultValue={date}
+                    onChange={(e) => setDate(e.target.value)}
+                    name="date"
+                  />
+                </Col>
+                <Col>
+                  <Form.Label>OPIS</Form.Label>
+                </Col>
+                <Col className="mb-5">
+                  <Form.Control
+                    as="textarea"
+                    rows={6}
+                    defaultValue={description}
+                    onChange={(e) => setDescription(e.target.value)}
+                    name="description"
+                  />
+                </Col>
               </Col>
 
-              <Col>
-                <Form.Label>DATA</Form.Label>
-              </Col>
-              <Col className="mb-5">
-                <Form.Control type="date" value={date.toISOString().substr(0, 10)}/>
-              </Col>
-              <Col>
-                <Form.Label>OPIS</Form.Label>
-              </Col>
-              <Col className="mb-5">
-                <Form.Control as="textarea" rows={6} placeholder="WYPŁATA Z FIRMY I.O.L" />
-              </Col>
-            </Col>
+              <Col className="col-sm-12 col-md-5 mx-3">
+                <Col>
+                  <Form.Label>KWOTA</Form.Label>
+                </Col>
+                <Col className="mb-5">
+                  <Form.Control
+                    type="number"
+                    min={1}
+                    max={100000}
+                    step={1}
+                    defaultValue={amount || ""}
+                    onChange={(e) => setAmount(parseFloat(e.target.value))}
+                    name="amount"
+                  />
+                </Col>
 
-            <Col className="col-sm-12 col-md-5 mx-3">
-              <Col>
-                <Form.Label>KWOTA</Form.Label>
+                <Col>
+                  <Form.Label>KATEGORIA</Form.Label>
+                </Col>
+                <Col className="mb-5">
+                  <Form.Select
+                    aria-label="Default select example"
+                    value={category}
+                    onChange={(e) => setCategory(e.target.value)}
+                    name="category"
+                  >
+                    <option value="wyplata">wypłata</option>
+                    <option value="zarobki z samozatrudnienia">
+                      zarobki z samozatrudnienia
+                    </option>
+                    <option value="zasilki/zapomogi">zasiłki/zapomogi</option>
+                    <option value="stypendia">stypendia</option>
+                    <option value="inne">inne</option>
+                  </Form.Select>
+                </Col>
+                <Col className="submit-button mb-4">
+                  <Button className="some-btn" onClick={handleSubmit}>
+                    ZAPISZ PRZYCHÓD
+                  </Button>
+                </Col>
               </Col>
-              <Col className="mb-5">
-                <Form.Control
-                  type="number"
-                  min={100}
-                  max={100000}
-                  step={10}
-                  placeholder="4323.20 zł"
-                />
-              </Col>
-
-              <Col>
-                <Form.Label>KATEGORIA</Form.Label>
-              </Col>
-              <Col className="mb-5">
-                <Form.Select aria-label="Default select example">
-                  <option value="1" selected>wypłata</option>
-                  <option value="2">zarobki z samozatrudnienia</option>
-                  <option value="3">zasiłki/zapomogi</option>
-                  <option value="4">stypendia</option>
-                  <option value="5">inne</option>
-                </Form.Select>
-              </Col>
-              <Col className="submit-button mb-4">
-              <Link to="/outgoes">
-                <Button className="some-btn">ZAPISZ PRZYCHÓD</Button>
-              </Link>
-            </Col>
-            </Col>
-          </Row>
+            </Row>
+          </Form>
         </Row>
       </Container>
       <Footer></Footer>
     </>
   );
-}
+};
 export default EditIncome;

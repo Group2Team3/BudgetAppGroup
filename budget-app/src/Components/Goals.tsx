@@ -393,7 +393,7 @@ const Goals = () => {
                             </Form>
                           </Col>
                           <Col className="text-end mx-2 pencil-col">
-                            <Link to="/editgoal">
+                            <Link to={`/editgoal/${goal.id}`}>
                               <FontAwesomeIcon
                                 icon={faPencil}
                                 className="pencil"
@@ -457,7 +457,7 @@ const Goals = () => {
                             </p>
                           </Col>
                           <Col className="text-end mx-2 pencil-col">
-                            <Link to="/editgoal">
+                            <Link to={`/editgoal/${goal.id}`}>
                               <FontAwesomeIcon
                                 icon={faPencil}
                                 className="pencil"
