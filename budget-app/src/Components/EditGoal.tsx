@@ -3,17 +3,52 @@ import { Col, Container, Row } from "react-bootstrap";
 import { Button } from "@mui/material";
 import { MainNavbar } from "./MainNavbar";
 import { Footer } from "./Footer";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import Form from "react-bootstrap/Form";
+import { useEffect, useRef, useState } from "react";
+import axios from "axios";
+
+interface Goal {
+  id: number;
+  amount: number;
+  category: string;
+  dateTo: string;
+  description: string;
+  name: string;
+  saved: number;
+}
 
 const EditGoal = () => {
-  //kiedys tu beda pobrane dane dotyczace celu by przekazac je do formularza, na razie na sztywno
-  const title: string = "WAKACJE";
-  const date: Date = new Date(2024, 5, 17);
-  const amount: number = 10000;
-  const savedAmount: number = 5000;
-  const category: string = "wakacje";
-  const description: string = "Wakacje w Indonezji";
+  const { goalId } = useParams();
+  const [goal, setGoal] = useState<Goal | null>(null);
+  const formRef = useRef<HTMLFormElement>(document.createElement('form'));
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    axios.get(`http://localhost:8080/goal/${goalId}`)
+      .then(response => {
+        setGoal(response.data);
+      })
+      .catch(error => {
+        console.error('Error fetching goal', error);
+      });
+      console.log(goal)
+  }, [goalId]);
+
+  const handleSubmit = () => {
+    const formData = new FormData(formRef.current);
+    const data = Object.fromEntries(formData);
+    console.log("DATA", data);
+
+    axios.put(`http://localhost:8080/goal/${goalId}`, data)
+      .then(response => {
+        console.log(response.data);
+        navigate('/goals')
+      })
+      .catch(error => {
+        console.error('Error posting goal!', error);
+      });
+  }
 
   return (
     <>
@@ -28,6 +63,7 @@ const EditGoal = () => {
 
       <Container>
         <Row>
+        <Form ref={formRef}>
           <Row className="mx-4">
             <Col className="col-md-5">
               <p className="description">Tutaj edytujesz swój cel.</p>
@@ -45,7 +81,7 @@ const EditGoal = () => {
                 <Form.Label>NAZWA</Form.Label>
               </Col>
               <Col className="mb-5">
-                <Form.Control type="text" value={title} />
+                <Form.Control type="text" defaultValue={goal?.name} name="name"/>
               </Col>
 
               <Col>
@@ -54,7 +90,8 @@ const EditGoal = () => {
               <Col className="mb-5">
                 <Form.Control
                   type="date"
-                  value={date.toISOString().substr(0, 10)}
+                 defaultValue={goal?.dateTo}
+                 name="dateTo"
                 />
               </Col>
 
@@ -64,9 +101,10 @@ const EditGoal = () => {
               <Col className="mb-5">
                 <Form.Select
                   aria-label="Default select example"
-                  value={category}
+                  value={goal?.category}
+                  name="category"
                 >
-                  <option value="samochód">samochód</option>
+                  <option value="samochod">samochód</option>
                   <option value="dom">dom</option>
                   <option value="prezent">prezent</option>
                   <option value="wakacje">wakacje</option>
@@ -75,11 +113,7 @@ const EditGoal = () => {
                 </Form.Select>
               </Col>
 
-              <Col className="submit-button">
-                <Link to="/goals">
-                  <Button className="some-btn">ZAPISZ CEL</Button>
-                </Link>
-              </Col>
+              
             </Col>
 
             <Col className="col-md-5 mx-3">
@@ -92,7 +126,8 @@ const EditGoal = () => {
                   min={100}
                   max={100000}
                   step={10}
-                  placeholder={amount.toString()}
+                  defaultValue={goal?.amount}
+                  name="amount"
                 />
               </Col>
 
@@ -105,7 +140,8 @@ const EditGoal = () => {
                   min={10}
                   max={100000}
                   step={10}
-                  placeholder={savedAmount.toString()}
+                  defaultValue={goal?.saved}
+                  name="saved"
                 />
               </Col>
 
@@ -116,11 +152,18 @@ const EditGoal = () => {
                 <Form.Control
                   as="textarea"
                   rows={6}
-                  placeholder={description}
+                  defaultValue={goal?.description}
+                  name="description"
                 />
+              </Col>
+
+              <Col className="submit-button">
+                  <Button className="some-btn"
+                  onClick={handleSubmit}>ZAPISZ CEL</Button>
               </Col>
             </Col>
           </Row>
+          </Form>
         </Row>
       </Container>
 

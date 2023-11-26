@@ -18,6 +18,7 @@ import Incomes from './Components/Incomes';
 import AddIncome from './Components/AddIncome';
 import EditIncome from './Components/EditIncome';
 import ModalCookies from './Components/CookiesModal';
+import EditBudget from './Components/EditBudget';
 
 class App extends React.Component {
     render() {
@@ -26,10 +27,11 @@ class App extends React.Component {
               <Routes>
                 <Route path="/" element={<StartPage />} />
                 <Route path="/addbudgetinfo" element={<AddBudget />} />
+                <Route path="/editbudgetinfo/:customerId" element={<EditBudget/>} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/budget" element={<YourBudget />} />
                 <Route path="/goals" element={<Goals />} />
-                <Route path="/editgoal" element={<EditGoal />} />
+                <Route path="/editgoal/:goalId" element={<EditGoal />} />
                 <Route path="/receipts" element={<Receipts />} />
                 <Route path="/policy" element={<Policy />} />
                 <Route path="/terms" element={<Terms />} />
@@ -38,7 +40,7 @@ class App extends React.Component {
                 <Route path="/outgoes_edit" element={<OutgoesEdit />} />
                 <Route path="/incomes" element={<Incomes />} />
                 <Route path="/income_add" element={<AddIncome />} />
-                <Route path="/income_edit" element={<EditIncome />} />
+                <Route path="/income_edit/:incomeId" element={<EditIncome />} />
               </Routes>
               <ModalCookies />
             </AuthProvider>
