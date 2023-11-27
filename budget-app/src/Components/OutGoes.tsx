@@ -396,9 +396,9 @@ const extractTotalAmount = (text: string): string | null => {
       >
         <option value="samochod">pojazd</option>
         <option value="rachunki">rachunki</option>
-        <option value="koszty życia">koszty życia</option>
+        <option value="koszty zycia">koszty życia</option>
         <option value="rozrywka">rozrywka</option>
-        <option value="rodzina/zwierzęta">rodzina/zwierzęta</option>
+        <option value="rodzina/zwierzeta">rodzina/zwierzęta</option>
         <option value="ubezpieczenia/finanse">ubezpieczenia/finanse</option>
         <option value="transport publiczny">transport publiczny</option>
         <option value="wakacje">wakacje</option>
@@ -421,29 +421,16 @@ const extractTotalAmount = (text: string): string | null => {
               {isLoading ? <LoadingSpinner /> : ''}
             </Col>
               )}
-              {/* <Col className="submit-button">
-              <Form.Check
-                type="checkbox"
-                label="CHCĘ ZAPISAĆ PARAGON"
-                className="is-recipt-save"
-                checked={isParagonChecked}
-                onChange={() => saveRecepits(!isParagonChecked)}
-              />
-            </Col> */}
-
               <Col className="submit-button mb-4">
                 <Button className="some-btn"  onClick={() => saveReceipts()}>Wpisz kwotę z paragonu</Button>
               </Col>
               </Col>
             )}
-
       <Modal show={showDialog} onHide={handleCloseDialog}>
         <Modal.Header closeButton>
           <Modal.Title> {isParagonChecked ? 'Zweryfikuj poprawność kwoty' : 'Czy napewno chcesz kontynuować bez dodawania paragonu?'} </Modal.Title>
         </Modal.Header>
         <Modal.Body style={{ textAlign: 'center'}}>
-          
-    
     <div>
       <h5>Kwota:
         <p className="amount">{totalAmount !== null ? `${totalAmount} zł` : '0.00 zł'}</p></h5>

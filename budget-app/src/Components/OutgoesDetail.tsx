@@ -110,7 +110,7 @@ const Outgoes = () => {
                 <Accordion.Item eventKey={month}>
                   <Accordion.Header>{monthNames[Number(month)]}</Accordion.Header>
                   <Accordion.Body>
-                  {groupedData[month].map((item: { name: string; category: string; description: string; amount: number; date: Date; }) => (
+                  {groupedData[month].map((item: { id:number; name: string; category: string; description: string; amount: number; date: Date; }) => (
                     <Row className="current-goal pb-0">
                         <div className="badge-right"></div>
                       <Col className="col-md-4 text-center d-flex justify-content-center">
@@ -129,7 +129,7 @@ const Outgoes = () => {
                         </p>
                       </Col>
                       <Col className="col-md-12 text-end mx-2 pencil-col">
-                        <Link to="/outgoes_edit">
+                        <Link to={`/outgoes_edit/${item.id}`}>
                           <FontAwesomeIcon icon={faPencil} className="pencil" />
                         </Link>
                       </Col>
