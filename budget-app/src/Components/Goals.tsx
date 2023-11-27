@@ -53,6 +53,8 @@ const Goals = () => {
   const [description, setDescription] = useState("");
   const [saved, setSaved] = useState("");
   const [goals, setGoals] = useState<Goal[]>([]);
+  const [newSaved, setNewSaved] = useState("");
+  const [goalId, setGoalId] = useState(0);
 
   const handleSubmit = async (event: { preventDefault: () => void }) => {
     console.log("Form submitted");
@@ -84,10 +86,9 @@ const Goals = () => {
   useEffect(() => {
     const fetchGoals = async () => {
       try {
-        //const response = await axios.get(`http://localhost:8080/goal/customer/${userId}`); NIE DZIALA CZEKAM NA ENDPOINT
-        const response = await axios.get(`http://localhost:8080/goal`);
+        const response = await axios.get(`http://localhost:8080/goal/customer/${userId}`);
         setGoals(response.data);
-        console.log("Data", response.data);
+        console.log("cele", response.data);
       } catch (error) {
         console.error(error);
       }
@@ -95,6 +96,23 @@ const Goals = () => {
 
     fetchGoals();
   }, []);
+
+  console.log("goalId", goalId);
+  console.log("newSaved", newSaved);
+  const handleSubmitSetNewSaved = async (e: { preventDefault: () => void; }) => {
+    e.preventDefault();
+    try {
+      await axios.put(`http://localhost:8080/goal/saved/${goalId}`, {
+        saved: newSaved,
+      });
+      console.log("newSaved", newSaved)
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  console.log("GOAL ID", goalId)
+  
 
   const getIconForCategory = (category: any) => {
     switch (category) {
@@ -252,7 +270,7 @@ const Goals = () => {
                   {goals
                     .filter((goal) => goal.timePassed === false)
                     .map((goal) => (
-                      <Row className="current-goal mb-4" key={goal.id}>
+                      <Row className="current-goal mb-4" key={goal.id} onClick={() => setGoalId(goal.id)}>
                         <Col className="col-md-4 text-center d-flex justify-content-center">
                           <FontAwesomeIcon
                             icon={getIconForCategory(goal.category)}
@@ -325,12 +343,15 @@ const Goals = () => {
                               let amountPerPeriod = 0;
                               let period = "";
 
-                              if (diffMonths >= 1) {
+                              if (diffMonths !== 0) {
                                 amountPerPeriod = (goal.amount - goal.saved) / diffMonths;
                                 period = `MIESIĘCZNIE POWINIENEŚ ODKŁADAĆ: `;
-                              } else {
+                              } else if (diffWeeks !== 0){
                                 amountPerPeriod = (goal.amount - goal.saved) / diffWeeks;
                                 period = `TYGODNIOWO POWINIENEŚ ODKŁADAĆ: `;
+                              } else {
+                                amountPerPeriod = goal.amount - goal.saved;
+                                period = `MUSISZ ODŁOŻYĆ: `;
                               }
 
                               return period;
@@ -354,10 +375,12 @@ const Goals = () => {
                                 );
                                 let amountPerPeriod = 0;
 
-                                if (diffMonths >= 1) {
+                                if (diffMonths !== 0) {
                                   amountPerPeriod = (goal.amount - goal.saved) / diffMonths;
-                                } else {
+                                } else if (diffWeeks !== 0) {
                                   amountPerPeriod = (goal.amount - goal.saved) / diffWeeks;
+                                } else {
+                                  amountPerPeriod = goal.amount - goal.saved;
                                 }
 
                                 return amountPerPeriod.toFixed(2);
@@ -365,30 +388,32 @@ const Goals = () => {
                             </span>
                           </p>
                           <Col>
-                            <Form /* Tu jak bedzie juz put bedziemy updatetowac goal.amount w db */
-                            >
+                          <Form onSubmit={handleSubmitSetNewSaved}>
                               <Form.Group className="mb-5">
                                 <Row>
-                                  <Col className="col-md-3">
-                                    <Form.Label className="mx-5 saved-add">
-                                      ODŁOŻONO:{" "}
-                                    </Form.Label>
-                                  </Col>
-                                  <Col className="col-md-4">
-                                    <Form.Control
-                                      className="saved-amount"
-                                      type="number"
-                                      min={0}
-                                      max={1000000}
-                                      step={10}
-                                      placeholder="kwota"
-                                    />
-                                  </Col>
-                                  <Col className="col-md-4">
-                                    <Button className="some-other-btn">
+                                  
+                                    <Col className="col-md-3">
+                                      <Form.Label className="mx-5 saved-add">
+                                        ODŁOŻONO:{" "}
+                                      </Form.Label>
+                                    </Col>
+                                    <Col className="col-md-4">
+                                      <Form.Control
+                                        className="saved-amount"
+                                        type="number"
+                                        min={0}
+                                        max={1000000}
+                                        step={10}
+                                        placeholder="kwota"
+                                        onChange={e => setNewSaved(e.target.value)}
+                                      />
+                                    </Col>
+                                    <Col className="col-md-4">
+                                    <Button className="some-other-btn" type="submit">
                                       DODAJ
                                     </Button>
                                   </Col>
+                                  
                                 </Row>
                               </Form.Group>
                             </Form>
