@@ -13,12 +13,12 @@ import Terms from './Components/Terms';
 import { AuthProvider } from './service/AuthContext';
 import Outgoes from './Components/OutGoes';
 import OutgoesDetail from './Components/OutgoesDetail';
-import OutgoesEdit from './Components/OutgoesEdit';
 import Incomes from './Components/Incomes';
 import AddIncome from './Components/AddIncome';
 import EditIncome from './Components/EditIncome';
 import ModalCookies from './Components/CookiesModal';
 import EditBudget from './Components/EditBudget';
+import EditOutgoes from './Components/EditOutgoes';
 
 class App extends React.Component {
     render() {
@@ -37,7 +37,7 @@ class App extends React.Component {
                 <Route path="/terms" element={<Terms />} />
                 <Route path="/outgoes_detail" element={<OutgoesDetail />} />
                 <Route path="/outgoes" element={<Outgoes />} />
-                <Route path="/outgoes_edit" element={<OutgoesEdit />} />
+                <Route path="/outgoes_edit/:outgoesId" element={<EditOutgoes />} />
                 <Route path="/incomes" element={<Incomes />} />
                 <Route path="/income_add" element={<AddIncome />} />
                 <Route path="/income_edit/:incomeId" element={<EditIncome />} />
