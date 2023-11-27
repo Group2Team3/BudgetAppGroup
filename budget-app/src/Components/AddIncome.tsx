@@ -10,7 +10,6 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 const AddIncome = () => {
-  const userId = Number(localStorage.getItem("userId"));
   const budgetId = Number(localStorage.getItem("budgetId"));
 
   const [name, setName] = useState("");

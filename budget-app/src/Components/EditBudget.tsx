@@ -7,7 +7,6 @@ import { format } from "date-fns";
 import { pl } from "date-fns/locale";
 import Accordion from "react-bootstrap/Accordion";
 import Form from "react-bootstrap/Form";
-import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import { useParams } from 'react-router-dom';
@@ -34,7 +33,6 @@ const EditBudget = () => {
   const formRef = useRef<HTMLFormElement>(document.createElement('form'));
 
   useEffect(() => {
-    // Pobierz dane budżetu po załadowaniu strony
     axios.get(`http://localhost:8080/budget/${customerId}`)
       .then(response => {
         setBudget(response.data[0]);

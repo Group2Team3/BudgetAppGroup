@@ -1,5 +1,5 @@
 import "../Style/Policy.css";
-import { Col, Container, Row, Modal } from "react-bootstrap";
+import { Col, Container, Row } from "react-bootstrap";
 import { MainNavbar } from "./MainNavbar";
 import { Footer } from "./Footer";
 import Card from "react-bootstrap/Card";

@@ -152,6 +152,12 @@ const Login: React.FC = () => {
         password: state.password,
       });
 
+      const response2 = await axios.post('http://localhost:8080/customer', {
+        name: state.username, // assuming 'name' corresponds to the user's name
+        mail: state.username,
+        password: state.password,
+      });
+
       setState({ ...state, helperText: 'Registration successful', isError: false });
       // Assuming your server responds with a success message
       setLogin(true); // Update login state

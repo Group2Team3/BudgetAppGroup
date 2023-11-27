@@ -5,7 +5,7 @@ import Accordion from "react-bootstrap/Accordion";
 import { Link } from "react-router-dom";
 import { Button } from "@mui/material";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPencil, faFilm, faMoneyCheckDollar, faCreditCard, faHandHoldingDollar, faCashRegister, faMoneyBillWave, faCoins, faMoneyBill } from "@fortawesome/free-solid-svg-icons";
+import { faPencil, faCreditCard, faHandHoldingDollar, faCashRegister, faMoneyBillWave, faCoins, faMoneyBill } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 import axios from "axios";
 import { useEffect } from "react";

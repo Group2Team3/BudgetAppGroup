@@ -7,10 +7,9 @@ import { format } from "date-fns";
 import { pl } from "date-fns/locale";
 import Accordion from "react-bootstrap/Accordion";
 import Form from "react-bootstrap/Form";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
-import { error } from "console";
 
 const AddBudget = () => {
   const currentMonth = format(new Date(), "MMMM", { locale: pl });
@@ -259,21 +258,12 @@ const AddBudget = () => {
   );
   const navigate = useNavigate();
 
-  {/* Funkcja handleSubmit dla wszystkich poszczególnych pól w formularzu */}
+  {/* Funkcja handleSubmit dla sum poszczególnych pól w formularzu */}
   const handleSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
     try {
       const Budget_acc_id = userId;
       let currentBudget = null;
-      // nie dziala na razie zakomentuje
-      // try {
-      //   const response = await axios.get(
-      //     `http://localhost:8080/budget/${Budget_acc_id}`
-      //   );
-      //   currentBudget = response.data;
-      // } catch (error) {
-      //   console.error("Error fetching current budget:", error);
-      // }
 
       
       const data = {
@@ -287,7 +277,7 @@ const AddBudget = () => {
         publicTrans: Budget_public_transport,
         entertainment: Budget_entertainment,
         vacations: Budget_vacations,
-        additionalCosts: 0, //dodatkowe koszty na zero bo usunelam je z formularza
+        additionalCosts: 0, 
       };
       
 
@@ -296,47 +286,7 @@ const AddBudget = () => {
         await axios.post(`http://localhost:8080/budget/${Budget_acc_id}`, data);
         console.log("data", data)
       } else {
-        //jesli istnieje juz dla niego budzet to jest aktualizowany o nowe wartosci
-        // const updatedData = {
-        //   Budget_income:
-        //     parseFloat(currentBudget.budget_income) + Budget_income,
-        //   Budget_bills: parseFloat(currentBudget.budget_bills) + Budget_bills,
-        //   Budget_cost_of_life:
-        //     parseFloat(currentBudget.budget_cost_of_life) + Budget_cost_of_life,
-        //   Budget_insurance:
-        //     parseFloat(currentBudget.budget_insurance) + Budget_insurance,
-        //   Budget_family:
-        //     parseFloat(currentBudget.budget_family) + Budget_family,
-        //   Budget_car: parseFloat(currentBudget.budget_car) + Budget_car,
-        //   Budget_public_trans:
-        //     parseFloat(currentBudget.budget_public_trans) +
-        //     Budget_public_transport,
-        //   Budget_entertainment:
-        //     parseFloat(currentBudget.budget_entertainment) +
-        //     Budget_entertainment,
-        //   Budget_vacations:
-        //     parseFloat(currentBudget.budget_vacations) + Budget_vacations,
-        //   Budget_expenses:
-        //     parseFloat(currentBudget.budget_expenses) +
-        //     Budget_bills +
-        //     Budget_cost_of_life +
-        //     Budget_insurance +
-        //     Budget_family +
-        //     Budget_car +
-        //     Budget_public_transport +
-        //     Budget_entertainment +
-        //     Budget_vacations,
-        //   Budget_summary: Budget_income - Budget_bills,
-        // };
-        // console.log("updatedData", updatedData);
-        // await axios.put(
-        //   `http://localhost:3001/api/budgets/${Budget_acc_id}`,
-        //   updatedData
-        // );
-        {/* Jako ze nie ma jeszcze puta to na tej moment tylko alert
-          W przyszlosci trzeba bedzie aktualizowac te wartosci 
-        */}
-        console.log("Istnieje juz budzet dla tego uzytkownika")
+        console.log('budzet istnieje')
       }
       navigate("/budget");
     } catch (error) {

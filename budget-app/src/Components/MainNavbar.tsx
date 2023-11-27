@@ -4,7 +4,7 @@ import budgetLogo from "../assets/budgetImages/Piggy2.svg";
 import { Button, ButtonGroup, IconButton, Menu, MenuItem } from "@mui/material";
 import '../Style/MainNavbar.css';
 import { useAuth } from "../service/AuthContext";
-import { SetStateAction, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import MenuIcon from '@mui/icons-material/Menu';
 
 export const MainNavbar = () => {
@@ -14,7 +14,6 @@ export const MainNavbar = () => {
   const [userId, setUserId] = useState(null);
 
   const handleLogout = () => {
-    // Add logic to handle logout
     setLogin(false);
     localStorage.setItem('userId', '0');
     localStorage.setItem('login', JSON.stringify(false));
@@ -44,7 +43,6 @@ export const MainNavbar = () => {
     }
   }, []);
 
-  //const login : boolean = false;
   return (
     <Container>
       <Row className="align-items-center pt-3">

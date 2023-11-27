@@ -84,7 +84,8 @@ const Goals = () => {
   useEffect(() => {
     const fetchGoals = async () => {
       try {
-        const response = await axios.get(`http://localhost:8080/goal/customer/${userId}`);
+        //const response = await axios.get(`http://localhost:8080/goal/customer/${userId}`); NIE DZIALA CZEKAM NA ENDPOINT
+        const response = await axios.get(`http://localhost:8080/goal`);
         setGoals(response.data);
         console.log("Data", response.data);
       } catch (error) {
