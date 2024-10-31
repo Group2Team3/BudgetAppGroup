@@ -190,7 +190,7 @@ Create a PostgreSQL database and define the table structures according to the sc
 
 ## UI
 
-##### Login and Register
+#### Login and Register
 
 BudgetApp is available only to registered users, so the first step is to either sign up or log in if you already have an account.
 
@@ -202,7 +202,7 @@ The **Login/Register** panel allows new users to create an account and existing 
 
 ![Budget App Login](img/login.png)
 
-##### Information About Your Budget
+#### Information About Your Budget
 
 After registering, a new user is redirected to a page where they can enter information about their income sources and expenses. There are 9 categories available, which are optional but help the app generate more accurate statistics, so it’s recommended to fill them out carefully and accurately.
 
@@ -224,7 +224,7 @@ Note! This is a starting page that appears only at the first login. Each subsequ
 
 ![Budget Info Editing](img/edit.png)
 
-##### Your Budget
+#### Your Budget
 
 After adding information about the budget, the user is redirected to the "Your Budget" view. At the top, there is a message with a link to edit the budget. Below, a simple progress bar displays the budget percentage: expenses for the month are shown in red, and income in green. Under this, a pie chart illustrates this month's expenses divided into categories such as bills, living costs, insurance/finance etc. Hovering over a color reveals the amount allocated for that expense.
 
@@ -236,7 +236,7 @@ By clicking on the link to Edit the Budget, we will be redirected to the appropr
 
 ![Your Budget](img/budget.png)
 
-##### Incomes 
+#### Incomes 
 
 Income refers to individual earnings that the user can add. Upon opening this view, we see a brief message and a button with a link to add new income. Below, there are accordions displaying specific income from certain months. Each income entry shows the name, description, date, and amount. We can edit it using the pencil icon.
 
@@ -252,7 +252,7 @@ In the form, we can enter details regarding the new income, such as: name, amoun
 
 If we click the pencil icon next to any income entry, we will be redirected to the edit view of that income, pre-filled with the data, which we can edit freely. After clicking the "Save Income" button, we will return to the list of all incomes, and the specific income will be updated with the changes made.
 
-##### Expenses 
+#### Expenses 
 
 Expenses refer to individual costs incurred each day. The application includes categories such as bills, living costs, entertainment, family/pets, insurance/finance, public transport, and vacations. After selecting the appropriate category and filling in the basic fields in this section, the user also has the option to save a receipt as proof of the transaction and store it in the database. If the receipt image is of good quality, upon selecting the "ENTER AMOUNT FROM RECEIPT" button, the application provides functionality for automatically entering the amount found on the receipt into the amount field, minimizing the account owner's manual work. However, to avoid situations where incorrectly read amounts are added to the database, distorting actual expenses, the user is prompted to compare the amount on the receipt with the amount recognized through optical character recognition and make any necessary corrections before adding the expense.
 
@@ -264,7 +264,7 @@ Expenses refer to individual costs incurred each day. The application includes c
 
 If we click the pencil icon next to any expense, we will be redirected to the edit view of that expense, pre-filled with the data, which we can edit freely. After clicking the "Save Expense" button, we will return to the list of all expenses, and the specific expense will be updated with the changes made.
 
-##### Goals 
+#### Goals 
 
 The application allows users to add Goals. Goals are divided into specific categories selected from a dropdown list (such as: car, house, gift, vacation, health, and others), with corresponding icons displayed accordingly. Additionally, goals are categorized as current and completed. Past goals are divided into those that were successfully achieved and those that were not.
 
